@@ -1,0 +1,52 @@
+.App {
+  text-align: left;
+  line-height: normal;
+}
+
+.App-logo {
+  /* animation: App-logo-spin infinite 20s linear; */
+  height: 100px;
+  position: relative;
+  left: 20px;
+}
+
+.App-header {
+  background-color: #0079BF;
+  width: auto;
+  height: auto;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.Card-position {
+  position: relative;
+  top: 20px;
+}
+
+.Tabela-position {
+  text-align: center;
+  position: relative;
+  top: 20px;
+}
+
+.btn-position {
+  position: relative;
+  top: 20px;
+}
+
+.Text-indent {
+  text-indent: 50px
+}
+
+.App-intro {
+  font-size: large;
+}
+
+/* @keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+} */
