@@ -3,52 +3,91 @@ import logo from './Logo UFPB.svg';
 import './App.css';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
 
+const dados = {
+  usuario: {
+    NOME: "Zezinho Cirurgião da Silva",
+    CPF:  "123.456.789-00",
+    EMAIL: "zezinho.cirurgia@boy.com"
+  },
+  avaliacao: [
+    {
+      id: "1",
+      ano: "2016",
+      tipo: "Probatoria",
+      estado: "Avaliado"
+    },
+
+    {
+      id: "2",
+      ano: "2017",
+      tipo: "Desempenho",
+      estado: "Avaliado"
+    },
+    {
+      id: "3",
+      ano: "2018",
+      tipo: "Desempenho",
+      estado: "Em Avaliação"
+    },
+    {
+      id: "4",
+      ano: "2018",
+      tipo: "Desempenho",
+      estado: "Pendente"
+    }
+  ]
+};
+// var React = require('react');
+// var PropTypes = require('prop-types');
+
 
 export class App extends Component {
   render() {
     return (
-      <Container>
-      <div className="App">
-      <Col>
-        <Row  className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <Col>
-            <Row>
-              <h1 className="App-title Text-indent">Sistema de Avaliação de Desempenho</h1>
-            </Row>
-            <Row>
-              <a className="Text-indent">Hospital Universitário Lauro Wanderley</a>
-            </Row>
-            <Row>
-              <p className="Text-indent">Universidade Federal da Paraiba</p>
-            </Row>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Info_pessoa />
-            <Tabela/>
-          </Col>
-        </Row>
-        <Botao />
-      </Col>
-      </div>
+    <div className="App">
+      <Container fluid>
+        <Col>
+          <Row  className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <Col>
+              <Row>
+                <h1 className="App-title Text-indent">Sistema de Avaliação de Desempenho</h1>
+              </Row>
+              <Row>
+                <a className="Text-indent">Hospital Universitário Lauro Wanderley</a>
+              </Row>
+              <Row>
+                <p className="Text-indent">Universidade Federal da Paraiba</p>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Info_pessoa usuario={dados.usuario}/>
+              <Tabela avaliacao={dados.avaliacao}/>
+            </Col>
+          </Row>
+          <Botao />
+        </Col>
       </Container>
+    </div>
     );
   }
 }
+
 class Info_pessoa extends Component {
+
   render() {
     return (
       <div>
         <Card  className="Card-position">
           <CardBody>
             <CardSubtitle>Nome: </CardSubtitle>
-            <CardText>Zezinho Cirurgião da Silva</CardText>
+            <CardText>{this.props.usuario.NOME}</CardText>
             <CardSubtitle>CPF: </CardSubtitle>
-            <CardText>123.456.789-00</CardText>
+            <CardText>{this.props.usuario.CPF}</CardText>
             <CardSubtitle>Email: </CardSubtitle>
-            <CardText>zezinho.cirurgia@boy.com</CardText>
+            <CardText>{this.props.usuario.EMAIL}</CardText>
           </CardBody>
         </Card>
       </div>
@@ -67,33 +106,29 @@ class Tabela extends Component {
             <th>Situação</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td scope="row">2016</td>
-            <td>Probatoria</td>
-            <td className="btn-success">Resultado</td>
-          </tr>
-          <tr>
-            <td scope="row">2017</td>
-            <td>Avaliativa</td>
-            <td className="btn-success">Resultado</td>
-          </tr>
-          <tr>
-            <td scope="row">2018</td>
-            <td>Avaliativa</td>
-            <td className="btn-info">Processando</td>
-          </tr>
-          <tr>
-            <td scope="row">2018</td>
-            <td>Avaliativa</td>
-            <td className="btn-danger">Pendente</td>
-          </tr>
-        </tbody>
+        <Linha {...dados}/>
       </Table>
     );
   }
 }
 
+class Linha extends Component {
+  render() {
+    return (
+    <tbody>
+      {dados.avaliacao.map((val) =>
+        <tr key={val.id}>
+          <td scope="row">{val.ano}</td>
+          <td>{val.tipo}</td>
+          { val.estado === "Avaliado"     && <td className="btn-success">{val.estado}</td> }
+          { val.estado === "Em Avaliação" && <td className="btn-info">   {val.estado}</td> }
+          { val.estado === "Pendente"     && <td className="btn-danger"> {val.estado}</td> }
+        </tr>
+      )}
+    </tbody>
+    );
+  }
+}
 
 class Botao extends Component {
   render() {
