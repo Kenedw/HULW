@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './Logo UFPB.svg';
 import './App.css';
+import Head from './Head.js';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
 
 const dados = {
@@ -12,55 +12,38 @@ const dados = {
   avaliacao: [
     {
       id: "1",
-      ano: "2016",
-      tipo: "Probatoria",
-      estado: "Avaliado"
+      ano: "2018",
+      tipo: "Desempenho",
+      estado: "Pendente"
     },
-
     {
       id: "2",
-      ano: "2017",
-      tipo: "Desempenho",
-      estado: "Avaliado"
-    },
-    {
-      id: "3",
       ano: "2018",
       tipo: "Desempenho",
       estado: "Em Avaliação"
     },
     {
-      id: "4",
-      ano: "2018",
+      id: "3",
+      ano: "2017",
       tipo: "Desempenho",
-      estado: "Pendente"
+      estado: "Avaliado"
+    },
+    {
+      id: "4",
+      ano: "2016",
+      tipo: "Probatoria",
+      estado: "Avaliado"
     }
   ]
 };
-// var React = require('react');
-// var PropTypes = require('prop-types');
-
 
 export class App extends Component {
   render() {
     return (
     <div className="App">
-      <Container fluid>
+      <Head />
+      <Container>
         <Col>
-          <Row  className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <Col>
-              <Row>
-                <h1 className="App-title Text-indent">Sistema de Avaliação de Desempenho</h1>
-              </Row>
-              <Row>
-                <a className="Text-indent">Hospital Universitário Lauro Wanderley</a>
-              </Row>
-              <Row>
-                <p className="Text-indent">Universidade Federal da Paraiba</p>
-              </Row>
-            </Col>
-          </Row>
           <Row>
             <Col>
               <Info_pessoa usuario={dados.usuario}/>
