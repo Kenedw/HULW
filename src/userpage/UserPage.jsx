@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './../App.css';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
 
 const dados = {
@@ -36,7 +36,7 @@ const dados = {
   ]
 };
 
-export class App extends Component {
+export class Userpage extends Component {
   render() {
     return (
     <div className="App">
@@ -120,4 +120,4 @@ class Botao extends Component {
     );
   }
 }
-export default App;
+export default Userpage;
