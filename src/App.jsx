@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Head from './Head.js';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
 
 const dados = {
@@ -41,7 +40,6 @@ export class App extends Component {
   render() {
     return (
     <div className="App">
-      <Head />
       <Container>
         <Col>
           <Row>

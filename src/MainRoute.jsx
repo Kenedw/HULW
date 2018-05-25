@@ -13,12 +13,15 @@ const NotFound = () =>(
 class Rota extends Component {
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route path="/" exact component={App} />
-          <Route path='*' component={NotFound}/>
-        </Switch>
-      </Router>
+      <div>
+        <Head />
+        <Router>
+          <Switch>
+            <Route path="/" exact component={App} />
+            <Route component={NotFound}/>
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }
