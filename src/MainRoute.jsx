@@ -1,14 +1,26 @@
 import React,{ Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import App from './App.jsx';
+import Userpage from './userpage/UserPage.jsx';
 import Head from './Head.js';
+import Login from './login/Login';
 
 const NotFound = () =>(
   <div>
     <h1>Pagina não encontrada, cidadão.</h1>
   </div>
 );
+const cadastrar = () => (
+  <div>
+      <h2>Tela Cadastrar</h2>
+  </div>
+);
+
+const esqueci = () => (
+  <div>
+      <h2>Tela: Esqueci a senha</h2>
+  </div>
+)
 
 class Rota extends Component {
   render() {
@@ -17,7 +29,10 @@ class Rota extends Component {
         <Head />
         <Router>
           <Switch>
-            <Route path="/" exact component={App} />
+            <Route exact path="/" component={Login} />
+            <Route path="/cadastrar" component={cadastrar} />
+            <Route path="/esqueciSenha" component={esqueci} />
+            <Route path="/userpage" exact component={Userpage} />
             <Route component={NotFound}/>
           </Switch>
         </Router>
@@ -27,10 +42,3 @@ class Rota extends Component {
 }
 
 export default Rota;
-// <!-- Links do login
-// <Route exact path="/" component={Login} />
-// <Route path="/cadastrar" component={cadastrar} />
-// <Route path="/esqueciSenha" component={esqueci} />
-// -->
-// <!-- Links da userpage -->
-// <Route path="/userpage" component={userpage} />
