@@ -4,22 +4,21 @@
 }
 
 .App-logo {
-  /* animation: App-logo-spin infinite 20s linear; */
   height: 100px;
-  position: relative;
-  left: 150px;
+  position: absolute;
+  right: 155px;
 }
 .App-logoPGP {
-  /* animation: App-logo-spin infinite 20s linear; */
   height: 100px;
-  position: relative;
-  left: 170px;
+  position: absolute;
+  right: 235px;
 }
 
 .App-header {
   background-color: #0079BF;
-  padding: 20px;
+  padding: 10px;
   color: white;
+
 }
 
 .App-title {
@@ -49,6 +48,8 @@
   margin-bottom: 0px !important;
   text-align: left !important;
   height: auto !important;
+  position: relative;
+  left: 25%;
 
 }
 
