@@ -9,6 +9,12 @@
   position: relative;
   left: 150px;
 }
+.App-logoPGP {
+  /* animation: App-logo-spin infinite 20s linear; */
+  height: 100px;
+  position: relative;
+  left: 170px;
+}
 
 .App-header {
   background-color: #0079BF;
@@ -39,12 +45,21 @@
 }
 
 .Text-indent {
-  text-indent: 50px
+  text-indent: 50px !important;
+  margin-bottom: 0px !important;
+  text-align: left !important;
+  height: auto !important;
+
 }
 
 .App-intro {
   font-size: large;
 }
+.a-fix {
+  margin-left: 10px !important;
+  margin-bottom: 0px !important;
+}
+
 body {
   background: #F0F8FF !important;
 }
