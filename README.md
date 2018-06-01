@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Folder Structure
 
 After creation, your project should look like this:
@@ -2316,3 +2317,15 @@ In the future, we might start automatically compiling incompatible third-party m
 ## Something Missing?
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
+=======
+### Pre-visualização da pagina de usuario
+
+
+![UserPage](https://i.imgur.com/LkOX9K1.png)
+
+
+### Pre-visualização da pagina de login
+
+
+![UserPage](https://i.imgur.com/vpljXn7.png)
+>>>>>>> +Login

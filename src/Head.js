@@ -1,29 +1,26 @@
 import React, { Component } from 'react';
-import logo from './Logo UFPB.svg';
+import logo from './logo ufpb.png';
+import logoPGP from './logo progep.png';
 import './App.css';
 import {  Row, Col} from 'reactstrap';
 
 export class Head extends Component {
   render() {
     return (
-    <div className="App">
-      <header>
-        <Row  className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <Col className="App-logo">
-            <Row>
-              <h1 className="App-title Text-indent ">Sistema de Avaliação de Desempenho</h1>
-            </Row>
-            <Row>
-              <a className="Text-indent">Hospital Universitário Lauro Wanderley</a>
-            </Row>
-            <Row>
+      <div className="App App-header">
+          <Row>
+            <div>
+              <h1 className="App-title Text-indent">Sistema de Avaliação de Desempenho</h1>
               <p className="Text-indent">Universidade Federal da Paraiba</p>
-            </Row>
-          </Col>
-        </Row>
-      </header>
-    </div>
+              <p className="Text-indent">Pró-Reitoria de Gestão de Pessoas</p>
+              <p className="Text-indent">Hospital Universitário Lauro Wanderley</p>
+            </div>
+            <div>
+              <img src={logoPGP} className="App-logoPGP" />
+              <img src={logo} className="App-logo" />
+            </div>
+          </Row>
+      </div>
     );
   }
 }
