@@ -1,6 +1,6 @@
 import React  from 'react';
 import './../App.css';
-import { Input, Row, Col, Button, Card, CardBody, CardSubtitle} from 'reactstrap';
+import { Input, Button, Card, CardBody, CardSubtitle} from 'reactstrap';
 
 
 class cadastrotec extends React.Component {

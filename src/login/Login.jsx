@@ -54,7 +54,6 @@ class Login extends React.Component{
             <span className="fontawesome-lock"></span>
             <input type="password" value={this.state.pass} placeholder="Senha" onChange={this.handleChangePass}/>
             <div>
-              <a href="/cadastrar">Criar Conta</a>
               <a href="/esqueciSenha">Esqueci a senha</a>
             </div>
             <input type="submit" value="Login" onClick={this.verificar} />
