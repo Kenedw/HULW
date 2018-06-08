@@ -19,6 +19,12 @@ const esqueci = () => (
   </div>
 )
 
+const formulario = () => (
+  <div>
+    <h2>Tela: Formulario</h2>
+  </div>
+)
+
 class Rota extends Component {
   render() {
     return (
@@ -30,6 +36,7 @@ class Rota extends Component {
             <Route path="/cadastrar" component={CadastroTec} />
             <Route path="/esqueciSenha" component={esqueci} />
             <Route path="/userpage" exact component={Userpage} />
+            <Route path="/formulario" exact component={formulario} />
             <Route component={NotFound}/>
           </Switch>
         </Router>

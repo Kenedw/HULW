@@ -3,13 +3,13 @@ import './../App.css';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
 
 const dados = {
-  usuario: {
+  /*usuario: {
     NOME: "Zezinho Cirurgião da Silva",
     CPF:  "123.456.789-00",
     EMAIL: "zezinho.cirurgia@boy.com",
     SETOR: "Urgência e emergência"
   },
-  avaliacao: [
+  */avaliacao: [
     {
       id: "1",
       ano: "2018",
@@ -42,6 +42,38 @@ const dados = {
 };
 
 export class Userpage extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      CPF: "",
+      NOME: "",
+      EMAIL: "",
+      SETOR: "Urgência e emergência"
+    }
+  }
+
+
+  pegaDados(){
+    return fetch('https://hulw.herokuapp.com/usuario/cpf/12345678901')
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        this.setState({CPF: responseJson.cd_CPF});
+        this.setState({NOME: responseJson.no_Pessoa});
+        this.setState({EMAIL: responseJson.cd_Email});
+        
+
+      }).catch((error) => {
+        console.error(error);
+      })
+  }
+
+  componentWillMount() {
+
+    this.pegaDados();
+  }
+  
   render() {
     return (
       <div className="App">
@@ -49,11 +81,11 @@ export class Userpage extends Component {
           <Col>
             <Row>
               <Col>
-                <Info_pessoa usuario={dados.usuario}/>
+                <Info_pessoa usuario={this.state}/>
                 <Tabela avaliacao={dados.avaliacao}/>
               </Col>
             </Row>
-            <Botao />
+            <Botao/>
           </Col>
         </Container>
       </div>
@@ -108,6 +140,11 @@ class Tabela extends Component {
 }
 
 class Linha extends Component {
+
+  irPaginaFormulario(){
+    window.open("/formulario","_self");
+  }
+
   render() {
     return (
       <tbody>
@@ -118,7 +155,7 @@ class Linha extends Component {
             <td>{val.tipo}</td>
             { val.estado === "Avaliado"     && <td className="btn-success">{val.estado}</td> }
             { val.estado === "Agardando Superior" && <td className="btn-warning">   {val.estado}</td> }
-            { val.estado === "Pendente"     && <td className="btn-danger"> {val.estado}</td> }
+            { val.estado === "Pendente"     && <td className="btn-danger" onClick={this.irPaginaFormulario}> {val.estado}</td> }
           </tr>
         )}
       </tbody>
@@ -127,10 +164,15 @@ class Linha extends Component {
 }
 
 class Botao extends Component {
+
+  logout(){
+    window.open("/","_self");
+  }
+
   render() {
     return (
       <div className="btn-position">
-        <Button outline>Sair</Button>
+        <Button onClick={this.logout} outline >Sair</Button>
       </div>
     );
   }
