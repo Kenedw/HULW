@@ -1,16 +1,49 @@
 import React  from 'react';
 import './../App.css';
-import { Input, Button, Card, CardBody, CardSubtitle} from 'reactstrap';
+import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col,} from 'reactstrap';
+import axios from 'axios';
+
+
+const dados = {
+  usuario: {
+    NOME: "Zezinho Administrador da Silva",
+    CPF:  "123.456.789-00",
+    EMAIL: "zezinho.admin@boy.com",
+  }
+};
+
+class Info_adm extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <Card >
+          <CardBody>
+            <Row>
+              <Col>
+                <CardSubtitle>Nome: </CardSubtitle>
+                <CardText>{this.props.usuario.NOME}</CardText>
+                <CardSubtitle>Email: </CardSubtitle>
+                <CardText>{this.props.usuario.EMAIL}</CardText>
+              </Col>
+              <Col>
+                <CardSubtitle>CPF: </CardSubtitle>
+                <CardText>{this.props.usuario.CPF}</CardText>
+              </Col>
+            </Row>
+          </CardBody>
+        </Card>
+      </div>
+    );
+  }
+}
 
 
 class cadastrotec extends React.Component {
   constructor(){
     super();
     this.state = {
-      nome: "",
-      cpf: "",
-      email: "",
-      senha: ""
+      cpf: ""
     };
     this.onChange = (evento) => {
       this.setState({nome: evento.target.value});
@@ -20,15 +53,23 @@ class cadastrotec extends React.Component {
       state[campo] = evento.target.value;
 
       this.setState(state);
-      //if(campo === 'senha' && evento.target.value.length < 8 ){
-      //alert(TestaCPF(state[campo]));
-      console.log( evento.target.value.length)
       if(campo === 'cpf'){
         this.setState( {cpf: formatarCpf(evento.target.value)} ); // atualiza o valor do cpf formatado
       }
     };
   }
 
+
+  search(cpf){
+    cpf = cpf.replace(/[^0-9]+/g,'');
+    console.log(JSON.stringify(cpf)); // ex.: { user: 'Your User'}
+
+    axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf )
+    .then(function(response){
+      console.log(JSON.stringify(response.data[0])); // ex.: { user: 'Your User'}
+      //console.log(response.cd_Senha); // ex.: 200
+    });
+  }
 
 
   render(){
@@ -39,43 +80,26 @@ class cadastrotec extends React.Component {
             <CardBody>
 
               <form>
-                <h3>Cadastro</h3>
-
-                <div className="form-group">
-                  <CardSubtitle>Nome: </CardSubtitle>
-                  <Input  type="text"  className="form-control"  name="nome"
-                    value={this.state.nome} onChange={this.onChange} required/>
+                <h3>Administrador</h3>
+                <div>
+                  <Info_adm {...dados}/>
                 </div>
-
                 <div className="form-group">
-                  <CardSubtitle>Email: </CardSubtitle>
-                  <input type="email" className="form-control"  name="email"
-                    value={this.state.email} onChange={this.onChange} required/>
-                </div>
-
-                <div className="form-group">
-                  <CardSubtitle>CPF: </CardSubtitle>
+                  <p></p>
+                  <CardSubtitle>Pesquisar CPF: </CardSubtitle>
                   <Input  type="text"  className="form-control" name="cpf"
-                    value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' required/>
-                </div>
-
-                <div className="form-group">
-                  <CardSubtitle>Senha: </CardSubtitle>
-                  <input type="password" className="form-control"  name="senha"
-                    value={this.state.senha} onChange={this.onChange} minLength='6' required/>
+                    value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-                  <Button outline type="Submit" >Cadastrar</Button>
-                  <Button outline href="/" className="a-fix">Voltar</Button>
+                  <Button outline type="Submit" >Cadastrar Setor</Button>
+                  <Button outline onClick={this.search(this.state.cpf)} className="a-fix">Pesquisar</Button>
                 </div>
               </form>
             </CardBody>
           </Card>
         </div>
       </div>
-
     )
-
   }
 }
 
