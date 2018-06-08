@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './../App.css';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
+// import axios from 'axios';
+
 
 const dados = {
   /*usuario: {
@@ -153,9 +155,15 @@ class Linha extends Component {
             <td scope="row">{val.ano}</td>
             <td>{val.nome}</td>
             <td>{val.tipo}</td>
+<<<<<<< HEAD
             { val.estado === "Avaliado"     && <td className="btn-success">{val.estado}</td> }
             { val.estado === "Agardando Superior" && <td className="btn-warning">   {val.estado}</td> }
             { val.estado === "Pendente"     && <td className="btn-danger" onClick={this.irPaginaFormulario}> {val.estado}</td> }
+=======
+            { val.estado === "Avaliado"           && <td className="btn-success">{val.estado}</td> }
+            { val.estado === "Agardando Superior" && <td className="btn-warning">{val.estado}</td> }
+            { val.estado === "Pendente"           && <td className="btn-danger"> {val.estado}</td> }
+>>>>>>> adminPage
           </tr>
         )}
       </tbody>

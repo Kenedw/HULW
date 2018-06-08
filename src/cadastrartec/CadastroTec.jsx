@@ -1,16 +1,50 @@
 import React  from 'react';
 import './../App.css';
-import { Input, Button, Card, CardBody, CardSubtitle} from 'reactstrap';
+import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col,} from 'reactstrap';
+import axios from 'axios';
+import lista from '../Component/todoList.jsx';
+
+
+const dados = {
+  usuario: {
+    NOME: "Zezinho Administrador da Silva",
+    CPF:  "123.456.789-00",
+    EMAIL: "zezinho.admin@boy.com",
+  }
+};
+
+class Info_adm extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <Card >
+          <CardBody>
+            <Row>
+              <Col>
+                <CardSubtitle>Nome: </CardSubtitle>
+                <CardText>{this.props.usuario.NOME}</CardText>
+                <CardSubtitle>Email: </CardSubtitle>
+                <CardText>{this.props.usuario.EMAIL}</CardText>
+              </Col>
+              <Col>
+                <CardSubtitle>CPF: </CardSubtitle>
+                <CardText>{this.props.usuario.CPF}</CardText>
+              </Col>
+            </Row>
+          </CardBody>
+        </Card>
+      </div>
+    );
+  }
+}
 
 
 class cadastrotec extends React.Component {
   constructor(){
     super();
     this.state = {
-      nome: "",
-      cpf: "",
-      email: "",
-      senha: ""
+      cpf: ""
     };
     this.onChange = (evento) => {
       this.setState({nome: evento.target.value});
@@ -20,9 +54,6 @@ class cadastrotec extends React.Component {
       state[campo] = evento.target.value;
 
       this.setState(state);
-      //if(campo === 'senha' && evento.target.value.length < 8 ){
-      //alert(TestaCPF(state[campo]));
-      console.log( evento.target.value.length)
       if(campo === 'cpf'){
         this.setState( {cpf: formatarCpf(evento.target.value)} ); // atualiza o valor do cpf formatado
       }
@@ -37,49 +68,58 @@ class cadastrotec extends React.Component {
         <div className="col-md-16">
           <Card  className="Card-position">
             <CardBody>
-
               <form>
-                <h3>Cadastro</h3>
-
-                <div className="form-group">
-                  <CardSubtitle>Nome: </CardSubtitle>
-                  <Input  type="text"  className="form-control"  name="nome"
-                    value={this.state.nome} onChange={this.onChange} required/>
+                <h3>Administrador</h3>
+                <div>
+                  <Info_adm {...dados}/>
                 </div>
-
                 <div className="form-group">
-                  <CardSubtitle>Email: </CardSubtitle>
-                  <input type="email" className="form-control"  name="email"
-                    value={this.state.email} onChange={this.onChange} required/>
-                </div>
-
-                <div className="form-group">
-                  <CardSubtitle>CPF: </CardSubtitle>
+                  <p></p>
+                  <CardSubtitle>Pesquisar CPF: </CardSubtitle>
                   <Input  type="text"  className="form-control" name="cpf"
-                    value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' required/>
-                </div>
-
-                <div className="form-group">
-                  <CardSubtitle>Senha: </CardSubtitle>
-                  <input type="password" className="form-control"  name="senha"
-                    value={this.state.senha} onChange={this.onChange} minLength='6' required/>
+                    value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-                  <Button outline type="Submit" >Cadastrar</Button>
-                  <Button outline href="/" className="a-fix">Voltar</Button>
+                  <Button outline >Cadastrar Setor</Button>
+                  <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
+                      .then(function(response){
+                        console.log(JSON.stringify(response.data));
+                      });
+                    }
+                  }
+                    className="a-fix">Pesquisar</Button>
                 </div>
               </form>
             </CardBody>
+            <card_lista />
           </Card>
         </div>
       </div>
-
     )
-
   }
 }
 
+class card_lista extends React.Component {
+  constructor() {
+  super();
+  }
+  render(){
+    return(
+    <Card>
+      <CardBody>
+        <lista />
+      </CardBody>
+    </Card>
+  )}
+}
+
 //{JSON.stringify(this.state)}
+
+function cpf2int(cpf){
+  cpf = cpf.replace(/[^0-9]+/g,'');
+
+  return cpf;
+}
 
 function formatarCpf(cpf){
   cpf = cpf.replace(/\D/g,"");
