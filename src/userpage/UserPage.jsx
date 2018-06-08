@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import './../App.css';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
-// import axios from 'axios';
 
 
 const dados = {
-  /*usuario: {
-    NOME: "Zezinho Cirurgião da Silva",
-    CPF:  "123.456.789-00",
-    EMAIL: "zezinho.cirurgia@boy.com",
-    SETOR: "Urgência e emergência"
-  },
-  */avaliacao: [
+  avaliacao: [
     {
       id: "1",
       ano: "2018",
@@ -64,7 +57,7 @@ export class Userpage extends Component {
         this.setState({CPF: responseJson.cd_CPF});
         this.setState({NOME: responseJson.no_Pessoa});
         this.setState({EMAIL: responseJson.cd_Email});
-        
+
 
       }).catch((error) => {
         console.error(error);
@@ -75,7 +68,7 @@ export class Userpage extends Component {
 
     this.pegaDados();
   }
-  
+
   render() {
     return (
       <div className="App">
@@ -155,15 +148,10 @@ class Linha extends Component {
             <td scope="row">{val.ano}</td>
             <td>{val.nome}</td>
             <td>{val.tipo}</td>
-<<<<<<< HEAD
             { val.estado === "Avaliado"     && <td className="btn-success">{val.estado}</td> }
             { val.estado === "Agardando Superior" && <td className="btn-warning">   {val.estado}</td> }
             { val.estado === "Pendente"     && <td className="btn-danger" onClick={this.irPaginaFormulario}> {val.estado}</td> }
-=======
-            { val.estado === "Avaliado"           && <td className="btn-success">{val.estado}</td> }
-            { val.estado === "Agardando Superior" && <td className="btn-warning">{val.estado}</td> }
-            { val.estado === "Pendente"           && <td className="btn-danger"> {val.estado}</td> }
->>>>>>> adminPage
+
           </tr>
         )}
       </tbody>
