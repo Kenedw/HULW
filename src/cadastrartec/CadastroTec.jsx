@@ -81,7 +81,7 @@ class cadastrotec extends React.Component {
                 </div>
                 <div>
                   <Button outline >Cadastrar Setor</Button>
-                  <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + this.state.cpf )
+                  <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
                       .then(function(response){
                         console.log(JSON.stringify(response.data[0]));
                       });
@@ -114,6 +114,12 @@ class card_lista extends React.Component {
 }
 
 //{JSON.stringify(this.state)}
+
+function cpf2int(cpf){
+  cpf = cpf.replace(/[^0-9]+/g,'');
+
+  return cpf;
+}
 
 function formatarCpf(cpf){
   cpf = cpf.replace(/\D/g,"");
