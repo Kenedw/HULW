@@ -50,7 +50,7 @@ class Info_user extends React.Component {
               <Card  className="Card-position">
                 <CardBody>
 
-                 
+                
             <hr/>
             <Button color="primary"> Gravar</Button>{' '}
             <Button color="danger">Cancelar</Button>{' '}
