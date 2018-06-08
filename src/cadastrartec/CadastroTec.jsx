@@ -81,7 +81,13 @@ class cadastrotec extends React.Component {
                 </div>
                 <div>
                   <Button outline >Cadastrar Setor</Button>
-                  <Button outline onClick={search(this.state.cpf)} className="a-fix">Pesquisar</Button>
+                  <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + this.state.cpf )
+                      .then(function(response){
+                        console.log(JSON.stringify(response.data[0]));
+                      });
+                    }
+                  } 
+                    className="a-fix">Pesquisar</Button>
                 </div>
               </form>
             </CardBody>
@@ -105,15 +111,6 @@ class card_lista extends React.Component {
       </CardBody>
     </Card>
   )}
-}
-
-function search(cpf){
-  cpf = cpf.replace(/[^0-9]+/g,'');
-  axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf )
-  .then(function(response){
-    console.log(JSON.stringify(response.data)); // ex.: { user: 'Your User'}
-    //console.log(response.cd_Senha); // ex.: 200
-  });
 }
 
 //{JSON.stringify(this.state)}
