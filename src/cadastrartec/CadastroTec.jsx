@@ -83,10 +83,10 @@ class cadastrotec extends React.Component {
                   <Button outline >Cadastrar Setor</Button>
                   <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
                       .then(function(response){
-                        console.log(JSON.stringify(response.data[0]));
+                        console.log(JSON.stringify(response.data));
                       });
                     }
-                  } 
+                  }
                     className="a-fix">Pesquisar</Button>
                 </div>
               </form>

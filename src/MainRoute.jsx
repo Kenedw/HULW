@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Userpage from './userpage/UserPage.jsx';
 import Head from './Head.js';
 import Login from './login/Login';
-import CadastroTec from './cadastrartec/CadastroTec0.jsx'
+import CadastroTec from './cadastrartec/CadastroTec.jsx'
 import Aval from './avaliacao/avaliacao'
 import Aval2 from './avaliacao/avaliacaoprob'
 
