@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './../App.css';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
-import axios from 'axios';
+// import axios from 'axios';
 
 
 const dados = {

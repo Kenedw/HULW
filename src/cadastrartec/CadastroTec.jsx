@@ -2,6 +2,7 @@ import React  from 'react';
 import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col,} from 'reactstrap';
 import axios from 'axios';
+import lista from '../Component/todoList.jsx';
 
 
 const dados = {
@@ -60,17 +61,6 @@ class cadastrotec extends React.Component {
   }
 
 
-  search(cpf){
-    cpf = cpf.replace(/[^0-9]+/g,'');
-    console.log(JSON.stringify(cpf)); // ex.: { user: 'Your User'}
-
-    axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf )
-    .then(function(response){
-      console.log(JSON.stringify(response.data[0])); // ex.: { user: 'Your User'}
-      //console.log(response.cd_Senha); // ex.: 200
-    });
-  }
-
 
   render(){
     return (
@@ -78,7 +68,6 @@ class cadastrotec extends React.Component {
         <div className="col-md-16">
           <Card  className="Card-position">
             <CardBody>
-
               <form>
                 <h3>Administrador</h3>
                 <div>
@@ -91,16 +80,40 @@ class cadastrotec extends React.Component {
                     value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-                  <Button outline type="Submit" >Cadastrar Setor</Button>
-                  <Button outline onClick={this.search(this.state.cpf)} className="a-fix">Pesquisar</Button>
+                  <Button outline >Cadastrar Setor</Button>
+                  <Button outline onClick={search(this.state.cpf)} className="a-fix">Pesquisar</Button>
                 </div>
               </form>
             </CardBody>
+            <card_lista />
           </Card>
         </div>
       </div>
     )
   }
+}
+
+class card_lista extends React.Component {
+  constructor() {
+  super();
+  }
+  render(){
+    return(
+    <Card>
+      <CardBody>
+        <lista />
+      </CardBody>
+    </Card>
+  )}
+}
+
+function search(cpf){
+  cpf = cpf.replace(/[^0-9]+/g,'');
+  axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf )
+  .then(function(response){
+    console.log(JSON.stringify(response.data)); // ex.: { user: 'Your User'}
+    //console.log(response.cd_Senha); // ex.: 200
+  });
 }
 
 //{JSON.stringify(this.state)}
