@@ -50,17 +50,35 @@ export class Userpage extends Component {
 
 
   pegaDados(){
-    return fetch('https://hulw.herokuapp.com/usuario/cpf/12345678901')
+
+    var base64 = require('base-64')
+    var utf8 = require('utf8')
+
+    var encoded = (this.props.location.search).substring(1)
+    var bytes = base64.decode(encoded)
+    var cpf = utf8.decode(bytes)
+
+    //retirando os pontos e os traços
+    var cpfLimpo = cpf.substring(0,3) + cpf.substring(4,7) + cpf.substring(8,11) + cpf.substring(12,14)
+
+    return fetch('https://hulw.herokuapp.com/usuario/cpf/' + cpfLimpo)
       .then((response) => response.json())
       .then((responseJson) => {
 
-        this.setState({CPF: responseJson.cd_CPF});
+        var cpfLE = responseJson.cd_CPF;
+
+        //adicionando os pontos e traços, somente para a tela de usuario
+        var cpfPontos = [cpfLE.slice(0,3),'.',cpfLE.slice(3)].join('');
+        cpfPontos = [cpfPontos.slice(0,7),'.',cpfPontos.slice(7)].join('');
+        cpfPontos = [cpfPontos.slice(0,11),'-',cpfPontos.slice(11)].join('');
+
+        this.setState({CPF: cpfPontos});
         this.setState({NOME: responseJson.no_Pessoa});
         this.setState({EMAIL: responseJson.cd_Email});
 
 
       }).catch((error) => {
-        console.error(error);
+        console.log('nao encontrou o usuario!!!');
       })
   }
 

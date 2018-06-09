@@ -36,7 +36,14 @@ class Login extends React.Component{
         //
       }
       else{
-        window.open("/userpage","_self");
+        var base64 = require('base-64')
+        var utf8 = require('utf8')
+
+        var cpf = this.state.user;
+        var bytes = utf8.encode(cpf)
+        var encoded = base64.encode(bytes)
+
+        window.open("/userpage?"+encoded,"_self");
       }
     }
 
