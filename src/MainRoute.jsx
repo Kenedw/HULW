@@ -7,6 +7,7 @@ import Login from './login/Login';
 import CadastroTec from './cadastrartec/CadastroTec.jsx'
 import Aval from './avaliacao/avaliacao'
 import Aval2 from './avaliacao/avaliacaoprob'
+import Formulario from './avaliacao/formulario'
 
 const NotFound = () =>(
   <div>
@@ -18,12 +19,6 @@ const NotFound = () =>(
 const esqueci = () => (
   <div>
       <h2>Tela: Esqueci a senha</h2>
-  </div>
-)
-
-const formulario = () => (
-  <div>
-    <h2>Tela: Formulario</h2>
   </div>
 )
 
@@ -40,7 +35,7 @@ class Rota extends Component {
             <Route path="/userpage" exact component={Userpage} />
             <Route path="/avaliacao" component ={Aval}/>
             <Route path="/avalprob" component = {Aval2}/>
-            <Route path="/formulario" exact component={formulario} />
+            <Route path="/formulario" exact component={Formulario} />
             <Route component={NotFound}/>
           </Switch>
         </Router>

@@ -36,6 +36,8 @@ const dados = {
   ]
 };
 
+var cpf = ""
+
 export class Userpage extends Component {
 
   constructor(){
@@ -56,7 +58,7 @@ export class Userpage extends Component {
 
     var encoded = (this.props.location.search).substring(1)
     var bytes = base64.decode(encoded)
-    var cpf = utf8.decode(bytes)
+    cpf = utf8.decode(bytes)
 
     //retirando os pontos e os traços
     var cpfLimpo = cpf.substring(0,3) + cpf.substring(4,7) + cpf.substring(8,11) + cpf.substring(12,14)
@@ -155,7 +157,12 @@ class Tabela extends Component {
 class Linha extends Component {
 
   irPaginaFormulario(){
-    window.open("/formulario","_self");
+    var base64 = require('base-64')
+    var utf8 = require('utf8')
+
+    var bytes = utf8.encode(cpf)
+    var encoded = base64.encode(bytes)
+    window.open("/formulario?" + encoded,"_self");
   }
 
   render() {
