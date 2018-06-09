@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo ufpb.png';
 import logoPGP from './logo progep.png';
 import './App.css';
-import {  Row, Col} from 'reactstrap';
+import {  Row } from 'reactstrap';
 
 export class Head extends Component {
   render() {

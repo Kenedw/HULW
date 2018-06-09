@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Userpage from './userpage/UserPage.jsx';
 import Head from './Head.js';
 import Login from './login/Login';
-import CadastroTec from './cadastrartec/CadastroTec.jsx'
+import AdminPage from './adminpage/AdminPage.jsx'
 import Aval from './avaliacao/avaliacao'
 import Aval2 from './avaliacao/avaliacaoprob'
 import Formulario from './avaliacao/formulario'
@@ -30,7 +30,7 @@ class Rota extends Component {
         <Router>
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route path="/cadastrar" component={CadastroTec} />
+            <Route path="/administrador" component={AdminPage} />
             <Route path="/esqueciSenha" component={esqueci} />
             <Route path="/userpage" exact component={Userpage} />
             <Route path="/avaliacao" component ={Aval}/>

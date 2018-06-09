@@ -2,8 +2,7 @@ import React  from 'react';
 import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col,} from 'reactstrap';
 import axios from 'axios';
-import lista from '../Component/todoList.jsx';
-
+import Lista from '../Component/todoList.jsx';
 
 const dados = {
   usuario: {
@@ -60,8 +59,6 @@ class cadastrotec extends React.Component {
     };
   }
 
-
-
   render(){
     return (
       <div className="container">
@@ -83,6 +80,7 @@ class cadastrotec extends React.Component {
                   <Button outline >Cadastrar Setor</Button>
                   <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
                       .then(function(response){
+                        <Card_lista list={response.data}/>
                         console.log(JSON.stringify(response.data));
                       });
                     }
@@ -91,7 +89,7 @@ class cadastrotec extends React.Component {
                 </div>
               </form>
             </CardBody>
-            <card_lista />
+            <Card_lista />
           </Card>
         </div>
       </div>
@@ -99,21 +97,19 @@ class cadastrotec extends React.Component {
   }
 }
 
-class card_lista extends React.Component {
+class Card_lista extends React.Component {
   constructor() {
   super();
   }
+
   render(){
     return(
-    <Card>
-      <CardBody>
-        <lista />
-      </CardBody>
-    </Card>
-  )}
+      <div>
+        <h>kkkkk</h>
+        <Lista />
+      </div>)
+  }
 }
-
-//{JSON.stringify(this.state)}
 
 function cpf2int(cpf){
   cpf = cpf.replace(/[^0-9]+/g,'');
