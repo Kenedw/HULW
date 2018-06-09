@@ -80,7 +80,7 @@ class cadastrotec extends React.Component {
                   <Button outline >Cadastrar Setor</Button>
                   <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
                       .then(function(response){
-                        <Card_lista list={response.data}/>
+                        <Card_lista pesq={response.data}/>
                         console.log(JSON.stringify(response.data));
                       });
                     }
@@ -89,7 +89,6 @@ class cadastrotec extends React.Component {
                 </div>
               </form>
             </CardBody>
-            <Card_lista />
           </Card>
         </div>
       </div>
@@ -105,8 +104,7 @@ class Card_lista extends React.Component {
   render(){
     return(
       <div>
-        <h>kkkkk</h>
-        <Lista />
+        <Lista list={this.props.pesq}/>
       </div>)
   }
 }
