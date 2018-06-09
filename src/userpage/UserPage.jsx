@@ -46,7 +46,7 @@ export class Userpage extends Component {
       CPF: "",
       NOME: "",
       EMAIL: "",
-      SETOR: "Urgência e emergência"
+      UNIDADE: "32161920"
     }
   }
 
@@ -64,24 +64,25 @@ export class Userpage extends Component {
     var cpfLimpo = cpf.substring(0,3) + cpf.substring(4,7) + cpf.substring(8,11) + cpf.substring(12,14)
 
     return fetch('https://hulw.herokuapp.com/usuario/cpf/' + cpfLimpo)
-      .then((response) => response.json())
-      .then((responseJson) => {
+    .then((response) => response.json())
+    .then((responseJson) => {
 
-        var cpfLE = responseJson.cd_CPF;
+      var cpfLE = responseJson.cd_CPF;
 
-        //adicionando os pontos e traços, somente para a tela de usuario
-        var cpfPontos = [cpfLE.slice(0,3),'.',cpfLE.slice(3)].join('');
-        cpfPontos = [cpfPontos.slice(0,7),'.',cpfPontos.slice(7)].join('');
-        cpfPontos = [cpfPontos.slice(0,11),'-',cpfPontos.slice(11)].join('');
+      //adicionando os pontos e traços, somente para a tela de usuario
+      var cpfPontos = [cpfLE.slice(0,3),'.',cpfLE.slice(3)].join('');
+      cpfPontos = [cpfPontos.slice(0,7),'.',cpfPontos.slice(7)].join('');
+      cpfPontos = [cpfPontos.slice(0,11),'-',cpfPontos.slice(11)].join('');
 
-        this.setState({CPF: cpfPontos});
-        this.setState({NOME: responseJson.no_Pessoa});
-        this.setState({EMAIL: responseJson.cd_Email});
+      this.setState({CPF: cpfPontos});
+      this.setState({NOME: responseJson.no_Pessoa});
+      this.setState({EMAIL: responseJson.cd_Email});
 
 
-      }).catch((error) => {
-        console.log('nao encontrou o usuario!!!');
-      })
+    }).catch((error) => {
+      window.open("/","_self");
+      // console.log('nao encontrou o usuario!!!');
+    })
   }
 
   componentWillMount() {
@@ -125,8 +126,8 @@ class Info_pessoa extends Component {
               <Col>
                 <CardSubtitle>CPF: </CardSubtitle>
                 <CardText>{this.props.usuario.CPF}</CardText>
-                <CardSubtitle>Setor: </CardSubtitle>
-                <CardText>{this.props.usuario.SETOR}</CardText>
+                <CardSubtitle>Unidade: </CardSubtitle>
+                <CardText>{this.props.usuario.UNIDADE}</CardText>
               </Col>
             </Row>
           </CardBody>
@@ -173,9 +174,9 @@ class Linha extends Component {
             <td scope="row">{val.ano}</td>
             <td>{val.nome}</td>
             <td>{val.tipo}</td>
-            { val.estado === "Avaliado"     && <td className="btn-success">{val.estado}</td> }
-            { val.estado === "Agardando Superior" && <td className="btn-warning">   {val.estado}</td> }
-            { val.estado === "Pendente"     && <td className="btn-danger" onClick={this.irPaginaFormulario}> {val.estado}</td> }
+            { val.estado === "Avaliado"           && <td className="btn-success">{val.estado}</td> }
+            { val.estado === "Agardando Superior" && <td className="btn-warning">{val.estado}</td> }
+            { val.estado === "Pendente"           && <td className="btn-danger" onClick={this.irPaginaFormulario}> {val.estado}</td> }
 
           </tr>
         )}
