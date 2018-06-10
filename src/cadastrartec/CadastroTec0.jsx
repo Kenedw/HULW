@@ -1,17 +1,28 @@
-import React  from 'react';
+import React, { Component } from 'react';
 import './../App.css';
-import { Input, Button, Card, CardBody, CardSubtitle} from 'reactstrap';
+import { Input, Row, Col, Button,ButtonGroup, Card, CardBody, CardSubtitle, Label,FormGroup, CustomInput} from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import axios from 'axios'
 
+
+const URL = 'https://hulw.herokuapp.com/'
 
 class cadastrotec extends React.Component {
   constructor(){
     super();
     this.state = {
+      unidades :[],
       nome: "",
       cpf: "",
       email: "",
-      senha: ""
+      senha: "",
+      chefe: false,
+      unidade: "",
+      dataAdm: "",
+      
     };
+
+    
     this.onChange = (evento) => {
       this.setState({nome: evento.target.value});
       const state = Object.assign({}, this.state);
@@ -20,15 +31,32 @@ class cadastrotec extends React.Component {
       state[campo] = evento.target.value;
 
       this.setState(state);
-      //if(campo === 'senha' && evento.target.value.length < 8 ){
-      //alert(TestaCPF(state[campo]));
-      console.log( evento.target.value.length)
-      if(campo === 'cpf'){
-        this.setState( {cpf: formatarCpf(evento.target.value)} ); // atualiza o valor do cpf formatado
-      }
+      //if(campo === 'unidade' &&  evento.target.value === ''){
+       // console.log( evento.target.value.length)
+      // alert("Sem comentario")
+      //}
+
     };
+    this.onSubmit = (evento) => { // ver os dados a serem enviados no console
+      evento.preventDefault();
+      console.log( this.state)
+    };
+
   }
 
+  handleAdd(){
+    const description = this.state.description
+    axios.post(URL, {description})
+        .then(resp => this.refresh())
+  }
+  
+  componentDidMount() {
+    axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
+      .then(res => {
+        const unidades = res.data;
+        this.setState({ unidades });
+      })
+    }
 
 
   render(){
@@ -54,9 +82,24 @@ class cadastrotec extends React.Component {
                 </div>
 
                 <div className="form-group">
+                    <Label >Unidade</Label>
+                <Input type="select" name="unidade" id="exampleSelect"
+                    value={this.state.unidade} onChange={this.onChange} required>
+                    <option></option>
+                    { this.state.unidades.map(unidade => <option>{unidade.de_UNIDADE}</option>)}
+
+                </Input>
+                </div>
+
+                <FormGroup>
+                  <Label for="exampleDate">Data de admissão</Label>
+                  <Input type="date" name="dataAdm" placeholder="date placeholder" value={this.state.dataAdm} onChange={this.onChange} required/>
+                </FormGroup>
+
+                <div className="form-group">
                   <CardSubtitle>CPF: </CardSubtitle>
                   <Input  type="text"  className="form-control" name="cpf"
-                    value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' required/>
+                    value={formatarCpf(this.state.cpf)} onChange={this.onChange} minLength='14' maxLength='14' placeholder="000.000.000-00" required/>
                 </div>
 
                 <div className="form-group">
@@ -65,7 +108,7 @@ class cadastrotec extends React.Component {
                     value={this.state.senha} onChange={this.onChange} minLength='6' required/>
                 </div>
                 <div>
-                  <Button outline type="Submit" >Cadastrar</Button>
+                  <Button onClick={this.onSubmit} outline type="Submit" >Cadastrar</Button>
                   <Button outline href="/" className="a-fix">Voltar</Button>
                 </div>
               </form>
@@ -78,6 +121,13 @@ class cadastrotec extends React.Component {
 
   }
 }
+
+// TODO: checkbox referente ao chefe
+
+//<CustomInput type="checkbox" id="1" label="Chefe" onChange={this.onChange} value={this.state.chefe} name="chefe"/>
+
+//           <Input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked} >One</Input>
+
 
 //{JSON.stringify(this.state)}
 
