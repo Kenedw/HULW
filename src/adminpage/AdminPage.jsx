@@ -84,11 +84,15 @@ class admin extends Component {
                 </div>
                 <div>
                   <Button outline >Cadastrar Setor</Button>
-                  <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
+                  <Button outline onClick={()=> {axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
                       console.log(response.data);
+                    })
+                    .catch((error) => {
+                      this.setState({open: false });
+                      console.log("Aki é a referencia da pagina de cadastro do usuario!");
                     });
                     clickInfo = true;
                   }}
