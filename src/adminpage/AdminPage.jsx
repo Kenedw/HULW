@@ -1,8 +1,8 @@
-import React  from 'react';
+import React, { Component } from 'react';
 import './../App.css';
-import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col,} from 'reactstrap';
+import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col, Collapse} from 'reactstrap';
 import axios from 'axios';
-import Lista from '../Component/todoList.jsx';
+import Lista from './todoList.jsx';
 
 const dados = {
   usuario: {
@@ -12,7 +12,7 @@ const dados = {
   }
 };
 
-class Info_adm extends React.Component {
+class Info_adm extends Component {
 
   render() {
     return (
@@ -39,12 +39,16 @@ class Info_adm extends React.Component {
 }
 
 
-class cadastrotec extends React.Component {
+var clickInfo = false;
+class admin extends Component {
   constructor(){
     super();
     this.state = {
-      cpf: ""
+      cpf: "",
+      open: false,
+      response: []
     };
+
     this.onChange = (evento) => {
       this.setState({nome: evento.target.value});
       const state = Object.assign({}, this.state);
@@ -58,7 +62,9 @@ class cadastrotec extends React.Component {
       }
     };
   }
-
+  componentDidMount() {
+    clickInfo = false;
+  }
   render(){
     return (
       <div className="container">
@@ -79,35 +85,30 @@ class cadastrotec extends React.Component {
                 <div>
                   <Button outline >Cadastrar Setor</Button>
                   <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
-                      .then(function(response){
-                        <Card_lista pesq={response.data}/>
-                        console.log(JSON.stringify(response.data));
-                      });
-                    }
-                  }
-                    className="a-fix">Pesquisar</Button>
+                    .then((response) => {
+                      this.setState({response: response.data});
+                      this.setState({open: true });
+                      console.log(response.data);
+                    });
+                    clickInfo = true;
+                  }}
+                  className="a-fix">Pesquisar</Button>
+              </div>
+            </form>
+            <Collapse isOpen={this.state.open}>
+              {clickInfo === true &&
+                <div>
+                  <Lista list={this.state.response}/>
                 </div>
-              </form>
-            </CardBody>
-          </Card>
-        </div>
+              }
+            </Collapse>
+          </CardBody>
+        </Card>
       </div>
-    )
-  }
-}
+    </div>
+  )
+}}
 
-class Card_lista extends React.Component {
-  constructor() {
-  super();
-  }
-
-  render(){
-    return(
-      <div>
-        <Lista list={this.props.pesq}/>
-      </div>)
-  }
-}
 
 function cpf2int(cpf){
   cpf = cpf.replace(/[^0-9]+/g,'');
@@ -124,4 +125,4 @@ function formatarCpf(cpf){
 }
 
 
-export default cadastrotec;
+export default admin;

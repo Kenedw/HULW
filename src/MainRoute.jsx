@@ -29,13 +29,13 @@ class Rota extends Component {
         <Head />
         <Router>
           <Switch>
-            <Route exact path="/" component={Login} />
+            <Route exact path="/"        component={Login} />
             <Route path="/administrador" component={AdminPage} />
-            <Route path="/esqueciSenha" component={esqueci} />
-            <Route path="/userpage" exact component={Userpage} />
-            <Route path="/avaliacao" component ={Aval}/>
-            <Route path="/avalprob" component = {Aval2}/>
-            <Route path="/formulario" exact component={Formulario} />
+            <Route path="/esqueciSenha"  component={esqueci} />
+            <Route path="/userpage"      component={Userpage} />
+            <Route path="/avaliacao"     component ={Aval}/>
+            <Route path="/avalprob"      component = {Aval2}/>
+            <Route path="/formulario"    component={Formulario} />
             <Route component={NotFound}/>
           </Switch>
         </Router>

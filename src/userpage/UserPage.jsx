@@ -157,13 +157,13 @@ class Tabela extends Component {
 
 class Linha extends Component {
 
-  irPaginaFormulario(){
+  irPaginaAvaliacao(){
     var base64 = require('base-64')
     var utf8 = require('utf8')
 
     var bytes = utf8.encode(cpf)
     var encoded = base64.encode(bytes)
-    window.open("/formulario?" + encoded,"_self");
+    window.open("/avaliacao?" + encoded,"_self");
   }
 
   render() {
@@ -176,7 +176,7 @@ class Linha extends Component {
             <td>{val.tipo}</td>
             { val.estado === "Avaliado"           && <td className="btn-success">{val.estado}</td> }
             { val.estado === "Agardando Superior" && <td className="btn-warning">{val.estado}</td> }
-            { val.estado === "Pendente"           && <td className="btn-danger" onClick={this.irPaginaFormulario}> {val.estado}</td> }
+            { val.estado === "Pendente"           && <td className="btn-danger" onClick={this.irPaginaAvaliacao}> {val.estado}</td> }
 
           </tr>
         )}
