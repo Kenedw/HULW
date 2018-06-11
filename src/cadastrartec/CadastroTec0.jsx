@@ -22,7 +22,8 @@ class cadastrotec extends React.Component {
       
     };
 
-    
+    this.handleInputChange = this.handleInputChange.bind(this);
+
     this.onChange = (evento) => {
       this.setState({nome: evento.target.value});
       const state = Object.assign({}, this.state);
@@ -35,6 +36,7 @@ class cadastrotec extends React.Component {
        // console.log( evento.target.value.length)
       // alert("Sem comentario")
       //}
+      
 
     };
     this.onSubmit = (evento) => { // ver os dados a serem enviados no console
@@ -43,6 +45,18 @@ class cadastrotec extends React.Component {
     };
 
   }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.checked;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+
 
   handleAdd(){
     const description = this.state.description
@@ -107,6 +121,15 @@ class cadastrotec extends React.Component {
                   <input type="password" className="form-control"  name="senha"
                     value={this.state.senha} onChange={this.onChange} minLength='6' required/>
                 </div>
+
+                <div>
+                <label>
+                <input name="chefe" type="checkbox" checked={this.state.chefe} onChange={this.handleInputChange} 
+                />
+                Chefe 
+                </label>
+                </div>
+
                 <div>
                   <Button onClick={this.onSubmit} outline type="Submit" >Cadastrar</Button>
                   <Button outline href="/" className="a-fix">Voltar</Button>
