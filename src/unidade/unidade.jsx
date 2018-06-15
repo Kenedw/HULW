@@ -1,0 +1,133 @@
+import React, { Component } from 'react';
+import './../App.css';
+import { Input, Row, Col, Button,ButtonGroup, Card, CardBody, CardSubtitle, Label,FormGroup, CustomInput} from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import axios from 'axios'
+
+const URL = 'https://hulw.herokuapp.com/'
+
+class cadastrarUnidade extends React.Component {
+    constructor(){
+      super();
+      this.state = {
+        unidades :[],
+        unidade: "",
+        descricao: "",
+        unidade_pai: null,
+      };
+  
+  
+      this.onChange = (evento) => {
+        this.setState({nome: evento.target.value});
+        const state = Object.assign({}, this.state);
+        const campo = evento.target.name;
+  
+        state[campo] = evento.target.value;
+  
+        this.setState(state);
+        //if(campo === 'unidade' &&  evento.target.value === ''){
+         // console.log( evento.target.value.length)
+        // alert("Sem comentario")
+        //}
+        
+  
+      };
+        this.handleSubmit = event => {
+          event.preventDefault();
+          var config = {
+            headers: {'content-type': 'application/json'}
+          };
+          const unidades = {
+            cd_Unidade: this.state.unidade,
+            de_UNIDADE: this.state.descricao,
+            id_Unidade_Superior: this.unidade_pai,
+           
+          };
+      
+          axios.post(`${URL}unidade`,JSON.stringify(unidades), config) //JSON.stringify(usuario)
+            .then(res => { 
+              //console.log(res.Object.data);
+              console.log(res.data);
+              alert(res.data.message) // alerta sucesso ao cadastrar
+              window.location.reload() // atualiza a página caso sucesso
+            })
+            .catch(error => {
+              console.log(error.response.data.error.message);
+              alert(error.response.data.error.message) // alerta o erro ao submit
+            });
+        };
+  
+    }
+  
+    
+    componentDidMount() {
+      axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
+        .then(res => {
+          const unidades = res.data;
+          this.setState({ unidades });
+        })
+      }
+  
+  
+    render(){
+      return (
+        <div className="container">
+          <div className="col-md-16">
+            <Card  className="Card-position">
+              <CardBody>
+  
+                <form onSubmit={this.handleSubmit}>
+                  <h3>Cadastro de Unidades</h3>
+  
+                  <div className="form-group">
+                    <CardSubtitle>Unidade: </CardSubtitle>
+                    <Input  type="text"  className="form-control"  name="unidade"
+                      value={somenteNumeros(this.state.unidade)} onChange={this.onChange} required/>
+                  </div>
+
+
+                   
+                    <div className="form-group">
+                      <CardSubtitle>Descrição: </CardSubtitle>
+                      <Input  type="text"  className="form-control"  name="descricao"
+                        value={this.state.descricao} onChange={this.onChange} required/>
+                    </div>
+
+
+                <div className="form-group">
+                    <Label >Unidade Pai</Label>
+                    <Input type="select" name="unidade_pai" id="exampleSelect"
+                    value={this.state.unidade_pai} onChange={this.onChange}>
+                    <option></option>
+                    { this.state.unidades.map(unidade => <option>{unidade.de_UNIDADE}</option>)}
+
+                    </Input>
+                </div>
+
+
+               
+                  <div>
+                    <Button onSubmit={this.handleSubmit} outline type="Submit" >Cadastrar</Button>
+                    <Button outline href="/" className="a-fix">Voltar</Button>
+                  </div>
+                 
+                </form>
+              </CardBody>
+            </Card>
+          </div>
+        </div>
+  
+      )
+  
+    }
+  }
+
+ //  {JSON.stringify(this.state)}
+
+
+function somenteNumeros(num){
+  num = num.replace(/\D/g,"");
+  return num;
+}
+
+  export default cadastrarUnidade;

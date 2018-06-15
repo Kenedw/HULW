@@ -8,6 +8,7 @@ import AdminPage from './adminpage/AdminPage.jsx'
 import Aval from './avaliacao/avaliacao'
 import Aval2 from './avaliacao/avaliacaoprob'
 import Cadastro from './cadastrartec/CadastroTec0'
+import Unidade from './unidade/unidade'
 
 const NotFound = () =>(
   <div>
@@ -36,6 +37,7 @@ class Rota extends Component {
             <Route path="/avaliacao"     component = {Aval}/>
             <Route path="/avalprob"      component = {Aval2}/>
             <Route path="/cadastroTec"    component = {Cadastro} />
+            <Route path="/unidade"    component = {Unidade} />
             <Route component={NotFound}/>
           </Switch>
         </Router>

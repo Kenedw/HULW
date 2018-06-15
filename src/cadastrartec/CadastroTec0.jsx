@@ -11,13 +11,13 @@ class cadastrotec extends React.Component {
   constructor(){
     super();
     this.state = {
-      unidades :[],
+      //unidades :[],
       nome: "",
       cpf: "",
       email: "",
       senha: "",
-      chefe: false,
-      unidade: "",
+      //chefe: false,
+      //unidade: "",
       dataAdm: "",
       
     };
@@ -39,10 +39,34 @@ class cadastrotec extends React.Component {
       
 
     };
-    this.onSubmit = (evento) => { // ver os dados a serem enviados no console
-      evento.preventDefault();
-      console.log( this.state)
-    };
+    //this.onSubmit = (evento) => { // ver os dados a serem enviados no console
+      this.handleSubmit = event => {
+        event.preventDefault();
+        var config = {
+          headers: {'content-type': 'application/json'}
+        };
+        const usuario = {
+          no_Pessoa: this.state.nome,
+          cd_CPF: this.state.cpf,
+          cd_Email: this.state.email,
+          cd_Senha: this.state.senha,
+         // chefe: this.state.chefe,
+         // unidade: this.state.unidade,
+         dt_Admissao: this.state.dataAdm+"T00:00:00.000Z",
+        };
+    
+        axios.post(`${URL}usuario`,JSON.stringify(usuario), config) //JSON.stringify(usuario)
+          .then(res => { 
+            //console.log(res.Object.data);
+            console.log(res.data.msg);
+            alert(res.data.msg) // alerta sucesso ao cadastrar
+            window.location.reload() // atualiza a página caso sucesso
+          })
+          .catch(error => {
+            console.log(error.response.data.error.message);
+            alert(error.response.data.error.message) // alerta o erro ao submit
+          });
+      };
 
   }
 
@@ -56,13 +80,6 @@ class cadastrotec extends React.Component {
     });
   }
 
-
-
-  handleAdd(){
-    const description = this.state.description
-    axios.post(URL, {description})
-        .then(resp => this.refresh())
-  }
   
   componentDidMount() {
     axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
@@ -80,7 +97,7 @@ class cadastrotec extends React.Component {
           <Card  className="Card-position">
             <CardBody>
 
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <h3>Cadastro</h3>
 
                 <div className="form-group">
@@ -95,15 +112,6 @@ class cadastrotec extends React.Component {
                     value={this.state.email} onChange={this.onChange} required/>
                 </div>
 
-                <div className="form-group">
-                    <Label >Unidade</Label>
-                <Input type="select" name="unidade" id="exampleSelect"
-                    value={this.state.unidade} onChange={this.onChange} required>
-                    <option></option>
-                    { this.state.unidades.map(unidade => <option>{unidade.de_UNIDADE}</option>)}
-
-                </Input>
-                </div>
 
                 <FormGroup>
                   <Label for="exampleDate">Data de admissão</Label>
@@ -113,27 +121,21 @@ class cadastrotec extends React.Component {
                 <div className="form-group">
                   <CardSubtitle>CPF: </CardSubtitle>
                   <Input  type="text"  className="form-control" name="cpf"
-                    value={formatarCpf(this.state.cpf)} onChange={this.onChange} minLength='14' maxLength='14' placeholder="000.000.000-00" required/>
+                    value={this.state.cpf} onChange={this.onChange} minLength='11' maxLength='11' placeholder="000.000.000-00" required/>
                 </div>
-
+             
                 <div className="form-group">
                   <CardSubtitle>Senha: </CardSubtitle>
                   <input type="password" className="form-control"  name="senha"
                     value={this.state.senha} onChange={this.onChange} minLength='6' required/>
                 </div>
 
+                
                 <div>
-                <label>
-                <input name="chefe" type="checkbox" checked={this.state.chefe} onChange={this.handleInputChange} 
-                />
-                Chefe 
-                </label>
-                </div>
-
-                <div>
-                  <Button onClick={this.onSubmit} outline type="Submit" >Cadastrar</Button>
+                  <Button onSubmit={this.handleSubmit} outline type="Submit" >Cadastrar</Button>
                   <Button outline href="/" className="a-fix">Voltar</Button>
                 </div>
+                {JSON.stringify(this.state)}
               </form>
             </CardBody>
           </Card>
@@ -150,7 +152,27 @@ class cadastrotec extends React.Component {
 //<CustomInput type="checkbox" id="1" label="Chefe" onChange={this.onChange} value={this.state.chefe} name="chefe"/>
 
 //           <Input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked} >One</Input>
+/*
+<div>
+                <label>
+                <input name="chefe" type="checkbox" checked={this.state.chefe} onChange={this.handleInputChange} 
+                />
+                Chefe 
+                </label>
+                </div>
 
+
+                <div className="form-group">
+                    <Label >Unidade</Label>
+                <Input type="select" name="unidade" id="exampleSelect"
+                    value={this.state.unidade} onChange={this.onChange}>
+                    <option></option>
+                    { this.state.unidades.map(unidade => <option>{unidade.de_UNIDADE}</option>)}
+
+                </Input>
+                </div>
+
+*/
 
 //{JSON.stringify(this.state)}
 
@@ -162,5 +184,31 @@ function formatarCpf(cpf){
   return cpf;
 }
 
+class Unidade extends Component {
+ 
+
+  componentDidMount() {
+    axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
+      .then(res => {
+        const unidades = res.data;
+        this.setState({ unidades });
+      })
+    }
+
+  render() {
+    return (
+
+      <div className="form-group">
+        <Label >Unidade</Label>
+            <Input type="select" name="unidade" id="exampleSelect"
+            value={this.state.unidade} onChange={this.onChange}>
+              <option></option>
+              { this.state.unidades.map(unidade => <option>{unidade.de_UNIDADE}</option>)}
+
+            </Input>
+      </div>
+    );
+  }
+}
 
 export default cadastrotec;
