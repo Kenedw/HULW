@@ -7,7 +7,7 @@ import Login from './login/Login';
 import AdminPage from './adminpage/AdminPage.jsx'
 import Aval from './avaliacao/avaliacao'
 import Aval2 from './avaliacao/avaliacaoprob'
-import Formulario from './avaliacao/formulario'
+import Cadastro from './cadastrartec/CadastroTec0'
 
 const NotFound = () =>(
   <div>
@@ -29,13 +29,13 @@ class Rota extends Component {
         <Head />
         <Router>
           <Switch>
-            <Route exact path="/"        component={Login} />
-            <Route path="/administrador" component={AdminPage} />
-            <Route path="/esqueciSenha"  component={esqueci} />
-            <Route path="/userpage"      component={Userpage} />
-            <Route path="/avaliacao"     component ={Aval}/>
+            <Route exact path="/"        component = {Login} />
+            <Route path="/administrador" component = {AdminPage} />
+            <Route path="/esqueciSenha"  component = {esqueci} />
+            <Route path="/userpage"      component = {Userpage} />
+            <Route path="/avaliacao"     component = {Aval}/>
             <Route path="/avalprob"      component = {Aval2}/>
-            <Route path="/formulario"    component={Formulario} />
+            <Route path="/cadastroTec"    component = {Cadastro} />
             <Route component={NotFound}/>
           </Switch>
         </Router>

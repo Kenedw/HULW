@@ -83,20 +83,20 @@ class admin extends Component {
                     value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-                  <Button outline >Cadastrar Setor</Button>
                   <Button outline onClick={()=> {axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
-                      console.log(response.data);
                     })
                     .catch((error) => {
                       this.setState({open: false });
-                      console.log("Aki é a referencia da pagina de cadastro do usuario!");
+                      if(error.response.status == 404){
+                        window.open("/cadastroTec","_self");
+                      }
                     });
                     clickInfo = true;
-                  }}
-                  className="a-fix">Pesquisar</Button>
+                  }}>Cadastrar/Pesquisar</Button>
+                <Button className="a-fix" outline >Cadastrar Unidade</Button>
               </div>
             </form>
             <Collapse isOpen={this.state.open}>

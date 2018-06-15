@@ -3,7 +3,6 @@ import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col} from 'reactstrap';
 import axios from 'axios';
 import PageHeader from '../pageHeader';
-import ReactRadioButtonGroup from 'react-radio-button-group';
 
 
 const dados = {
@@ -87,7 +86,6 @@ class avaliacao extends React.Component {
 
   <p>1. Cumpre  os horários de entrada e saída no trabalho com pontualidade.
   </p>
-  <ReactRadioButtonGroup name="number" options={["One", "Two", "Three"]} value="Three"/>
   <p>2. Permanece no local de trabalho durante o expediente.</p>
   <p>3. As eventuais chegadas com atraso ou saídas antecipadas realizam-se dentro dos limites de tolerância, estabelecidos pela instituição.</p>
 
