@@ -103,7 +103,7 @@ class admin extends Component {
             <Collapse isOpen={this.state.open}>
               {clickInfo === true &&
                 <div>
-                  <Lista list={this.state.response}/>
+                  <Lista list={this.state.response} cpfAdmin={cpf2int(dados.usuario.CPF)}/>
                 </div>
               }
             </Collapse>

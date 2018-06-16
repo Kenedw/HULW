@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './../App.css';
-import { Input, Row, Col, Button,ButtonGroup, Card, CardBody, CardSubtitle, Label,FormGroup, CustomInput} from 'reactstrap';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Input, Button, Card, CardBody, CardSubtitle, Label,FormGroup} from 'reactstrap';
+//import { DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios'
 
 
 const URL = 'https://hulw.herokuapp.com/'
+
 
 class cadastrotec extends React.Component {
   constructor(){
@@ -19,6 +20,8 @@ class cadastrotec extends React.Component {
       //chefe: false,
       //unidade: "",
       dataAdm: "",
+      flagEditar: false,
+      id_usuario: "",
       
     };
 
@@ -47,6 +50,7 @@ class cadastrotec extends React.Component {
         };
         const usuario = {
           no_Pessoa: this.state.nome,
+          
           cd_CPF: cpf2int(this.state.cpf),
           cd_Email: this.state.email,
           cd_Senha: this.state.senha,
@@ -54,7 +58,9 @@ class cadastrotec extends React.Component {
          // unidade: this.state.unidade,
          dt_Admissao: this.state.dataAdm+"T00:00:00.000Z",
         };
-    
+        //alert(this.state.nome);
+
+        if(this.state.flagEditar === false){
         axios.post(`${URL}usuario`,JSON.stringify(usuario), config) //JSON.stringify(usuario)
           .then(res => { 
             //console.log(res.Object.data);
@@ -66,6 +72,19 @@ class cadastrotec extends React.Component {
             console.log(error.response.data.error.message);
             alert(error.response.data.error.message) // alerta o erro ao submit
           });
+        }else{
+          axios.put(`${URL}usuario/`+this.state.id_usuario,JSON.stringify(usuario), config) //JSON.stringify(usuario)
+          .then(res => { 
+            //console.log(res.Object.data);
+            console.log(res.data.msg);
+            alert(res.data.msg) // alerta sucesso ao cadastrar
+            window.location.reload() // atualiza a página caso sucesso
+          })
+          .catch(error => {
+            console.log(error.response);
+            alert(error.response) // alerta o erro ao submit
+          });
+        }
       };
 
   }
@@ -80,6 +99,38 @@ class cadastrotec extends React.Component {
     });
   }
 
+  pegaDados(){
+    var base64 = require('base-64')
+    var utf8 = require('utf8')
+
+    var decodifica = (this.props.location.search).substring(1);
+
+    var bytes = base64.decode(decodifica);
+    var cpfs = utf8.decode(bytes);
+    //alert(cpfs);
+
+    var cpfAdmin = (cpfs).substring(11,23) // salva o segundo CPF referente ao ADMIN
+    //var bytes = base64.decode(encoded)
+    var cpfEditar = (cpfs).substring(0,11) //utf8.decode(bytes) // CPF para editar/cadastrar
+    if(cpfEditar !== ""){
+     // alert(cpfEditar)
+     // alert(cpfAdmin)
+      
+      axios.get(`${URL}usuario/cpf/`+cpfEditar)                    //'http://localhost:3003/api/todos`)
+      .then(res => {
+        const usuarios = res.data;
+        this.setState({ usuarios });
+        this.setState({id_usuario: usuarios.id_Usuario, flagEditar: true, cpf: usuarios.cd_CPF,nome: usuarios.no_Pessoa, email: usuarios.cd_Email,dataAdm: (usuarios.dt_Admissao).substring(0,10)})
+      })
+    }//else{
+   // alert("NAO TEM NADA");
+    //}
+  }
+
+  componentWillMount() {
+
+    this.pegaDados();
+  }
   
   componentDidMount() {
     axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
@@ -88,6 +139,7 @@ class cadastrotec extends React.Component {
         this.setState({ unidades });
       })
     }
+
 
 
   render(){
@@ -127,14 +179,16 @@ class cadastrotec extends React.Component {
                 <div className="form-group">
                   <CardSubtitle>Senha: </CardSubtitle>
                   <input type="password" className="form-control"  name="senha"
-                    value={this.state.senha} onChange={this.onChange} minLength='6' required/>
+                    value={this.state.senha} onChange={this.onChange} minLength='4'/>
                 </div>
-
+{/*{JSON.stringify(this.state)} */}
                 
                 <div>
-                  <Button onSubmit={this.handleSubmit} outline type="Submit" >Cadastrar</Button>
-                  <Button outline href="/" className="a-fix">Voltar</Button>
-                </div>
+
+<Button onSubmit={this.handleSubmit} outline type="Submit" >{this.state.flagEditar === true ? "Editar" : "Cadastrar"}</Button>
+<Button outline href="/administrador" className="a-fix">Voltar</Button>
+</div>
+                
                
               </form>
             </CardBody>
@@ -147,7 +201,6 @@ class cadastrotec extends React.Component {
   }
 }
 
-// TODO: checkbox referente ao chefe
 
 //<CustomInput type="checkbox" id="1" label="Chefe" onChange={this.onChange} value={this.state.chefe} name="chefe"/>
 
