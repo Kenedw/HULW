@@ -4,6 +4,7 @@ import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col, Collap
 import axios from 'axios';
 import Lista from './todoList.jsx';
 
+
 const dados = {
   usuario: {
     NOME: "Zezinho Administrador da Silva",
@@ -73,9 +74,14 @@ class admin extends Component {
             <CardBody>
               <form>
                 <h3>Administrador</h3>
-                <div>
                   <Info_adm {...dados}/>
-                </div>
+                  <Card>
+                    <CardBody>
+                      <Button className="a-fix" outline onClick="">Cadastrar Unidade</Button>
+                      <Button className="a-fix" outline onClick="">Vincular Unidade</Button>
+                      <Button className="a-fix" outline onClick="">Vincular Probatorio</Button>
+                    </CardBody>
+                  </Card>
                 <div className="form-group">
                   <p></p>
                   <CardSubtitle>Pesquisar CPF: </CardSubtitle>
@@ -96,37 +102,36 @@ class admin extends Component {
                     });
                     clickInfo = true;
                   }}>Cadastrar/Pesquisar</Button>
-                <Button className="a-fix" outline >Cadastrar Unidade</Button>
-              </div>
-            </form>
-            <Collapse isOpen={this.state.open}>
-              {clickInfo === true &&
-                <div>
-                  <Lista list={this.state.response}/>
                 </div>
-              }
-            </Collapse>
-          </CardBody>
-        </Card>
+              </form>
+              <Collapse isOpen={this.state.open}>
+                {clickInfo === true &&
+                  <div>
+                    <Lista list={this.state.response}/>
+                  </div>
+                }
+              </Collapse>
+            </CardBody>
+          </Card>
+        </div>
       </div>
-    </div>
-  )
-}}
+    )
+  }}
 
 
-function cpf2int(cpf){
-  cpf = cpf.replace(/[^0-9]+/g,'');
+  function cpf2int(cpf){
+    cpf = cpf.replace(/[^0-9]+/g,'');
 
-  return cpf;
-}
+    return cpf;
+  }
 
-function formatarCpf(cpf){
-  cpf = cpf.replace(/\D/g,"");
-  cpf = cpf.replace(/(\d{3})(\d)/,"$1.$2");
-  cpf = cpf.replace(/(\d{3})(\d)/,"$1.$2");
-  cpf = cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
-  return cpf;
-}
+  function formatarCpf(cpf){
+    cpf = cpf.replace(/\D/g,"");
+    cpf = cpf.replace(/(\d{3})(\d)/,"$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d)/,"$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+    return cpf;
+  }
 
 
-export default admin;
+  export default admin;

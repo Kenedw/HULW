@@ -16,8 +16,8 @@ export class Head extends Component {
               <p className="Text-indent">Hospital Universitário Lauro Wanderley</p>
             </div>
             <div>
-              <img src={logoPGP} className="App-logoPGP" />
-              <img src={logo} className="App-logo" />
+              <img src={logoPGP} height="100" className="App-logoPGP" />
+              <img src={logo}    height="100" className="App-logo" />
             </div>
           </Row>
       </div>

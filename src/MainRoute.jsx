@@ -8,10 +8,11 @@ import AdminPage from './adminpage/AdminPage.jsx'
 import Aval from './avaliacao/avaliacao'
 import Aval2 from './avaliacao/avaliacaoprob'
 import Cadastro from './cadastrartec/CadastroTec0'
+import notfount from './paginaNaoEnc.png';
 
 const NotFound = () =>(
   <div>
-    <h1>Pagina não encontrada, cidadão.</h1>
+    <img src={notfount} width="100%"/>
   </div>
 );
 
