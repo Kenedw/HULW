@@ -1,12 +1,26 @@
 import React from 'react'
 import { Button, Table} from 'reactstrap';
+import Admin  from "./AdminPage"
 
 export default props => {
 
   var list = props.list;
+  var cpfAdmin = props.cpfAdmin;
+  var base64 = require('base-64')
+  var utf8 = require('utf8')
+
+  //var encoded = (this.props.location.search).substring(1)
+  //var bytes = base64.encode(todo.cd_CPF+cpfAdmin);
+  //var envia = utf8.encode(bytes);
+  //var cpf_url = utf8.encode(bytes)
   if(!props.list.length){
     list = [props.list];
   }
+  /*
+  verificar(){
+    window.open("/cadastroTec?"+this.state.cpf);
+  }
+*/
 
   const renderRows = () =>{
     return list.map(todo =>(
@@ -15,7 +29,7 @@ export default props => {
           <td >{todo.cd_CPF}</td>
           <td >{todo.cd_Email}</td>
           <td>
-            <Button className={'btn btn-success'}>Editar</Button>
+            <Button className={'btn btn-success'} href={"/cadastroTec?"+   utf8.encode(base64.encode(todo.cd_CPF+cpfAdmin))   }>Editar</Button>
           </td>
       </tr>
     ))
