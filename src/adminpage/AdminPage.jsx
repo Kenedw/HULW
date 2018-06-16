@@ -3,6 +3,7 @@ import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col, Collapse} from 'reactstrap';
 import axios from 'axios';
 import Lista from './todoList.jsx';
+import Pesquisa from '../unidade/pesqUnidade'
 
 const dados = {
   usuario: {
@@ -83,7 +84,7 @@ class admin extends Component {
                     value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-                  <Button outline onClick={()=> {axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
+                  <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
@@ -97,7 +98,6 @@ class admin extends Component {
                     });
                     clickInfo = true;
                   }}>Cadastrar/Pesquisar</Button>
-                <Button href="/unidade" className="a-fix" outline >Cadastrar Unidade</Button>
               </div>
             </form>
             <Collapse isOpen={this.state.open}>
@@ -109,6 +109,7 @@ class admin extends Component {
             </Collapse>
           </CardBody>
         </Card>
+              <Pesquisa/>
       </div>
     </div>
   )

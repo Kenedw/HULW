@@ -9,6 +9,7 @@ import Aval from './avaliacao/avaliacao'
 import Aval2 from './avaliacao/avaliacaoprob'
 import Cadastro from './cadastrartec/CadastroTec0'
 import Unidade from './unidade/unidade'
+import PesqUnidade from './unidade/pesqUnidade'
 
 const NotFound = () =>(
   <div>
@@ -36,8 +37,9 @@ class Rota extends Component {
             <Route path="/userpage"      component = {Userpage} />
             <Route path="/avaliacao"     component = {Aval}/>
             <Route path="/avalprob"      component = {Aval2}/>
-            <Route path="/cadastroTec"    component = {Cadastro} />
-            <Route path="/unidade"    component = {Unidade} />
+            <Route path="/cadastroTec"   component = {Cadastro} />
+            <Route path="/unidade"       component = {Unidade} />
+            <Route path="/pesqUnidade"   component = {PesqUnidade}/>
             <Route component={NotFound}/>
           </Switch>
         </Router>
