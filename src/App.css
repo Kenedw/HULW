@@ -4,12 +4,10 @@
 }
 
 .App-logo {
-  height: 100px;
   position: absolute;
   right: 155px;
 }
 .App-logoPGP {
-  height: 100px;
   position: absolute;
   right: 235px;
 }
@@ -57,7 +55,7 @@
   font-size: large;
 }
 .a-fix {
-  margin-left: 10px !important;
+  margin-right: 10px !important;
   margin-bottom: 0px !important;
 }
 .form-adm {
