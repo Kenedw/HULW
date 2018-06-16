@@ -11,10 +11,11 @@ import Cadastro from './cadastrartec/CadastroTec0'
 import Unidade from './unidade/unidade'
 import PesqUnidade from './unidade/pesqUnidade'
 import Vincular from './unidade/vincular'
+import notfount from './paginaNaoEnc.png';
 
 const NotFound = () =>(
   <div>
-    <h1>Pagina não encontrada, cidadão.</h1>
+    <img src={notfount} width="100%"/>
   </div>
 );
 

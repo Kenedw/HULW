@@ -6,6 +6,7 @@ import Lista from './todoList.jsx';
 import Pesquisa from '../unidade/pesqUnidade'
 import Decodificar from './decodifica'
 
+
 const dados = {
   usuario: {
     NOME: "Zezinho Administrador da Silva",
@@ -122,9 +123,14 @@ class admin extends Component {
             <CardBody>
               <form>
                 <h3>Administrador</h3>
-                <div>
                   <Info_adm {...dados}/>
-                </div>
+                  <Card>
+                    <CardBody>
+                      <Button className="a-fix" outline onClick="">Cadastrar Unidade</Button>
+                      <Button className="a-fix" outline onClick="">Vincular Unidade</Button>
+                      <Button className="a-fix" outline onClick="">Vincular Probatorio</Button>
+                    </CardBody>
+                  </Card>
                 <div className="form-group">
                   <p></p>
                   <CardSubtitle>Pesquisar CPF: </CardSubtitle>
@@ -168,16 +174,15 @@ class admin extends Component {
         </Card>
               <Pesquisa cpf_adm={dados.usuario.CPF} token={this.state.token}/>
       </div>
-    </div>
-  )
-}}
+    )
+  }}
 
 
-function cpf2int(cpf){
-  cpf = cpf.replace(/[^0-9]+/g,'');
+  function cpf2int(cpf){
+    cpf = cpf.replace(/[^0-9]+/g,'');
 
-  return cpf;
-}
+    return cpf;
+  }
 
 
 function formatarCpf(cpf){
@@ -189,4 +194,4 @@ function formatarCpf(cpf){
 }
 
 
-export default admin;
+  export default admin;
