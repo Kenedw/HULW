@@ -47,7 +47,7 @@ class cadastrotec extends React.Component {
         };
         const usuario = {
           no_Pessoa: this.state.nome,
-          cd_CPF: this.state.cpf,
+          cd_CPF: cpf2int(this.state.cpf),
           cd_Email: this.state.email,
           cd_Senha: this.state.senha,
          // chefe: this.state.chefe,
@@ -121,7 +121,7 @@ class cadastrotec extends React.Component {
                 <div className="form-group">
                   <CardSubtitle>CPF: </CardSubtitle>
                   <Input  type="text"  className="form-control" name="cpf"
-                    value={this.state.cpf} onChange={this.onChange} minLength='11' maxLength='11' placeholder="000.000.000-00" required/>
+                    value={formatarCpf(this.state.cpf)} onChange={this.onChange} minLength='14' maxLength='14' placeholder="000.000.000-00" required/>
                 </div>
              
                 <div className="form-group">
@@ -135,7 +135,7 @@ class cadastrotec extends React.Component {
                   <Button onSubmit={this.handleSubmit} outline type="Submit" >Cadastrar</Button>
                   <Button outline href="/" className="a-fix">Voltar</Button>
                 </div>
-                {JSON.stringify(this.state)}
+               
               </form>
             </CardBody>
           </Card>
@@ -184,31 +184,11 @@ function formatarCpf(cpf){
   return cpf;
 }
 
-class Unidade extends Component {
- 
+function cpf2int(cpf){
+  cpf = cpf.replace(/[^0-9]+/g,'');
 
-  componentDidMount() {
-    axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
-      .then(res => {
-        const unidades = res.data;
-        this.setState({ unidades });
-      })
-    }
-
-  render() {
-    return (
-
-      <div className="form-group">
-        <Label >Unidade</Label>
-            <Input type="select" name="unidade" id="exampleSelect"
-            value={this.state.unidade} onChange={this.onChange}>
-              <option></option>
-              { this.state.unidades.map(unidade => <option>{unidade.de_UNIDADE}</option>)}
-
-            </Input>
-      </div>
-    );
-  }
+  return cpf;
 }
+
 
 export default cadastrotec;

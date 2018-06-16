@@ -91,12 +91,13 @@ class admin extends Component {
                     .catch((error) => {
                       this.setState({open: false });
                       if(error.response.status == 404){
+                        alert("Usuário não cadastrado!")
                         window.open("/cadastroTec","_self");
                       }
                     });
                     clickInfo = true;
                   }}>Cadastrar/Pesquisar</Button>
-                <Button className="a-fix" outline >Cadastrar Unidade</Button>
+                <Button href="/unidade" className="a-fix" outline >Cadastrar Unidade</Button>
               </div>
             </form>
             <Collapse isOpen={this.state.open}>

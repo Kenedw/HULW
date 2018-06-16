@@ -6,6 +6,7 @@ import axios from 'axios'
 
 const URL = 'https://hulw.herokuapp.com/'
 
+
 class cadastrarUnidade extends React.Component {
     constructor(){
       super();
@@ -18,17 +19,18 @@ class cadastrarUnidade extends React.Component {
   
   
       this.onChange = (evento) => {
-        this.setState({nome: evento.target.value});
+        //this.setState({nome: evento.target.value});
         const state = Object.assign({}, this.state);
         const campo = evento.target.name;
   
         state[campo] = evento.target.value;
   
         this.setState(state);
-        //if(campo === 'unidade' &&  evento.target.value === ''){
-         // console.log( evento.target.value.length)
-        // alert("Sem comentario")
-        //}
+        if(campo === 'unidade_pai'){ // &&  evento.target.value === ''){
+          // console.log( evento.target.value.length)
+          //alert(evento.target.value);
+          //alert(state[campo]);
+        }
         
   
       };
@@ -99,7 +101,7 @@ class cadastrarUnidade extends React.Component {
                     <Input type="select" name="unidade_pai" id="exampleSelect"
                     value={this.state.unidade_pai} onChange={this.onChange}>
                     <option></option>
-                    { this.state.unidades.map(unidade => <option>{unidade.de_UNIDADE}</option>)}
+                    { this.state.unidades.map(unidade => <option>{unidade.id_Unidade}</option>)}
 
                     </Input>
                 </div>
@@ -110,7 +112,7 @@ class cadastrarUnidade extends React.Component {
                     <Button onSubmit={this.handleSubmit} outline type="Submit" >Cadastrar</Button>
                     <Button outline href="/" className="a-fix">Voltar</Button>
                   </div>
-                 
+                  
                 </form>
               </CardBody>
             </Card>
@@ -123,8 +125,12 @@ class cadastrarUnidade extends React.Component {
   }
 
  //  {JSON.stringify(this.state)}
-
-
+/*
+function retornaDescricao(des){
+  des = unidades.des.de_UNIDADE;
+  return des;
+}
+*/
 function somenteNumeros(num){
   num = num.replace(/\D/g,"");
   return num;
