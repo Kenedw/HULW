@@ -14,7 +14,15 @@ const dados = {
     EMAIL: "zezinho.admin@boy.com",
   }
 };
-
+var token = {
+    headers:
+    { 
+      'cache-control': 'no-cache',
+      'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    }
+};
 class Info_adm extends Component {
 
   render() {
@@ -97,10 +105,6 @@ class admin extends Component {
                 <h3>Administrador</h3>
                 <Info_adm {...dados}/>
                 <Card>
-                  <CardBody>
-                    <Button className="a-fix" outline onClick="">Vincular Unidade</Button>
-                    <Button className="a-fix" outline onClick="">Vincular Probatorio</Button>
-                  </CardBody>
                 </Card>
                 <div className="form-group">
                   <p></p>
@@ -110,15 +114,7 @@ class admin extends Component {
                 </div>
                 <div>
                   <Button outline onClick={()=> {        
-                    var token = {
-                        headers:
-                        { 
-                          'cache-control': 'no-cache',
-                          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
-                          'accept': 'application/json',
-                          'content-type': 'application/json'
-                        }
-                   };axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
+                    axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
@@ -132,6 +128,7 @@ class admin extends Component {
                     });
                     clickInfo = true;
                   }}>Cadastrar/Pesquisar</Button>
+                  <Button className="a-fix" outline href={"/vincularprob"}>Vincular Probatorio</Button>
                 </div>
               </form>
               <Collapse isOpen={this.state.open}>

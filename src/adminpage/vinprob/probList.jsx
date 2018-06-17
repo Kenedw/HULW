@@ -17,7 +17,7 @@ export default props => {
           <td >{todo.cd_CPF}</td>
           <td >{todo.cd_Email}</td>
           <td>
-            <CustomInput type="checkbox" id="probatorio"  checked={todo.probatorio} onChange={console.log("ss")} />
+            <CustomInput type="checkbox" id="probatorio"  checked={todo.probatorio} onChange={""} />
           </td>
       </tr>
     ))
