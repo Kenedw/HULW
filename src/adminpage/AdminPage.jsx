@@ -73,13 +73,14 @@ class admin extends Component {
     var dados_url = Decodificar((this.props.location.search).substring(1))
 
     var cpfAdmin = (dados_url).substring(0,11);
-    alert(cpfAdmin);
+    //alert(cpfAdmin);
     var token_url =  (dados_url).substring(11);
     if(token_url !== ""){
       this.setState({token: token_url})
-      alert(token_url);
-    }else{
-      alert(this.state.token)
+      //alert(token_url);
+    //}else{
+    //  alert(this.state.token) // alerta para debugar somente
+    //}
     }
     
    // var bytes = base64.decode(decodifica);

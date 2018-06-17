@@ -9,10 +9,6 @@ export default props => {
   var base64 = require('base-64')
   var utf8 = require('utf8')
 
-  //var encoded = (this.props.location.search).substring(1)
-  //var bytes = base64.encode(todo.cd_CPF+cpfAdmin);
-  //var envia = utf8.encode(bytes);
-  //var cpf_url = utf8.encode(bytes)
   if(!props.list.length){
     list = [props.list];
   }

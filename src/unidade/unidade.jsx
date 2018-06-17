@@ -78,10 +78,10 @@ class cadastrarUnidade extends React.Component {
         var dados_url = Decodificar((this.props.location.search).substring(1))
     
         var cpfAdmin = (dados_url).substring(0,11);
-        alert(cpfAdmin);
+        //alert(cpfAdmin);
         var token_url =  (dados_url).substring(11);
         this.setState({token: token_url, cpf_Admin: cpfAdmin})
-        alert(token_url);
+        //alert(token_url);
     
        // var bytes = base64.decode(decodifica);
         //var cpfs = utf8.decode(bytes);
