@@ -8,7 +8,6 @@ export default props => {
   if(!props.list.length){
     list = [props.list];
   }
-  // this.handleInputChange = this.handleInputChange.bind(this);
 
   const renderRows = () =>{
     return list.map(todo =>(
