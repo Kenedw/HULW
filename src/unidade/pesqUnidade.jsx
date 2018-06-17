@@ -47,7 +47,7 @@ class vincUnidade extends Component {
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
-                      console.log(response.status)
+                      //console.log(response.status)
                     })
                     .catch((error) => {
                       this.setState({open: false });
@@ -64,7 +64,7 @@ class vincUnidade extends Component {
             <Collapse isOpen={this.state.open}>
               {clickInfo === true &&
                 <div>
-                  <Lista list={this.state.response}/>
+                  <Lista list={this.state.response}  codUnidade={this.state.codigo}/>
                 </div>
               }
             </Collapse>

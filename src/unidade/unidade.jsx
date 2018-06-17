@@ -14,7 +14,7 @@ class cadastrarUnidade extends React.Component {
         unidades :[],
         unidade: "",
         descricao: "",
-        unidade_pai: null,
+        unidade_pai: "",
       };
   
   
@@ -42,7 +42,7 @@ class cadastrarUnidade extends React.Component {
           const unidades = {
             cd_Unidade: this.state.unidade,
             de_UNIDADE: this.state.descricao,
-            id_Unidade_Superior: this.unidade_pai,
+            id_Unidade_Superior: this.state.unidade_pai,
            
           };
       

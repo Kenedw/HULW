@@ -1,9 +1,12 @@
 import React from 'react'
 import { Button, Table} from 'reactstrap';
+import Pesq from './pesqUnidade';
 
 export default props => {
 
   var list = props.list;
+  var codUnidade = props.codUnidade;
+  
   if(!props.list.length){
     list = [props.list];
   }
@@ -13,7 +16,7 @@ export default props => {
       <tr key={todo.cd_Unidade}>
           <td >{todo.de_UNIDADE}</td>
           <td>
-            <Button className={'btn btn-dark'}>Adicionar Vinculos</Button>
+            <Button className={'btn btn-dark'} href={"/vincular?" + codUnidade}>Adicionar Vinculos</Button>
           </td>
       </tr>
     ))

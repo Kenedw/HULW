@@ -86,7 +86,6 @@ class cadastrotec extends React.Component {
           });
         }
       };
-
   }
 
   handleInputChange(event) {
