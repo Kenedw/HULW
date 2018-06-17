@@ -1,17 +1,18 @@
 import React,{ Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Userpage from './userpage/UserPage.jsx';
-import Head from './Head.js';
-import Login from './login/Login';
-import AdminPage from './adminpage/AdminPage.jsx'
-import Aval from './avaliacao/avaliacao'
-import Aval2 from './avaliacao/avaliacaoprob'
-import Cadastro from './cadastrartec/CadastroTec0'
-import Unidade from './unidade/unidade'
-import PesqUnidade from './unidade/pesqUnidade'
-import Vincular from './unidade/vincular'
-import notfount from './paginaNaoEnc.png';
+import Userpage     from './userpage/UserPage.jsx';
+import Head         from './Head.js';
+import Login        from './login/Login';
+import AdminPage    from './adminpage/AdminPage.jsx';
+import Aval         from './avaliacao/avaliacao';
+import Aval2        from './avaliacao/avaliacaoprob';
+import Cadastro     from './cadastrartec/CadastroTec0';
+import Unidade      from './unidade/unidade';
+import PesqUnidade  from './unidade/pesqUnidade';
+import Vincular     from './unidade/vincular'; //mudar este nome para VinculaUni
+import VincularProb from './adminpage/vinprob/vinculaProb';
+import notfount     from './paginaNaoEnc.png';
 
 const NotFound = () =>(
   <div>
@@ -43,6 +44,7 @@ class Rota extends Component {
             <Route path="/unidade"       component = {Unidade} />
             <Route path="/pesqUnidade"   component = {PesqUnidade}/>
             <Route path="/vincular"      component = {Vincular}/>
+            <Route path="/vincularprob"  component = {VincularProb}/>
             <Route component={NotFound}/>
           </Switch>
         </Router>

@@ -27,7 +27,7 @@ class vincUnidade extends Component {
 
       this.setState(state);
       this.setState( {codigo: (evento.target.value)} );
-      
+
     };
   }
   componentDidMount() {
@@ -48,7 +48,7 @@ class vincUnidade extends Component {
                     value={this.state.codigo} onChange={this.onChange} />
                 </div>
                 <div>
-                  <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/unidade/codigo/' + (this.state.codigo) )
+                  <Button className="a-fix" outline onClick={()=> {axios.get('https://hulw.herokuapp.com/unidade/codigo/' + (this.state.codigo) )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
@@ -63,7 +63,7 @@ class vincUnidade extends Component {
                     });
                     clickInfo = true;
                   }}>Pesquisar</Button>
-                <Button href={"/unidade?"+Codificar(cpf2int(this.props.cpf_adm)+this.props.token)} className="a-fix" outline >Cadastrar Unidade</Button>
+                <Button className="a-fix" href={"/unidade?"+Codificar(cpf2int(this.props.cpf_adm)+this.props.token)} className="a-fix" outline >Cadastrar Unidade</Button>
               </div>
             </form>
             <Collapse isOpen={this.state.open}>

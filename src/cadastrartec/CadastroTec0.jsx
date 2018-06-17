@@ -2,9 +2,9 @@ import React from 'react';
 import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, Label,FormGroup} from 'reactstrap';
 //import { DropdownMenu, DropdownItem } from 'reactstrap';
-import axios from 'axios'
-import Decodificar from '../adminpage/decodifica'
-import Codificar from '../adminpage/codifica'
+import axios from 'axios';
+import Decodificar from '../adminpage/decodifica';
+import Codificar from '../adminpage/codifica';
 
 const URL = 'https://hulw.herokuapp.com/'
 
@@ -25,7 +25,7 @@ class cadastrotec extends React.Component {
       id_usuario: "",
       token:"",
       cpf_Admin: "",
-      
+
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -42,7 +42,7 @@ class cadastrotec extends React.Component {
        // console.log( evento.target.value.length)
       // alert("Sem comentario")
       //}
-      
+
 
     };
     //this.onSubmit = (evento) => { // ver os dados a serem enviados no console
@@ -53,7 +53,7 @@ class cadastrotec extends React.Component {
         };
         const usuario = {
           no_Pessoa: this.state.nome,
-          
+
           cd_CPF: cpf2int(this.state.cpf),
           cd_Email: this.state.email,
           cd_Senha: this.state.senha,
@@ -65,7 +65,7 @@ class cadastrotec extends React.Component {
 
         if(this.state.flagEditar === false){
         axios.post(`${URL}usuario`,JSON.stringify(usuario), config) //JSON.stringify(usuario)
-          .then(res => { 
+          .then(res => {
             //console.log(res.Object.data);
             console.log(res.data.msg);
             alert(res.data.msg) // alerta sucesso ao cadastrar
@@ -77,7 +77,7 @@ class cadastrotec extends React.Component {
           });
         }else{
           axios.put(`${URL}usuario/`+this.state.id_usuario,JSON.stringify(usuario), config) //JSON.stringify(usuario)
-          .then(res => { 
+          .then(res => {
             //console.log(res.Object.data);
             console.log(res.data.msg);
             alert(res.data.msg) // alerta sucesso ao cadastrar
@@ -107,7 +107,7 @@ class cadastrotec extends React.Component {
     var cpfs = Decodificar((this.props.location.search).substring(1)); // função para decodificar
     //alert(cpfs);
 
-    
+
     //var bytes = base64.decode(encoded)
     var cpfEditar = (cpfs).substring(0,11) // utf8.decode(bytes) // CPF para editar/cadastrar
     var cpfAdmin = (cpfs).substring(11,23) // salva o segundo CPF referente ao ADMIN
@@ -117,7 +117,7 @@ class cadastrotec extends React.Component {
     if(cpfEditar !== ""){
      // alert(cpfEditar)
      // alert(cpfAdmin)
-      
+
       axios.get(`${URL}usuario/cpf/`+cpfEditar)                    //'http://localhost:3003/api/todos`)
       .then(res => {
         const usuarios = res.data;
@@ -133,7 +133,7 @@ class cadastrotec extends React.Component {
 
     this.pegaDados();
   }
-  
+
   componentDidMount() {
     axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
       .then(res => {
@@ -177,21 +177,21 @@ class cadastrotec extends React.Component {
                   <Input  type="text"  className="form-control" name="cpf"
                     value={formatarCpf(this.state.cpf)} onChange={this.onChange} minLength='14' maxLength='14' placeholder="000.000.000-00" required/>
                 </div>
-             
+
                 <div className="form-group">
                   <CardSubtitle>Senha: </CardSubtitle>
                   <input type="password" className="form-control"  name="senha"
                     value={this.state.senha} onChange={this.onChange} minLength='4'/>
                 </div>
 {/*JSON.stringify(this.state)*/}
-                
+
                 <div>
 
                   <Button onSubmit={this.handleSubmit} outline type="Submit" >{this.state.flagEditar === true ? "Editar" : "Cadastrar"}</Button>
                   <Button outline href={"/administrador?"+Codificar(this.state.cpf_Admin+this.state.token)} className="a-fix">Voltar</Button>
                   </div>
-                
-               
+
+
               </form>
             </CardBody>
           </Card>
@@ -210,9 +210,9 @@ class cadastrotec extends React.Component {
 /*
 <div>
                 <label>
-                <input name="chefe" type="checkbox" checked={this.state.chefe} onChange={this.handleInputChange} 
+                <input name="chefe" type="checkbox" checked={this.state.chefe} onChange={this.handleInputChange}
                 />
-                Chefe 
+                Chefe
                 </label>
                 </div>
 
