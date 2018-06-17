@@ -97,10 +97,6 @@ class admin extends Component {
                 <h3>Administrador</h3>
                 <Info_adm {...dados}/>
                 <Card>
-                  <CardBody>
-                    <Button className="a-fix" outline onClick="">Vincular Unidade</Button>
-                    <Button className="a-fix" outline onClick="">Vincular Probatorio</Button>
-                  </CardBody>
                 </Card>
                 <div className="form-group">
                   <p></p>
@@ -109,7 +105,8 @@ class admin extends Component {
                     value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-                  <Button outline onClick={()=> {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
+                  <Button className="a-fix" outline onClick={()=>
+                  {axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
@@ -123,6 +120,7 @@ class admin extends Component {
                     });
                     clickInfo = true;
                   }}>Cadastrar/Pesquisar</Button>
+                  <Button className="a-fix" outline href={"/vincularprob"}>Vincular Probatorio</Button>
                 </div>
               </form>
               <Collapse isOpen={this.state.open}>

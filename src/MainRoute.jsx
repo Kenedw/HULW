@@ -10,7 +10,7 @@ import Aval2        from './avaliacao/avaliacaoprob';
 import Cadastro     from './cadastrartec/CadastroTec0';
 import Unidade      from './unidade/unidade';
 import PesqUnidade  from './unidade/pesqUnidade';
-import Vincular     from './unidade/vincular'; //mudar este nome para VinculaUni
+import VincularUni  from './unidade/vincular'; 
 import VincularProb from './adminpage/vinprob/vinculaProb';
 import notfount     from './paginaNaoEnc.png';
 
@@ -35,15 +35,15 @@ class Rota extends Component {
         <Router>
           <Switch>
             <Route exact path="/"        component = {Login} />
-            <Route path="/administrador" component = {AdminPage} />
             <Route path="/esqueciSenha"  component = {esqueci} />
             <Route path="/userpage"      component = {Userpage} />
             <Route path="/avaliacao"     component = {Aval}/>
             <Route path="/avalprob"      component = {Aval2}/>
+            <Route path="/administrador" component = {AdminPage} />
             <Route path="/cadastroTec"   component = {Cadastro} />
             <Route path="/unidade"       component = {Unidade} />
             <Route path="/pesqUnidade"   component = {PesqUnidade}/>
-            <Route path="/vincular"      component = {Vincular}/>
+            <Route path="/vincularuni"   component = {VincularUni}/>
             <Route path="/vincularprob"  component = {VincularProb}/>
             <Route component={NotFound}/>
           </Switch>
