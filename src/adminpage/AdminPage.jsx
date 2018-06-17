@@ -3,8 +3,8 @@ import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col, Collapse} from 'reactstrap';
 import axios from 'axios';
 import Lista from './todoList.jsx';
-import Pesquisa from '../unidade/pesqUnidade'
-import Decodificar from './decodifica'
+import Pesquisa from '../unidade/pesqUnidade';
+import Decodificar from './decodifica';
 
 
 const dados = {
@@ -74,38 +74,10 @@ class admin extends Component {
     var dados_url = Decodificar((this.props.location.search).substring(1))
 
     var cpfAdmin = (dados_url).substring(0,11);
-    //alert(cpfAdmin);
     var token_url =  (dados_url).substring(11);
     if(token_url !== ""){
       this.setState({token: token_url})
-      //alert(token_url);
-    //}else{
-    //  alert(this.state.token) // alerta para debugar somente
-    //}
     }
-    
-   // var bytes = base64.decode(decodifica);
-    //var cpfs = utf8.decode(bytes);
-    //alert(cpfs);
-    /*
-    var cpfAdmin = (cpfs).substring(11,23) // salva o segundo CPF referente ao ADMIN
-    //var bytes = base64.decode(encoded)
-    var cpfEditar = (cpfs).substring(0,11) //utf8.decode(bytes) // CPF para editar/cadastrar
-    this.setState({cpf_Admin: cpfAdmin});
-    if(cpfEditar !== ""){
-     // alert(cpfEditar)
-     // alert(cpfAdmin)
-      
-      axios.get(`${URL}usuario/cpf/`+cpfEditar)                    //'http://localhost:3003/api/todos`)
-      .then(res => {
-        const usuarios = res.data;
-        this.setState({ usuarios });
-        this.setState({id_usuario: usuarios.id_Usuario, flagEditar: true, cpf: usuarios.cd_CPF,nome: usuarios.no_Pessoa, email: usuarios.cd_Email,dataAdm: (usuarios.dt_Admissao).substring(0,10)})
-      })
-    }//else{
-   // alert("NAO TEM NADA");
-    //}
-    */
   }
 
   componentWillMount() {
@@ -123,14 +95,13 @@ class admin extends Component {
             <CardBody>
               <form>
                 <h3>Administrador</h3>
-                  <Info_adm {...dados}/>
-                  <Card>
-                    <CardBody>
-                      <Button className="a-fix" outline onClick="">Cadastrar Unidade</Button>
-                      <Button className="a-fix" outline onClick="">Vincular Unidade</Button>
-                      <Button className="a-fix" outline onClick="">Vincular Probatorio</Button>
-                    </CardBody>
-                  </Card>
+                <Info_adm {...dados}/>
+                <Card>
+                  <CardBody>
+                    <Button className="a-fix" outline onClick="">Vincular Unidade</Button>
+                    <Button className="a-fix" outline onClick="">Vincular Probatorio</Button>
+                  </CardBody>
+                </Card>
                 <div className="form-group">
                   <p></p>
                   <CardSubtitle>Pesquisar CPF: </CardSubtitle>
@@ -161,28 +132,30 @@ class admin extends Component {
                     });
                     clickInfo = true;
                   }}>Cadastrar/Pesquisar</Button>
-              </div>
-            </form>
-            <Collapse isOpen={this.state.open}>
-              {clickInfo === true &&
-                <div>
-                  <Lista list={this.state.response} cpfAdmin={cpf2int(dados.usuario.CPF)}/>
                 </div>
-              }
-            </Collapse>
-          </CardBody>
-        </Card>
-              <Pesquisa cpf_adm={dados.usuario.CPF} token={this.state.token}/>
+              </form>
+              <Collapse isOpen={this.state.open}>
+                {clickInfo === true &&
+                  <div>
+                    <Lista list={this.state.response} cpfAdmin={cpf2int(dados.usuario.CPF)}/>
+                  </div>
+                }
+              </Collapse>
+            </CardBody>
+          </Card>
+        </div>
+        <Pesquisa cpf_adm={dados.usuario.CPF} token={this.state.token}/>
       </div>
-    )
-  }}
-
-
-  function cpf2int(cpf){
-    cpf = cpf.replace(/[^0-9]+/g,'');
-
-    return cpf;
+    );
   }
+}
+
+
+function cpf2int(cpf){
+  cpf = cpf.replace(/[^0-9]+/g,'');
+
+  return cpf;
+}
 
 
 function formatarCpf(cpf){
@@ -194,4 +167,4 @@ function formatarCpf(cpf){
 }
 
 
-  export default admin;
+export default admin;
