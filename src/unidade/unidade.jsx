@@ -3,6 +3,8 @@ import './../App.css';
 import { Input, Row, Col, Button,ButtonGroup, Card, CardBody, CardSubtitle, Label,FormGroup, CustomInput} from 'reactstrap';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios'
+import Decodificar from '../adminpage/decodifica'
+import Codificar from '../adminpage/codifica'
 
 const URL = 'https://hulw.herokuapp.com/'
 
@@ -14,7 +16,9 @@ class cadastrarUnidade extends React.Component {
         unidades :[],
         unidade: "",
         descricao: "",
-        unidade_pai: "",
+        unidade_pai: null,
+        token: "",
+        cpf_Admin: "",
       };
   
   
@@ -69,6 +73,45 @@ class cadastrarUnidade extends React.Component {
           this.setState({ unidades });
         })
       }
+
+      pegaDados(){
+        var dados_url = Decodificar((this.props.location.search).substring(1))
+    
+        var cpfAdmin = (dados_url).substring(0,11);
+        alert(cpfAdmin);
+        var token_url =  (dados_url).substring(11);
+        this.setState({token: token_url, cpf_Admin: cpfAdmin})
+        alert(token_url);
+    
+       // var bytes = base64.decode(decodifica);
+        //var cpfs = utf8.decode(bytes);
+        //alert(cpfs);
+        /*
+        var cpfAdmin = (cpfs).substring(11,23) // salva o segundo CPF referente ao ADMIN
+        //var bytes = base64.decode(encoded)
+        var cpfEditar = (cpfs).substring(0,11) //utf8.decode(bytes) // CPF para editar/cadastrar
+        this.setState({cpf_Admin: cpfAdmin});
+        if(cpfEditar !== ""){
+         // alert(cpfEditar)
+         // alert(cpfAdmin)
+          
+          axios.get(`${URL}usuario/cpf/`+cpfEditar)                    //'http://localhost:3003/api/todos`)
+          .then(res => {
+            const usuarios = res.data;
+            this.setState({ usuarios });
+            this.setState({id_usuario: usuarios.id_Usuario, flagEditar: true, cpf: usuarios.cd_CPF,nome: usuarios.no_Pessoa, email: usuarios.cd_Email,dataAdm: (usuarios.dt_Admissao).substring(0,10)})
+          })
+        }//else{
+       // alert("NAO TEM NADA");
+        //}
+        */
+      }
+    
+      componentWillMount() {
+    
+        this.pegaDados();
+      }
+    
   
   
     render(){
@@ -110,7 +153,7 @@ class cadastrarUnidade extends React.Component {
                
                   <div>
                     <Button onSubmit={this.handleSubmit} outline type="Submit" >Cadastrar</Button>
-                    <Button outline href="/" className="a-fix">Voltar</Button>
+                    <Button outline href={"/administrador?"+Codificar(this.state.cpf_Admin+this.state.token)} className="a-fix">Voltar</Button>
                   </div>
                   
                 </form>

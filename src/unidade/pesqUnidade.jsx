@@ -3,7 +3,8 @@ import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col, Collapse} from 'reactstrap';
 import axios from 'axios';
 import Lista from './unidadeList';
-
+import Decodificar from '../adminpage/decodifica'
+import Codificar from '../adminpage/codifica'
 
 
 var clickInfo = false;
@@ -13,7 +14,8 @@ class vincUnidade extends Component {
     this.state = {
       codigo: "",
       open: false,
-      response: []
+      response: [],
+      token:"",
     };
 
     this.onChange = (evento) => {
@@ -31,6 +33,9 @@ class vincUnidade extends Component {
   componentDidMount() {
     clickInfo = false;
   }
+
+
+
   render(){
     return (
           <Card  className="Card-position">
@@ -58,7 +63,7 @@ class vincUnidade extends Component {
                     });
                     clickInfo = true;
                   }}>Pesquisar</Button>
-                <Button href="/unidade" className="a-fix" outline >Cadastrar Unidade</Button>
+                <Button href={"/unidade?"+Codificar(cpf2int(this.props.cpf_adm)+this.props.token)} className="a-fix" outline >Cadastrar Unidade</Button>
               </div>
             </form>
             <Collapse isOpen={this.state.open}>
@@ -72,6 +77,12 @@ class vincUnidade extends Component {
         </Card>
   )
 }}
+
+function cpf2int(cpf){
+  cpf = cpf.replace(/[^0-9]+/g,'');
+
+  return cpf;
+}
 
 
 

@@ -3,7 +3,8 @@ import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, Label,FormGroup} from 'reactstrap';
 //import { DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios'
-
+import Decodificar from '../adminpage/decodifica'
+import Codificar from '../adminpage/codifica'
 
 const URL = 'https://hulw.herokuapp.com/'
 
@@ -22,6 +23,8 @@ class cadastrotec extends React.Component {
       dataAdm: "",
       flagEditar: false,
       id_usuario: "",
+      token:"",
+      cpf_Admin: "",
       
     };
 
@@ -99,18 +102,18 @@ class cadastrotec extends React.Component {
   }
 
   pegaDados(){
-    var base64 = require('base-64')
-    var utf8 = require('utf8')
 
-    var decodifica = (this.props.location.search).substring(1);
 
-    var bytes = base64.decode(decodifica);
-    var cpfs = utf8.decode(bytes);
+    var cpfs = Decodificar((this.props.location.search).substring(1)); // função para decodificar
     //alert(cpfs);
 
-    var cpfAdmin = (cpfs).substring(11,23) // salva o segundo CPF referente ao ADMIN
+    
     //var bytes = base64.decode(encoded)
-    var cpfEditar = (cpfs).substring(0,11) //utf8.decode(bytes) // CPF para editar/cadastrar
+    var cpfEditar = (cpfs).substring(0,11) // utf8.decode(bytes) // CPF para editar/cadastrar
+    var cpfAdmin = (cpfs).substring(11,23) // salva o segundo CPF referente ao ADMIN
+    var token_url = (cpfs).substring(23); // salva o token
+
+    this.setState({cpf_Admin: cpfAdmin, token: token_url});
     if(cpfEditar !== ""){
      // alert(cpfEditar)
      // alert(cpfAdmin)
@@ -180,13 +183,13 @@ class cadastrotec extends React.Component {
                   <input type="password" className="form-control"  name="senha"
                     value={this.state.senha} onChange={this.onChange} minLength='4'/>
                 </div>
-{/*{JSON.stringify(this.state)} */}
+{/*JSON.stringify(this.state)*/}
                 
                 <div>
 
-<Button onSubmit={this.handleSubmit} outline type="Submit" >{this.state.flagEditar === true ? "Editar" : "Cadastrar"}</Button>
-<Button outline href="/administrador" className="a-fix">Voltar</Button>
-</div>
+                  <Button onSubmit={this.handleSubmit} outline type="Submit" >{this.state.flagEditar === true ? "Editar" : "Cadastrar"}</Button>
+                  <Button outline href={"/administrador?"+Codificar(this.state.cpf_Admin+this.state.token)} className="a-fix">Voltar</Button>
+                  </div>
                 
                
               </form>
@@ -227,6 +230,7 @@ class cadastrotec extends React.Component {
 */
 
 //{JSON.stringify(this.state)}
+
 
 function formatarCpf(cpf){
   cpf = cpf.replace(/\D/g,"");
