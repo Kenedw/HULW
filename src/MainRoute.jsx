@@ -37,7 +37,7 @@ class Rota extends Component {
             <Route path="/esqueciSenha"  component = {esqueci} />
             <Route path="/userpage"      component = {Userpage} />
             <Route path="/avaliacao"     component = {Aval}/>
-            <Route path="/avalprob"      component = {Aval2}/>
+            <Route path="/avaliacaoprob" component = {Aval2}/>
             <Route path="/cadastroTec"   component = {Cadastro} />
             <Route path="/unidade"       component = {Unidade} />
             <Route path="/pesqUnidade"   component = {PesqUnidade}/>
