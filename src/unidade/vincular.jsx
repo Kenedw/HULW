@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 import './../App.css';
-import { Input, Button, Card, CardBody, CardSubtitle, Label,FormGroup} from 'reactstrap';
+import { Input, Button, Card, CardBody, CardSubtitle, Label,FormGroup, Collapse} from 'reactstrap';
 //import { DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios'
-import Lista from '../adminpage/todoList';
+import Lista from './checkUsuario';
+
+const dados = {
+  usuario: {
+    NOME: "Zezinho Administrador da Silva",
+    CPF:  "123.456.789-00",
+    EMAIL: "zezinho.admin@boy.com",
+  }
+};
 
 
 const URL = 'https://hulwteste.herokuapp.com/'
@@ -15,7 +23,8 @@ class vincular extends React.Component{
           unidades :[],
           unidade: "",
           descricao: "",
-          cpf: ""
+          cpf: "",
+          response: [],
         };
 
         this.onChange = (evento) => {
@@ -26,13 +35,15 @@ class vincular extends React.Component{
           state[campo] = evento.target.value;
     
           this.setState(state);
+          if(campo === 'cpf'){
+            this.setState({cpf: formatarCpf(evento.target.value) } );
+          }
           
         };
           this.handleSubmit = event => {};
     
       }
     
-      
 
      pegaDados(){
        var codUnidade = (this.props.location.search).substring(1);
@@ -114,18 +125,17 @@ class vincular extends React.Component{
                           }
                         });
                         clickInfo = true;
-                      }}>Cadastrar/Pesquisar</Button>
+                      }}>Pesquisar</Button>
                      </div> 
                   </form>
-                </CardBody>
-              </Card>
-              <Card className = "Card-position">
-                 <CardBody>
+                  <Collapse isOpen={this.state.open}>
+                   {clickInfo === true &&
                     <div>
-                      <Button onSubmit={this.handleSubmit} outline type="Submit" >Gravar</Button>
-                      <Button outline href="/administrador" className="a-fix">Voltar</Button>
-                    </div>
-                 </CardBody>
+                  <Lista list={this.state.response} cpfAdmin={cpf2int(dados.usuario.CPF)} codUnidade = {this.state.unidade}/>
+                     </div>
+                     }
+                  </Collapse>
+                </CardBody>
               </Card>
             </div>
           </div>
@@ -139,6 +149,14 @@ function cpf2int(cpf){
    cpf = cpf.replace(/[^0-9]+/g,'');
     
    return cpf;
+}
+
+function formatarCpf(cpf){
+  cpf = cpf.replace(/\D/g,"");
+  cpf = cpf.replace(/(\d{3})(\d)/,"$1.$2");
+  cpf = cpf.replace(/(\d{3})(\d)/,"$1.$2");
+  cpf = cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+  return cpf;
 }
 
 function somenteNumeros(num){
