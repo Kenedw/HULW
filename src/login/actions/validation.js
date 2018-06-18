@@ -47,7 +47,7 @@ const getId = async (cpf) => {
 }
 
 var state = -1
-var token = "";
+var token = "a";
 var id_Usuario = -1;
 var is_admin = -1;
 
@@ -60,15 +60,16 @@ export default async function newLogin(user,pass) {
     var liberado = await liberar(cpfLimpo,pass);
     //console.log(liberado);
     if (liberado){
-        //console.log(' '+ id_Usuario + ' '+ is_admin + ' ' + token);
+        console.log(' '+ id_Usuario + ' '+ is_admin + ' ' + token);
         
         if(is_admin){
             state = 3; //ira entrar como adminstrador
         }else{
 
             var is_chefe = await getChefe(token);
-            console.log(is_chefe);
+            if(is_chefe) state = 2;
+            else state = 1;
         }
     }
-    return state;
+    return ({state, token});
 }

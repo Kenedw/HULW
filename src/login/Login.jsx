@@ -35,51 +35,18 @@ class Login extends React.Component{
       alert('Por favor, preencha os campos!')
     }
     else{
-      console.log(await newLogin(this.state.user,this.state.pass));
-      /*var resposta = newLogin(this.state.user,this.state.pass);
-      if(resposta === 0){
-        alert('Usuário e/ou senha digitados incorretamente!');
-        //
+      var resultado = await newLogin(this.state.user,this.state.pass);
+
+      if(resultado.state === 1){
+        window.open("/userpage?"+resultado.token,"_self");
+      }else if(resultado.state === 2){
+        window.open("/userpage?"+resultado.token,"_self");
+      }else if(resultado.state === 3){
+        window.open("/telaADM","_self");
+      }else{
+        alert('Usuário ou senha, incorreta!');
       }
-      else if(resposta === 1){
-        console.log("entrou como usuario comum")
-        /*var base64 = require('base-64')
-        var utf8 = require('utf8')
-
-        var usuar = this.state.user
-
-        var cpfLimpo = usuar.substring(0,3) + usuar.substring(4,7) + usuar.substring(8,11) + usuar.substring(12,14)
-
-        console.log('https://hulw.herokuapp.com/usuario/cpf/' + cpfLimpo)
-
-        fetch('https://hulw.herokuapp.com/usuario/cpf/' + cpfLimpo)
-        .then((response) => response.json())
-        .then((responseJson) => {
-
-          var id = responseJson.id_Usuario;
-          console.log(responseJson.id_Usuario);
-
-          var bytes = utf8.encode(""+ id)
-          var encoded = base64.encode(bytes)  
-          
-          console.log(encoded);
-
-          window.open("/userpage?"+encoded,"_self");
-
-
-        }).catch((error) => {
-          console.log('nao encontrou o usuario!!!');
-        })
-      }else if (resposta === 2){
-        console.log("entrou como usuario CHEFE")
-
-      }else if (resposta === 3){
-        console.log("entrou como administrador")
-        //tela adm telaADM
-        //window.open("/telaADM","_self");
-      }else {
-        console.log('nao salvou o estado, apareceu para mim: ' + resposta);
-      }*/
+      
     }
 
   }

@@ -87,7 +87,7 @@ export class Userpage extends Component {
 
   componentWillMount() {
 
-    this.pegaDados();
+    //this.pegaDados();
   }
 
   render() {
