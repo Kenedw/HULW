@@ -1,22 +1,13 @@
 import React from 'react'
-import { Button, Table} from 'reactstrap';
-import Admin  from "./AdminPage"
+import { Button, Table, Input, CustomInput} from 'reactstrap';
 
 export default props => {
 
   var list = props.list;
   var cpfAdmin = props.cpfAdmin;
-  var base64 = require('base-64')
-  var utf8 = require('utf8')
-
   if(!props.list.length){
     list = [props.list];
   }
-  /*
-  verificar(){
-    window.open("/cadastroTec?"+this.state.cpf);
-  }
-*/
 
   const renderRows = () =>{
     return list.map(todo =>(
@@ -25,7 +16,7 @@ export default props => {
           <td >{todo.cd_CPF}</td>
           <td >{todo.cd_Email}</td>
           <td>
-            <Button className={'btn btn-success'} href={"/cadastroTec?"+   utf8.encode(base64.encode(todo.cd_CPF))   }>Editar</Button>
+            <Input type="checkbox" value={todo.id_Usuario}  checked={todo.probatorio}   />
           </td>
       </tr>
     ))
@@ -38,7 +29,7 @@ export default props => {
           <th> Nome</th>
           <th> CPF</th>
           <th> E-Mail</th>
-          <th> Ação</th>
+          <th> Estagio Probatorio</th>
         </tr>
       </thead>
       <tbody>
@@ -46,4 +37,8 @@ export default props => {
       </tbody>
     </Table>
   )
+}
+
+function handleInputChange(event){
+
 }

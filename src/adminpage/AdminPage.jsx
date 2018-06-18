@@ -3,6 +3,9 @@ import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col, Collapse} from 'reactstrap';
 import axios from 'axios';
 import Lista from './todoList.jsx';
+import Pesquisa from '../unidade/pesqUnidade';
+import Decodificar from './decodifica';
+
 
 const dados = {
   usuario: {
@@ -11,7 +14,15 @@ const dados = {
     EMAIL: "zezinho.admin@boy.com",
   }
 };
-
+var token = {
+    headers:
+    { 
+      'cache-control': 'no-cache',
+      'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    }
+};
 class Info_adm extends Component {
 
   render() {
@@ -22,13 +33,13 @@ class Info_adm extends Component {
             <Row>
               <Col>
                 <CardSubtitle>Nome: </CardSubtitle>
-                <CardText>{this.props.usuario.NOME}</CardText>
+                <CardText>{this.props.nome}</CardText>
                 <CardSubtitle>Email: </CardSubtitle>
-                <CardText>{this.props.usuario.EMAIL}</CardText>
+                <CardText>{this.props.email}</CardText>
               </Col>
               <Col>
                 <CardSubtitle>CPF: </CardSubtitle>
-                <CardText>{this.props.usuario.CPF}</CardText>
+                <CardText>{this.props.cpf_admin}</CardText>
               </Col>
             </Row>
           </CardBody>
@@ -45,8 +56,11 @@ class admin extends Component {
     super();
     this.state = {
       cpf: "",
+      cpf_admin: "",
+      email:"",
+      nome:"",
       open: false,
-      response: []
+      response: [],
     };
 
     this.onChange = (evento) => {
@@ -64,7 +78,40 @@ class admin extends Component {
   }
   componentDidMount() {
     clickInfo = false;
+    axios.get('https://hulwteste.herokuapp.com/auth/me',token )
+    .then(res => {
+      const dados = res.data;
+      this.setState({ dados });
+      
+      this.setState({nome: dados[0].no_Pessoa, cpf_admin: dados[0].cd_CPF, email: dados[0].cd_Email });
+      //alert(JSON.stringify(dados))
+    });/*
+    .catch((error) => {
+      this.setState({open: false });
+      if(error.response.status == 404){
+        alert("Usuário não cadastrado!")
+        //window.open("/cadastroTec","_self");
+      }
+    });*/
   }
+/*
+  pegaDados(){
+    var dados_url = Decodificar((this.props.location.search).substring(1))
+
+    var cpfAdmin = (dados_url).substring(0,11);
+    var token_url =  (dados_url).substring(11);
+    if(token_url !== ""){
+      this.setState({token: token_url})
+    }
+  }
+
+  componentWillMount() {
+
+    this.pegaDados();
+  }
+
+*/
+
   render(){
     return (
       <div className="container">
@@ -73,9 +120,9 @@ class admin extends Component {
             <CardBody>
               <form>
                 <h3>Administrador</h3>
-                <div>
-                  <Info_adm {...dados}/>
-                </div>
+                <Info_adm {...this.state}/>
+                <Card>
+                </Card>
                 <div className="form-group">
                   <p></p>
                   <CardSubtitle>Pesquisar CPF: </CardSubtitle>
@@ -83,35 +130,39 @@ class admin extends Component {
                     value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-                  <Button outline >Cadastrar Setor</Button>
-                  <Button outline onClick={()=> {axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf) )
+                  <Button outline onClick={()=> {        
+                    axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
-                      console.log(response.data);
                     })
                     .catch((error) => {
                       this.setState({open: false });
-                      console.log("Aki é a referencia da pagina de cadastro do usuario!");
+                      if(error.response.status == 404){
+                        alert("Usuário não cadastrado!")
+                        window.open("/cadastroTec","_self");
+                      }
                     });
                     clickInfo = true;
-                  }}
-                  className="a-fix">Pesquisar</Button>
-              </div>
-            </form>
-            <Collapse isOpen={this.state.open}>
-              {clickInfo === true &&
-                <div>
-                  <Lista list={this.state.response}/>
+                  }}>Cadastrar/Pesquisar</Button>
+                  <Button className="a-fix" outline href={"/vincularprob"}>Vincular Probatorio</Button>
                 </div>
-              }
-            </Collapse>
-          </CardBody>
-        </Card>
+              </form>
+              <Collapse isOpen={this.state.open}>
+                {clickInfo === true &&
+                  <div>
+                    <Lista list={this.state.response} cpfAdmin={cpf2int(dados.usuario.CPF)}/>
+                  </div>
+                }
+              </Collapse>
+            </CardBody>
+          </Card>
+        </div>
+        <Pesquisa cpf_adm={dados.usuario.CPF} token={this.state.token}/>
       </div>
-    </div>
-  )
-}}
+    );
+  }
+}
 
 
 function cpf2int(cpf){
@@ -119,6 +170,7 @@ function cpf2int(cpf){
 
   return cpf;
 }
+
 
 function formatarCpf(cpf){
   cpf = cpf.replace(/\D/g,"");
