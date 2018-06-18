@@ -72,7 +72,7 @@ class vincUnidade extends Component {
                     });
                     clickInfo = true;
                   }}>Pesquisar</Button>
-                <Button className="a-fix" href={"/unidade?"+Codificar(cpf2int(this.props.cpf_adm)+this.props.token)} className="a-fix" outline >Cadastrar Unidade</Button>
+                <Button className="a-fix" href={"/unidade"} className="a-fix" outline >Cadastrar Unidade</Button>
               </div>
             </form>
             <Collapse isOpen={this.state.open}>

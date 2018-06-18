@@ -25,7 +25,7 @@ export default props => {
           <td >{todo.cd_CPF}</td>
           <td >{todo.cd_Email}</td>
           <td>
-            <Button className={'btn btn-success'} href={"/cadastroTec?"+   utf8.encode(base64.encode(todo.cd_CPF+cpfAdmin))   }>Editar</Button>
+            <Button className={'btn btn-success'} href={"/cadastroTec?"+   utf8.encode(base64.encode(todo.cd_CPF))   }>Editar</Button>
           </td>
       </tr>
     ))

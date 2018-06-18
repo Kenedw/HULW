@@ -16,7 +16,7 @@ export default props => {
       <tr key={todo.cd_Unidade}>
           <td >{todo.de_UNIDADE}</td>
           <td>
-            <Button className={'btn btn-dark'} href={"/vincular?" + codUnidade}>Adicionar Vinculos</Button>
+            <Button className={'btn btn-dark'} href={"/vincularuni?" + codUnidade}>Adicionar Vinculos</Button>
           </td>
       </tr>
     ))

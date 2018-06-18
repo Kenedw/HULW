@@ -7,6 +7,7 @@ import Decodificar from '../adminpage/decodifica';
 import Codificar from '../adminpage/codifica';
 
 const URL = 'http://hulwteste.herokuapp.com/' //'https://hulw.herokuapp.com/'
+
 var token = {
   headers:
   { 
@@ -69,32 +70,8 @@ class cadastrotec extends React.Component {
          // unidade: this.state.unidade,
          dt_Admissao: this.state.dataAdm+"T00:00:00.000Z",
         };
-        //alert(this.state.nome);
-        //alert(JSON.stringify(login));
 
         if(this.state.flagEditar === false){
-
-
-
-/*
-
-          axios.post(`https://hulwteste.herokuapp.com/auth/login`,JSON.stringify(login))//, config) //JSON.stringify(usuario)
-          .then(res => { 
-            //console.log(res.Object.data);
-            console.log(res);
-            alert(res.data.msg) // alerta sucesso ao cadastrar
-            window.location.reload() // atualiza a página caso sucesso
-            
-          })
-          .catch(error => {
-            console.log(error)//.response)//.data.error.message);
-            alert(error.response.data.error.message) // alerta o erro ao submit
-          });
-
-
-*/
-
-
 
         axios.post(`${URL}usuario`,JSON.stringify(usuario), token) //JSON.stringify(usuario)
           .then(res => { 
@@ -143,42 +120,26 @@ class cadastrotec extends React.Component {
     //alert(cpfs);
 
 
-    //var bytes = base64.decode(encoded)
-    var cpfEditar = (cpfs).substring(0,11) // utf8.decode(bytes) // CPF para editar/cadastrar
-    var cpfAdmin = (cpfs).substring(11,23) // salva o segundo CPF referente ao ADMIN
-    var token_url = (cpfs).substring(23); // salva o token
 
-    this.setState({cpf_Admin: cpfAdmin, token: token_url});
+    var cpfEditar = (cpfs).substring(0,11) // utf8.decode(bytes) // CPF para editar/cadastrar
+
+ 
     if(cpfEditar !== ""){
-     // alert(cpfEditar)
-     // alert(cpfAdmin)
-      
+
       axios.get(`${URL}usuario/cpf/`+cpfEditar,token)                    //'http://localhost:3003/api/todos`)
       .then(res => {
         const usuarios = res.data;
         this.setState({ usuarios });
         this.setState({id_usuario: usuarios.id_Usuario, flagEditar: true, cpf: usuarios.cd_CPF,nome: usuarios.no_Pessoa, email: usuarios.cd_Email,dataAdm: (usuarios.dt_Admissao).substring(0,10)})
       })
-    }//else{
-   // alert("NAO TEM NADA");
-    //}
+    }
   }
 
   componentWillMount() {
 
     this.pegaDados();
   }
-  /*
-  componentDidMount() {
-    
-    axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
-      .then(res => {
-        const unidades = res.data;
-        this.setState({ unidades });
-      })
-    }
 
-*/
 
   render(){
     return (
@@ -224,7 +185,7 @@ class cadastrotec extends React.Component {
                 <div>
 
                   <Button onSubmit={this.handleSubmit} outline type="Submit" >{this.state.flagEditar === true ? "Editar" : "Cadastrar"}</Button>
-                  <Button outline href={"/administrador?"+Codificar(this.state.cpf_Admin+this.state.token)} className="a-fix">Voltar</Button>
+                  <Button outline href={"/administrador"} className="a-fix">Voltar</Button>
                   </div>
 
 

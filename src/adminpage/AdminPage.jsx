@@ -33,13 +33,13 @@ class Info_adm extends Component {
             <Row>
               <Col>
                 <CardSubtitle>Nome: </CardSubtitle>
-                <CardText>{this.props.usuario.NOME}</CardText>
+                <CardText>{this.props.nome}</CardText>
                 <CardSubtitle>Email: </CardSubtitle>
-                <CardText>{this.props.usuario.EMAIL}</CardText>
+                <CardText>{this.props.email}</CardText>
               </Col>
               <Col>
                 <CardSubtitle>CPF: </CardSubtitle>
-                <CardText>{this.props.usuario.CPF}</CardText>
+                <CardText>{this.props.cpf_admin}</CardText>
               </Col>
             </Row>
           </CardBody>
@@ -56,6 +56,9 @@ class admin extends Component {
     super();
     this.state = {
       cpf: "",
+      cpf_admin: "",
+      email:"",
+      nome:"",
       open: false,
       response: [],
     };
@@ -75,8 +78,23 @@ class admin extends Component {
   }
   componentDidMount() {
     clickInfo = false;
+    axios.get('https://hulwteste.herokuapp.com/auth/me',token )
+    .then(res => {
+      const dados = res.data;
+      this.setState({ dados });
+      
+      this.setState({nome: dados[0].no_Pessoa, cpf_admin: dados[0].cd_CPF, email: dados[0].cd_Email });
+      //alert(JSON.stringify(dados))
+    });/*
+    .catch((error) => {
+      this.setState({open: false });
+      if(error.response.status == 404){
+        alert("Usuário não cadastrado!")
+        //window.open("/cadastroTec","_self");
+      }
+    });*/
   }
-
+/*
   pegaDados(){
     var dados_url = Decodificar((this.props.location.search).substring(1))
 
@@ -92,7 +110,7 @@ class admin extends Component {
     this.pegaDados();
   }
 
-
+*/
 
   render(){
     return (
@@ -102,7 +120,7 @@ class admin extends Component {
             <CardBody>
               <form>
                 <h3>Administrador</h3>
-                <Info_adm {...dados}/>
+                <Info_adm {...this.state}/>
                 <Card>
                 </Card>
                 <div className="form-group">

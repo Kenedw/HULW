@@ -91,7 +91,7 @@ class vincular extends React.Component{
                
                     <div>
                       <Button onSubmit={this.handleSubmit} outline type="Submit" >Gravar</Button>
-                      <Button outline href="/" className="a-fix">Voltar</Button>
+                      <Button outline href="/administrador" className="a-fix">Voltar</Button>
                     </div>
                     
                   </form>

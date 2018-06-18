@@ -148,7 +148,7 @@ class cadastrarUnidade extends React.Component {
                
                   <div>
                     <Button onSubmit={this.handleSubmit} outline type="Submit" >Cadastrar</Button>
-                    <Button outline href={"/administrador?"+Codificar(this.state.cpf_Admin+this.state.token)} className="a-fix">Voltar</Button>
+                    <Button outline href={"/administrador"} className="a-fix">Voltar</Button>
                   </div>
                   
                 </form>
