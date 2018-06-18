@@ -22,6 +22,10 @@ const esqueci = () => (
   </div>
 )
 
+const adm = () => (
+  <div><h2>Tela: ADM</h2></div>
+)
+
 class Rota extends Component {
   render() {
     return (
@@ -36,6 +40,7 @@ class Rota extends Component {
             <Route path="/avaliacao"     component ={Aval}/>
             <Route path="/avalprob"      component = {Aval2}/>
             <Route path="/formulario"    component={Formulario} />
+            <Route path="/telaADM" component={adm} />
             <Route component={NotFound}/>
           </Switch>
         </Router>

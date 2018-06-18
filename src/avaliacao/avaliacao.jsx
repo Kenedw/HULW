@@ -14,6 +14,9 @@ const dados = {
   }
 };
 
+var id = "";
+var idM = "";
+
 class Info_user extends React.Component {
 
 
@@ -45,35 +48,51 @@ class avaliacao extends React.Component {
   constructor(){
     super();
     this.state = {
-      selectedValue: true
+      selectedValue: true,
+      var1: "",
+      var2: "",
+      var3: "",
+      var4: "",
+      var5: "",
+      var6: "",
+      var7: "",
+      var8: "",
+      var9: "",
+      var10: ""
     }
   }
 
-  pegaDados(){
-
+  colocarId(){
     var base64 = require('base-64')
     var utf8 = require('utf8')
 
     var encoded = (this.props.location.search).substring(1)
+    idM = encoded;
     var bytes = base64.decode(encoded)
-    var cpf = utf8.decode(bytes)
+    id = utf8.decode(bytes)
 
-    //retirando os pontos e os traços
-    var cpfLimpo = cpf.substring(0,3) + cpf.substring(4,7) + cpf.substring(8,11) + cpf.substring(12,14)
+    console.log(id)
+  }
 
-    return fetch('https://hulw.herokuapp.com/usuario/cpf/' + cpfLimpo)
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({Nome: responseJson.no_Pessoa});
-    }).catch((error) => {
-      console.log('nao encontrou o usuario!!!');
-    })
+  componentWillMount(){
+    this.colocarId();
   }
 
   handleChange(value) {
     this.setState({selectedValue: value});
   }
 
+  voltar(){
+    console.log("voltar");
+    window.open("/userpage?"+idM,"_self");
+  }
+
+  gravar(){
+    //salvando no banco
+    //-> comando
+    alert("Formulario salvo!")
+    window.open("/userpage?"+idM,"_self");
+  }
 
   render(){
     return (
@@ -118,8 +137,8 @@ class avaliacao extends React.Component {
   <p>2. Resguarda fatos de interesse da administração, agindo com descrição.</p>
   <p>3. Preocupa-se com o êxito do seu trabalho.</p>
   <hr/>
-    <Button color="primary"> Gravar</Button>{' '}
-      <Button color="danger">Cancelar</Button>{' '}
+    <Button color="primary" onClick={this.gravar}> Gravar</Button>{' '}
+      <Button color="danger" onClick={this.voltar}>Cancelar</Button>{' '}
 
       </CardBody>
     </Card>

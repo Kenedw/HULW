@@ -36,7 +36,7 @@ const dados = {
   ]
 };
 
-var cpf = ""
+var id = ""
 
 export class Userpage extends Component {
 
@@ -46,7 +46,8 @@ export class Userpage extends Component {
       CPF: "",
       NOME: "",
       EMAIL: "",
-      UNIDADE: "32161920"
+      UNIDADE: "32161920",
+      ID: ""
     }
   }
 
@@ -58,12 +59,9 @@ export class Userpage extends Component {
 
     var encoded = (this.props.location.search).substring(1)
     var bytes = base64.decode(encoded)
-    cpf = utf8.decode(bytes)
+    id = utf8.decode(bytes)
 
-    //retirando os pontos e os traços
-    var cpfLimpo = cpf.substring(0,3) + cpf.substring(4,7) + cpf.substring(8,11) + cpf.substring(12,14)
-
-    return fetch('https://hulw.herokuapp.com/usuario/cpf/' + cpfLimpo)
+    return fetch('https://hulw.herokuapp.com/usuario/' + id)
     .then((response) => response.json())
     .then((responseJson) => {
 
@@ -77,7 +75,9 @@ export class Userpage extends Component {
       this.setState({CPF: cpfPontos});
       this.setState({NOME: responseJson.no_Pessoa});
       this.setState({EMAIL: responseJson.cd_Email});
+      this.setState({ID: id})
 
+      console.log('id: ' + this.state.ID);
 
     }).catch((error) => {
       window.open("/","_self");
@@ -161,7 +161,7 @@ class Linha extends Component {
     var base64 = require('base-64')
     var utf8 = require('utf8')
 
-    var bytes = utf8.encode(cpf)
+    var bytes = utf8.encode(id)
     var encoded = base64.encode(bytes)
     window.open("/avaliacao?" + encoded,"_self");
   }
