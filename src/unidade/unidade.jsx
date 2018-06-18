@@ -99,30 +99,7 @@ class cadastrarUnidade extends React.Component {
         //alert(cpfAdmin);
         var token_url =  (dados_url).substring(11);
         this.setState({token: token_url, cpf_Admin: cpfAdmin})
-        //alert(token_url);
-    
-       // var bytes = base64.decode(decodifica);
-        //var cpfs = utf8.decode(bytes);
-        //alert(cpfs);
-        /*
-        var cpfAdmin = (cpfs).substring(11,23) // salva o segundo CPF referente ao ADMIN
-        //var bytes = base64.decode(encoded)
-        var cpfEditar = (cpfs).substring(0,11) //utf8.decode(bytes) // CPF para editar/cadastrar
-        this.setState({cpf_Admin: cpfAdmin});
-        if(cpfEditar !== ""){
-         // alert(cpfEditar)
-         // alert(cpfAdmin)
-          
-          axios.get(`${URL}usuario/cpf/`+cpfEditar)                    //'http://localhost:3003/api/todos`)
-          .then(res => {
-            const usuarios = res.data;
-            this.setState({ usuarios });
-            this.setState({id_usuario: usuarios.id_Usuario, flagEditar: true, cpf: usuarios.cd_CPF,nome: usuarios.no_Pessoa, email: usuarios.cd_Email,dataAdm: (usuarios.dt_Admissao).substring(0,10)})
-          })
-        }//else{
-       // alert("NAO TEM NADA");
-        //}
-        */
+
       }
     
       componentWillMount() {
@@ -162,7 +139,7 @@ class cadastrarUnidade extends React.Component {
                     <Input type="select" name="unidade_pai" id="exampleSelect"
                     value={this.state.unidade_pai} onChange={this.onChange}>
                     <option></option>
-                    { this.state.unidades.map(unidade => <option>{unidade.id_Unidade}</option>)}
+                    { this.state.unidades.map(unidade => <option value={unidade.id_Unidade}>{unidade.de_UNIDADE} </option>)}
 
                     </Input>
                 </div>
