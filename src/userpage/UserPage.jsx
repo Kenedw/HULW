@@ -47,47 +47,47 @@ export class Userpage extends Component {
       NOME: "",
       EMAIL: "",
       UNIDADE: "32161920",
-      ID: ""
+      ID: "",
+      TOKEN: ""
     }
   }
 
 
-  pegaDados(){
+  async pegaDados(){
 
-    var base64 = require('base-64')
-    var utf8 = require('utf8')
+    var token = await (this.props.location.search).substring(1)
 
-    var encoded = (this.props.location.search).substring(1)
-    var bytes = base64.decode(encoded)
-    id = utf8.decode(bytes)
 
-    return fetch('https://hulw.herokuapp.com/usuario/' + id)
-    .then((response) => response.json())
-    .then((responseJson) => {
+    const response = await fetch('https://hulwteste.herokuapp.com/auth/me/',{
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "x-access-token": token
+        }
+    });
+    const json = await response.json();
+    console.log(json);
+    var nome = await json[0].no_Pessoa;
+    var cpf = await json[0].cd_CPF;
+    var email = await json[0].cd_Email;
 
-      var cpfLE = responseJson.cd_CPF;
+    this.setState({TOKEN: token});
+    this.setState({NOME: nome});
+    this.setState({EMAIL: email});
 
-      //adicionando os pontos e traços, somente para a tela de usuario
-      var cpfPontos = [cpfLE.slice(0,3),'.',cpfLE.slice(3)].join('');
-      cpfPontos = [cpfPontos.slice(0,7),'.',cpfPontos.slice(7)].join('');
-      cpfPontos = [cpfPontos.slice(0,11),'-',cpfPontos.slice(11)].join('');
+    var cpfPontos = [cpf.slice(0,3),'.',cpf.slice(3)].join('');
+    cpfPontos = [cpfPontos.slice(0,7),'.',cpfPontos.slice(7)].join('');
+    cpfPontos = [cpfPontos.slice(0,11),'-',cpfPontos.slice(11)].join('');
 
-      this.setState({CPF: cpfPontos});
-      this.setState({NOME: responseJson.no_Pessoa});
-      this.setState({EMAIL: responseJson.cd_Email});
-      this.setState({ID: id})
+    this.setState({CPF: cpfPontos});
 
-      console.log('id: ' + this.state.ID);
-
-    }).catch((error) => {
-      window.open("/","_self");
-      // console.log('nao encontrou o usuario!!!');
-    })
+    
   }
 
   componentWillMount() {
 
-    //this.pegaDados();
+    this.pegaDados();
   }
 
   render() {

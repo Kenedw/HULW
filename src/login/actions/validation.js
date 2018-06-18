@@ -2,9 +2,8 @@ import 'babel-polyfill';
 import fetch from 'isomorphic-fetch';
 
 const liberar = async (cpfE,pass) => {
-    //var liberado = false;
-    //https://hulw.herokuapp.com/auth/login
-    const response = await fetch('https://hulw.herokuapp.com/auth/login',{
+    
+    const response = await fetch('https://hulwteste.herokuapp.com/auth/login',{
         method: 'POST',
         headers: {
             "Accept": "application/json",
@@ -38,12 +37,6 @@ const getChefe = async (token) => {
     });
     const json = await response.json();
     return json[0].is_Adm;
-}
-
-const getId = async (cpf) => {
-    const response = await fetch('https://hulw.herokuapp.com/auth/me');
-    const json = await response.json();
-    return json.id_Usuario;
 }
 
 var state = -1
