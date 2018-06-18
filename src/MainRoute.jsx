@@ -27,6 +27,10 @@ const esqueci = () => (
   </div>
 )
 
+const adm = () => (
+  <div><h2>Tela: ADM</h2></div>
+)
+
 class Rota extends Component {
   render() {
     return (
