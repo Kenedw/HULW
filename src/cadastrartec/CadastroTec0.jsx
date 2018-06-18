@@ -6,7 +6,7 @@ import axios from 'axios';
 import Decodificar from '../adminpage/decodifica';
 import Codificar from '../adminpage/codifica';
 
-const URL = 'https://hulw.herokuapp.com/'
+const URL = 'https://hulwteste.herokuapp.com/'
 
 
 class cadastrotec extends React.Component {
@@ -49,7 +49,13 @@ class cadastrotec extends React.Component {
       this.handleSubmit = event => {
         event.preventDefault();
         var config = {
-          headers: {'content-type': 'application/json'}
+            headers:
+            {
+              'cache-control': 'no-cache',
+              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+              accept: 'application/json',
+              'content-type': 'application/json'
+            }
         };
         const usuario = {
           no_Pessoa: this.state.nome,
@@ -64,6 +70,7 @@ class cadastrotec extends React.Component {
         //alert(this.state.nome);
 
         if(this.state.flagEditar === false){
+        console.log(JSON.stringify(usuario));
         axios.post(`${URL}usuario`,JSON.stringify(usuario), config) //JSON.stringify(usuario)
           .then(res => {
             //console.log(res.Object.data);

@@ -16,7 +16,7 @@ export default props => {
           <td >{todo.cd_CPF}</td>
           <td >{todo.cd_Email}</td>
           <td>
-            <CustomInput type="checkbox" id="probatorio"  checked={todo.probatorio} onChange={""} />
+            <Input type="checkbox" id="probatorio"  checked={todo.probatorio}  />
           </td>
       </tr>
     ))
@@ -37,4 +37,8 @@ export default props => {
       </tbody>
     </Table>
   )
+}
+
+function handleInputChange(event){
+
 }
