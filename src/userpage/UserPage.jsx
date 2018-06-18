@@ -37,6 +37,48 @@ const dados = {
 };
 
 var id = ""
+var dados2 = "";
+var chefe = false;
+
+const pegarUnidade = async (id, token) =>{
+  const response = await fetch('http://hulw.herokuapp.com/localizacao/usuario/'+id,{
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "x-access-token": token
+    }
+  });
+  const json = await response.json();
+
+  return json[0];
+}
+
+const pegaDados = async (url) => {
+
+  var token = await (url).substring(1)
+
+  const response = await fetch('https://hulwteste.herokuapp.com/auth/me/',{
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "x-access-token": token
+      }
+  });
+  const json = await response.json();
+  var nome = await json[0].no_Pessoa;
+  var cpf = await json[0].cd_CPF;
+  var email = await json[0].cd_Email;
+  var id = await json[0].id_Usuario;
+
+  var cpfPontos = [cpf.slice(0,3),'.',cpf.slice(3)].join('');
+  cpfPontos = [cpfPontos.slice(0,7),'.',cpfPontos.slice(7)].join('');
+  cpfPontos = [cpfPontos.slice(0,11),'-',cpfPontos.slice(11)].join('');
+
+  return ({nome,cpfPontos,email,id,token});
+
+}
 
 export class Userpage extends Component {
 
@@ -52,42 +94,18 @@ export class Userpage extends Component {
     }
   }
 
+  async componentWillMount() {
 
-  async pegaDados(){
+    var resposta = await pegaDados(this.props.location.search);
+    this.setState({TOKEN: resposta.token});
+    this.setState({NOME: resposta.nome});
+    this.setState({EMAIL: resposta.email});
+    this.setState({ID: resposta.id});
+    this.setState({CPF: resposta.cpfPontos});
 
-    var token = await (this.props.location.search).substring(1)
-
-
-    const response = await fetch('https://hulwteste.herokuapp.com/auth/me/',{
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "x-access-token": token
-        }
-    });
-    const json = await response.json();
-    console.log(json);
-    var nome = await json[0].no_Pessoa;
-    var cpf = await json[0].cd_CPF;
-    var email = await json[0].cd_Email;
-
-    this.setState({TOKEN: token});
-    this.setState({NOME: nome});
-    this.setState({EMAIL: email});
-
-    var cpfPontos = [cpf.slice(0,3),'.',cpf.slice(3)].join('');
-    cpfPontos = [cpfPontos.slice(0,7),'.',cpfPontos.slice(7)].join('');
-    cpfPontos = [cpfPontos.slice(0,11),'-',cpfPontos.slice(11)].join('');
-
-    this.setState({CPF: cpfPontos});
-
-    
-  }
-
-  componentWillMount() {
-
-    this.pegaDados();
+    resposta = await pegarUnidade(this.state.ID,this.state.TOKEN);
+    this.setState({UNIDADE: resposta.id_Unidade});
+    chefe = resposta.is_Chefe;
   }
 
   render() {
