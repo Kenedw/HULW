@@ -3,10 +3,11 @@ import './../App.css';
 import { Input, Button, Card, CardBody, CardSubtitle, Label,FormGroup} from 'reactstrap';
 //import { DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios'
+import Lista from '../adminpage/todoList';
 
 
 const URL = 'https://hulwteste.herokuapp.com/'
-
+var clickInfo = false;
 class vincular extends React.Component{
     constructor(){
         super();
@@ -14,8 +15,8 @@ class vincular extends React.Component{
           unidades :[],
           unidade: "",
           descricao: "",
+          cpf: ""
         };
-    
 
         this.onChange = (evento) => {
           //this.setState({nome: evento.target.value});
@@ -25,13 +26,7 @@ class vincular extends React.Component{
           state[campo] = evento.target.value;
     
           this.setState(state);
-          if(campo === 'unidade_pai'){ // &&  evento.target.value === ''){
-            // console.log( evento.target.value.length)
-            //alert(evento.target.value);
-            //alert(state[campo]);
-          }
           
-    
         };
           this.handleSubmit = event => {};
     
@@ -51,7 +46,7 @@ class vincular extends React.Component{
         }
       };
 
-       axios.get(`${URL}unidade/codigo/`+codUnidade, token)                    //'http://localhost:3003/api/todos`)
+       axios.get(`${URL}unidade/codigo/`+codUnidade, token)
        .then(res => {
          const unidades = res.data;
          this.setState({unidade: unidades.cd_Unidade, descricao: unidades.de_UNIDADE})
@@ -88,14 +83,49 @@ class vincular extends React.Component{
                         <Input  type="text"  className="form-control"  name="descricao"
                           value={this.state.descricao} onChange={this.onChange} disabled required/>
                       </div>
-               
-                    <div>
-                      <Button onSubmit={this.handleSubmit} outline type="Submit" >Gravar</Button>
-                      <Button outline href="/" className="a-fix">Voltar</Button>
-                    </div>
-                    
+                      
+                      
+                      <div className="form-group">
+                         <p></p>
+                         <CardSubtitle>Insira o CPF do usuario que deseja vincular a esta unidade: </CardSubtitle>
+                         <Input  type="text"  className="form-control" name="cpf"
+                          value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
+                      </div>
+                          <div>
+                      <Button outline onClick={()=> {        
+                        var token = {
+                            headers:
+                            { 
+                              'cache-control': 'no-cache',
+                              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+                              'accept': 'application/json',
+                              'content-type': 'application/json'
+                            }
+                      };axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
+                        .then((response) => {
+                          this.setState({response: response.data});
+                          this.setState({open: true });
+                        })
+                        .catch((error) => {
+                          this.setState({open: false });
+                          if(error.response.status == 404){
+                            alert("Usuário não cadastrado!")
+                            window.open("/cadastroTec","_self");
+                          }
+                        });
+                        clickInfo = true;
+                      }}>Cadastrar/Pesquisar</Button>
+                     </div> 
                   </form>
                 </CardBody>
+              </Card>
+              <Card className = "Card-position">
+                 <CardBody>
+                    <div>
+                      <Button onSubmit={this.handleSubmit} outline type="Submit" >Gravar</Button>
+                      <Button outline href="/administrador" className="a-fix">Voltar</Button>
+                    </div>
+                 </CardBody>
               </Card>
             </div>
           </div>
@@ -104,7 +134,13 @@ class vincular extends React.Component{
     
       }
     }
-  
+
+function cpf2int(cpf){
+   cpf = cpf.replace(/[^0-9]+/g,'');
+    
+   return cpf;
+}
+
 function somenteNumeros(num){
     num = num.replace(/\D/g,"");
     return num;

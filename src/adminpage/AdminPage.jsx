@@ -49,7 +49,7 @@ class admin extends Component {
       cpf: "",
       open: false,
       response: [],
-      token:"XyZY123789KjlH"
+      token:""
     };
 
     this.onChange = (evento) => {
