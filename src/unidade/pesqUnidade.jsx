@@ -6,7 +6,15 @@ import Lista from './unidadeList';
 import Decodificar from '../adminpage/decodifica'
 import Codificar from '../adminpage/codifica'
 
-
+var token = {
+  headers:
+  { 
+    'cache-control': 'no-cache',
+    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+    accept: 'application/json',
+    'content-type': 'application/json'
+  }
+};
 var clickInfo = false;
 class vincUnidade extends Component {
   constructor(){
@@ -49,15 +57,6 @@ class vincUnidade extends Component {
                 </div>
                 <div>
                   <Button outline onClick={()=> {
-                            var token = {
-                              headers:
-                              { 
-                                'cache-control': 'no-cache',
-                                'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
-                                accept: 'application/json',
-                                'content-type': 'application/json'
-                              }
-                            };
                     axios.get('https://hulwteste.herokuapp.com/unidade/codigo/' + (this.state.codigo),token )
                     .then((response) => {
                       this.setState({response: response.data});

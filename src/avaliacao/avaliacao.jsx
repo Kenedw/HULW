@@ -14,6 +14,9 @@ const dados = {
   }
 };
 
+var id = "";
+var idM = "";
+
 class Info_user extends React.Component {
 
 
@@ -57,25 +60,25 @@ class avaliacao extends React.Component {
     var utf8 = require('utf8')
 
     var encoded = (this.props.location.search).substring(1)
+    idM = encoded;
     var bytes = base64.decode(encoded)
-    var cpf = utf8.decode(bytes)
+    id = utf8.decode(bytes)
 
-    //retirando os pontos e os traços
-    var cpfLimpo = cpf.substring(0,3) + cpf.substring(4,7) + cpf.substring(8,11) + cpf.substring(12,14)
+    console.log(id)
+  }
 
-    return fetch('https://hulw.herokuapp.com/usuario/cpf/' + cpfLimpo)
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({Nome: responseJson.no_Pessoa});
-    }).catch((error) => {
-      console.log('nao encontrou o usuario!!!');
-    })
+  componentWillMount(){
+    this.colocarId();
   }
 
   handleChange(value) {
     this.setState({selectedValue: value});
   }
 
+  voltar(){
+    console.log("voltar");
+    window.open("/userpage?"+idM,"_self");
+  }
 
 
 
