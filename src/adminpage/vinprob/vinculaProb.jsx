@@ -10,7 +10,7 @@ var token = {
   headers:
   {
     'cache-control': 'no-cache',
-    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MzM5ODE0LCJleHAiOjE1Mjk0MjYyMTR9.7ZjQ0S0ZOAezz3PGYQo0uzPLajf3YftpviyFQplKiqk',
     accept: 'application/json',
     'content-type': 'application/json'
   }

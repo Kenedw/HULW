@@ -49,7 +49,6 @@ class Rota extends Component {
             <Route path="/pesqUnidade"   component = {PesqUnidade}/>
             <Route path="/vincularuni"   component = {VincularUni}/>
             <Route path="/vincularprob"  component = {VincularProb}/>
-            <Route path="/formulario"    component={Formulario} />
             <Route component={NotFound}/>
           </Switch>
         </Router>

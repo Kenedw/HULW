@@ -42,7 +42,7 @@ class Login extends React.Component{
       }else if(resultado.state === 2){
         window.open("/userpage?"+resultado.token,"_self");
       }else if(resultado.state === 3){
-        window.open("/telaADM","_self");
+        window.open("/administrador","_self");
       }else{
         alert('Usuário ou senha, incorreta!');
       }
