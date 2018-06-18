@@ -4,6 +4,8 @@ import { Input, Button, Card, CardBody, CardSubtitle, CardText, Row, Col, Collap
 import axios from 'axios';
 import Lista from './probList';
 import Decodificar from '../decodifica';
+
+const URL = 'https://hulwteste.herokuapp.com/';
 var token = {
   headers:
   {
@@ -80,7 +82,7 @@ class admin extends Component {
                       var result = "@";
                       if(this.state.cpf.length == 14){result ='cpf/' + cpf2int(this.state.cpf);}
                       else if(this.state.dataProb.length == 10){result = 'data/' + this.state.dataProb;}
-                      axios.get('https://hulwteste.herokuapp.com/usuario/' + result, token )
+                      axios.get(`${URL}usuario/` + result, token )
                       .then((response) => {
                         this.setState({response: response.data});
                         this.setState({open: true });

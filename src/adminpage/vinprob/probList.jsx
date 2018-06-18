@@ -16,7 +16,7 @@ export default props => {
           <td >{todo.cd_CPF}</td>
           <td >{todo.cd_Email}</td>
           <td>
-            <Input type="checkbox" id="probatorio"  checked={todo.probatorio}  />
+            <Input type="checkbox" value={todo.id_Usuario}  checked={todo.probatorio}   />
           </td>
       </tr>
     ))
