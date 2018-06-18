@@ -6,7 +6,7 @@ import Lista from './probList';
 import Decodificar from '../decodifica';
 var token = {
   headers:
-  { 'postman-token': '9e60e149-eae0-183f-7716-ded2c58b4471',
+  {
     'cache-control': 'no-cache',
     'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
     accept: 'application/json',
@@ -80,10 +80,8 @@ class admin extends Component {
                       var result = "@";
                       if(this.state.cpf.length == 14){result ='cpf/' + cpf2int(this.state.cpf);}
                       else if(this.state.dataProb.length == 10){result = 'data/' + this.state.dataProb;}
-                      console.log(token);
                       axios.get('https://hulwteste.herokuapp.com/usuario/' + result, token )
                       .then((response) => {
-                        console.log(response);
                         this.setState({response: response.data});
                         this.setState({open: true });
                       }).catch((error) => {
