@@ -5,7 +5,7 @@ import { Input, Button, Card, CardBody, CardSubtitle, Label,FormGroup} from 'rea
 import axios from 'axios'
 
 
-const URL = 'https://hulw.herokuapp.com/'
+const URL = 'https://hulwteste.herokuapp.com/'
 
 class vincular extends React.Component{
     constructor(){
@@ -41,8 +41,17 @@ class vincular extends React.Component{
 
      pegaDados(){
        var codUnidade = (this.props.location.search).substring(1);
+       var token = {
+        headers:
+        { 
+          'cache-control': 'no-cache',
+          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+          accept: 'application/json',
+          'content-type': 'application/json'
+        }
+      };
 
-       axios.get(`${URL}unidade/codigo/`+codUnidade)                    //'http://localhost:3003/api/todos`)
+       axios.get(`${URL}unidade/codigo/`+codUnidade, token)                    //'http://localhost:3003/api/todos`)
        .then(res => {
          const unidades = res.data;
          this.setState({unidade: unidades.cd_Unidade, descricao: unidades.de_UNIDADE})

@@ -6,7 +6,7 @@ import axios from 'axios'
 import Decodificar from '../adminpage/decodifica'
 import Codificar from '../adminpage/codifica'
 
-const URL = 'https://hulw.herokuapp.com/'
+const URL = 'http://hulwteste.herokuapp.com/' //'https://hulw.herokuapp.com/'
 
 
 class cadastrotec extends React.Component {
@@ -48,8 +48,17 @@ class cadastrotec extends React.Component {
     //this.onSubmit = (evento) => { // ver os dados a serem enviados no console
       this.handleSubmit = event => {
         event.preventDefault();
-        var config = {
-          headers: {'content-type': 'application/json'}
+       // var token = store.getState().session.token;
+        //let token = localStorage.getItem('x-access-token');
+        //alert(token)
+        var token = {
+          headers:
+          { 
+            'cache-control': 'no-cache',
+            'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+            accept: 'application/json',
+            'content-type': 'application/json'
+          }
         };
         const usuario = {
           no_Pessoa: this.state.nome,
@@ -62,25 +71,51 @@ class cadastrotec extends React.Component {
          dt_Admissao: this.state.dataAdm+"T00:00:00.000Z",
         };
         //alert(this.state.nome);
+        //alert(JSON.stringify(login));
 
         if(this.state.flagEditar === false){
-        axios.post(`${URL}usuario`,JSON.stringify(usuario), config) //JSON.stringify(usuario)
+
+
+
+/*
+
+          axios.post(`https://hulwteste.herokuapp.com/auth/login`,JSON.stringify(login))//, config) //JSON.stringify(usuario)
+          .then(res => { 
+            //console.log(res.Object.data);
+            console.log(res);
+            alert(res.data.msg) // alerta sucesso ao cadastrar
+            window.location.reload() // atualiza a página caso sucesso
+            
+          })
+          .catch(error => {
+            console.log(error)//.response)//.data.error.message);
+            alert(error.response.data.error.message) // alerta o erro ao submit
+          });
+
+
+*/
+
+
+
+        axios.post(`${URL}usuario`,JSON.stringify(usuario), token) //JSON.stringify(usuario)
           .then(res => { 
             //console.log(res.Object.data);
             console.log(res.data.msg);
             alert(res.data.msg) // alerta sucesso ao cadastrar
+            alert("Deu certo!")
             window.location.reload() // atualiza a página caso sucesso
           })
           .catch(error => {
-            console.log(error.response.data.error.message);
-            alert(error.response.data.error.message) // alerta o erro ao submit
+            console.log(error)//.response)//.data.error.message);
+            alert(error.response)//.data.error.message) // alerta o erro ao submit
           });
         }else{
-          axios.put(`${URL}usuario/`+this.state.id_usuario,JSON.stringify(usuario), config) //JSON.stringify(usuario)
+          axios.put(`${URL}usuario/`+this.state.id_usuario,JSON.stringify(usuario), token) //JSON.stringify(usuario)
           .then(res => { 
             //console.log(res.Object.data);
-            console.log(res.data.msg);
-            alert(res.data.msg) // alerta sucesso ao cadastrar
+            //console.log(res.data.msg);
+            //alert(res) // alerta sucesso ao cadastrar
+            alert("Deu certo!")
             window.location.reload() // atualiza a página caso sucesso
           })
           .catch(error => {
@@ -89,6 +124,7 @@ class cadastrotec extends React.Component {
           });
         }
       };
+      
   }
 
   handleInputChange(event) {
@@ -106,7 +142,15 @@ class cadastrotec extends React.Component {
 
     var cpfs = Decodificar((this.props.location.search).substring(1)); // função para decodificar
     //alert(cpfs);
-
+    var token = {
+      headers:
+      { 
+        'cache-control': 'no-cache',
+        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      }
+    };
     
     //var bytes = base64.decode(encoded)
     var cpfEditar = (cpfs).substring(0,11) // utf8.decode(bytes) // CPF para editar/cadastrar
@@ -118,7 +162,7 @@ class cadastrotec extends React.Component {
      // alert(cpfEditar)
      // alert(cpfAdmin)
       
-      axios.get(`${URL}usuario/cpf/`+cpfEditar)                    //'http://localhost:3003/api/todos`)
+      axios.get(`${URL}usuario/cpf/`+cpfEditar,token)                    //'http://localhost:3003/api/todos`)
       .then(res => {
         const usuarios = res.data;
         this.setState({ usuarios });
@@ -133,8 +177,9 @@ class cadastrotec extends React.Component {
 
     this.pegaDados();
   }
-  
+  /*
   componentDidMount() {
+    
     axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
       .then(res => {
         const unidades = res.data;
@@ -142,7 +187,7 @@ class cadastrotec extends React.Component {
       })
     }
 
-
+*/
 
   render(){
     return (

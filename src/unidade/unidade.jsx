@@ -6,7 +6,7 @@ import axios from 'axios'
 import Decodificar from '../adminpage/decodifica'
 import Codificar from '../adminpage/codifica'
 
-const URL = 'https://hulw.herokuapp.com/'
+const URL = 'https://hulwteste.herokuapp.com/'
 
 
 class cadastrarUnidade extends React.Component {
@@ -43,6 +43,15 @@ class cadastrarUnidade extends React.Component {
           var config = {
             headers: {'content-type': 'application/json'}
           };
+          var token = {
+            headers:
+            { 'postman-token': '9e60e149-eae0-183f-7716-ded2c58b4471',
+              'cache-control': 'no-cache',
+              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+              'accept': 'application/json',
+              'content-type': 'application/json'
+            }
+          };
           const unidades = {
             cd_Unidade: this.state.unidade,
             de_UNIDADE: this.state.descricao,
@@ -50,7 +59,7 @@ class cadastrarUnidade extends React.Component {
            
           };
       
-          axios.post(`${URL}unidade`,JSON.stringify(unidades), config) //JSON.stringify(usuario)
+          axios.post(`${URL}unidade`,JSON.stringify(unidades), token) //JSON.stringify(usuario)
             .then(res => { 
               //console.log(res.Object.data);
               console.log(res.data);
@@ -58,8 +67,8 @@ class cadastrarUnidade extends React.Component {
               window.location.reload() // atualiza a página caso sucesso
             })
             .catch(error => {
-              console.log(error.response.data.error.message);
-              alert(error.response.data.error.message) // alerta o erro ao submit
+              console.log(error.response);//.data.error.message);
+              alert(error.response.data)//.error.message) // alerta o erro ao submit
             });
         };
   
@@ -67,7 +76,16 @@ class cadastrarUnidade extends React.Component {
   
     
     componentDidMount() {
-      axios.get(`${URL}unidade`)                    //'http://localhost:3003/api/todos`)
+      var token = {
+        headers:
+        { 'postman-token': '9e60e149-eae0-183f-7716-ded2c58b4471',
+          'cache-control': 'no-cache',
+          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+          'accept': 'application/json',
+          'content-type': 'application/json'
+        }
+      };
+      axios.get(`${URL}unidade`,token)                    //'http://localhost:3003/api/todos`)
         .then(res => {
           const unidades = res.data;
           this.setState({ unidades });
