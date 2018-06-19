@@ -50,29 +50,25 @@ class avaliacao extends React.Component {
     this.state = {
       selectedValue: true
       ,IP_USER_AVALIADO: 7,
+      TOKEN: "",
+      IDAVALIADOR: "",
+      IDAVALIADO: ""
       }
   }
 
 
   pegaDados(){
 
-    var base64 = require('base-64')
-    var utf8 = require('utf8')
-
-    var encoded = (this.props.location.search).substring(1)
-    idM = encoded;
-    var bytes = base64.decode(encoded)
-    id = utf8.decode(bytes)
-
-    console.log(id)
+    console.log(this.props.location)
   }
 
   componentWillMount(){
-    this.colocarId();
+    //this.colocarId();
+    this.pegaDados();
   }
 
   handleChange(value) {
-    this.setState({selectedValue: value});
+    //this.setState({selectedValue: value});
   }
 
   voltar(){
