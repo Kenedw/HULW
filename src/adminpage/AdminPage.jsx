@@ -86,32 +86,8 @@ class admin extends Component {
 
       this.setState({nome: dados[0].no_Pessoa, cpf_admin: dados[0].cd_CPF, email: dados[0].cd_Email });
       //alert(JSON.stringify(dados))
-    });/*
-    .catch((error) => {
-      this.setState({open: false });
-      if(error.response.status == 404){
-        alert("Usuário não cadastrado!")
-        //window.open("/cadastroTec","_self");
-      }
-    });*/
-  }
-/*
-  pegaDados(){
-    var dados_url = Decodificar((this.props.location.search).substring(1))
+    });}
 
-    var cpfAdmin = (dados_url).substring(0,11);
-    var token_url =  (dados_url).substring(11);
-    if(token_url !== ""){
-      this.setState({token: token_url})
-    }
-  }
-
-  componentWillMount() {
-
-    this.pegaDados();
-  }
-
-*/
 
   render(){
     return (
@@ -131,16 +107,6 @@ class admin extends Component {
                     value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-<<<<<<< HEAD
-                  <Button outline onClick={()=> {        
-                    var token = {
-                        headers:
-                        { 
-                          'cache-control': 'no-cache',
-                          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI0MDU1LCJleHAiOjE1Mjk1MTA0NTV9.T0BatuKF9_th00982OFzuOqqdoMwZCVBnMPH8c1VbDM',
-                          'accept': 'application/json',
-                          'content-type': 'application/json'
-                        }
                   <Button outline onClick={()=> {
                     axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
                     .then((response) => {
