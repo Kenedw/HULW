@@ -14,7 +14,7 @@ const dados = {
 };
 
 
-const URL = 'https://hulwteste.herokuapp.com/'
+const URL = 'https://hulw.herokuapp.com/'
 var clickInfo = false;
 class vincular extends React.Component{
     constructor(){
@@ -26,7 +26,7 @@ class vincular extends React.Component{
           cpf: "",
           response: [],
           isChefe: false,
-          dt_Ano: "2018",
+          dt_Ano: "2018-06-06T00:00:00.000Z",
         };
 
         this.onChange = (evento) => {
@@ -53,7 +53,7 @@ class vincular extends React.Component{
         headers:
         { 
           'cache-control': 'no-cache',
-          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MzM5ODE0LCJleHAiOjE1Mjk0MjYyMTR9.7ZjQ0S0ZOAezz3PGYQo0uzPLajf3YftpviyFQplKiqk',
+          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
           accept: 'application/json',
           'content-type': 'application/json'
         }
@@ -110,11 +110,11 @@ class vincular extends React.Component{
                             headers:
                             { 
                               'cache-control': 'no-cache',
-                              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MzM5ODE0LCJleHAiOjE1Mjk0MjYyMTR9.7ZjQ0S0ZOAezz3PGYQo0uzPLajf3YftpviyFQplKiqk',
+                              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
                               'accept': 'application/json',
                               'content-type': 'application/json'
                             }
-                      };axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
+                      };axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
                         .then((response) => {
                           this.setState({response: response.data});
                           this.setState({open: true });

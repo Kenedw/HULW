@@ -10,7 +10,7 @@ var token = {
   headers:
   { 
     'cache-control': 'no-cache',
-    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MjQ3Mjk4LCJleHAiOjE1MjkzMzM2OTh9.l9xtUlHBBn6sgXbNB5Gm_YIzfwk096h27nYNmSRVJCE',
+    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
     accept: 'application/json',
     'content-type': 'application/json'
   }
@@ -61,12 +61,12 @@ class vincUnidade extends Component {
                               headers:
                               { 
                                 'cache-control': 'no-cache',
-                                'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MzM5ODE0LCJleHAiOjE1Mjk0MjYyMTR9.7ZjQ0S0ZOAezz3PGYQo0uzPLajf3YftpviyFQplKiqk',
+                                'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
                                 accept: 'application/json',
                                 'content-type': 'application/json'
                               }
                             };
-                    axios.get('https://hulwteste.herokuapp.com/unidade/codigo/' + (this.state.codigo),token )
+                    axios.get('https://hulw.herokuapp.com/unidade/codigo/' + (this.state.codigo),token )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
@@ -80,8 +80,7 @@ class vincUnidade extends Component {
                       }
                     });
                     clickInfo = true;
-                  }}>Pesquisar</Button>
-                <Button className="a-fix" href={"/unidade"} className="a-fix" outline >Cadastrar Unidade</Button>
+                  }}>Cadastrar/Pesquisar</Button>
               </div>
             </form>
             <Collapse isOpen={this.state.open}>

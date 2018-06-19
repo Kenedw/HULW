@@ -131,8 +131,16 @@ class admin extends Component {
                     value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-                  <Button outline onClick={()=> {
-                    axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
+                  <Button outline onClick={()=> {        
+                    var token = {
+                        headers:
+                        { 
+                          'cache-control': 'no-cache',
+                          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI0MDU1LCJleHAiOjE1Mjk1MTA0NTV9.T0BatuKF9_th00982OFzuOqqdoMwZCVBnMPH8c1VbDM',
+                          'accept': 'application/json',
+                          'content-type': 'application/json'
+                        }
+                   };axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
