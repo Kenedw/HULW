@@ -35,9 +35,8 @@ class Login extends React.Component{
       alert('Por favor, preencha os campos!')
     }
     else{
-      
+
       var resultado = await newLogin(this.state.user,this.state.pass);
-      alert("");
       if(resultado.state === 1){
         window.open("/userpage?"+resultado.token,"_self");
       }else if(resultado.state === 2){
@@ -47,7 +46,7 @@ class Login extends React.Component{
       }else{
         alert('Usuário ou senha, incorreta!');
       }
-      
+
     }
 
   }

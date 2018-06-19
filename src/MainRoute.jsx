@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Userpage     from './userpage/UserPage.jsx';
 import Head         from './Head.js';
 import Login        from './login/Login';
-import AdminPage    from './adminpage/AdminPage.jsx';
+import AdminPage    from './adminpage/AdminPage';
 import Aval         from './avaliacao/avaliacao';
 import Aval2        from './avaliacao/avaliacaoprob';
 import Cadastro     from './cadastrartec/CadastroTec0';
 import Unidade      from './unidade/unidade';
 import PesqUnidade  from './unidade/pesqUnidade';
-import VincularUni  from './unidade/vincular'; 
+import VincularUni  from './unidade/vincular';
 import VincularProb from './adminpage/vinprob/vinculaProb';
 import notfount     from './paginaNaoEnc.png';
 

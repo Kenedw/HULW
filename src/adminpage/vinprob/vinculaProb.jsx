@@ -92,7 +92,7 @@ class admin extends Component {
                       else if(this.state.dataPesq.length == 10){result = 'data/' + this.state.dataPesq;}
                       axios.get(`${URL}usuario/` + result, token )
                       .then((response) => {
-                        console.log(response.data);
+                        // console.log(response.data);
                         this.setState({response:response.data});
                         this.setState({open: true });
                       }).catch((error) => {
