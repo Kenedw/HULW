@@ -48,6 +48,12 @@ class avaliacao extends React.Component {
   constructor(){
     super();
     this.state = {
+      selectedValue: true
+      ,IP_USER_AVALIADO: 7,
+      TOKEN: "",
+      IDAVALIADOR: "",
+      IDAVALIADO: ""
+      }
       cpf: "",
       cpf_admin: "",
       email:"",
@@ -76,18 +82,23 @@ class avaliacao extends React.Component {
   }
 
   pegaDados(){
-    var base64 = require('base-64')
-    var utf8 = require('utf8')
 
-    var encoded = (this.props.location.search).substring(1)
-    idM = encoded;
-    var bytes = base64.decode(encoded)
-    id = utf8.decode(bytes)
-    console.log(id)
+    var url = (this.props.location.search).substring(1)
+
+    var tam = url.length;
+
+    var au = "a";
+    au = au + "b"
+
+    console.log(au);
+
+    for (var i = 0; i < tam; i++){}
   }
 
   componentWillMount(){
     // this.colocarId();
+    //this.colocarId();
+    this.pegaDados();
   }
 
   onChange = (evento) => {

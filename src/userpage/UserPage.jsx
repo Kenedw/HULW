@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './../App.css';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
 
-var id = ""
 var finis = false;
 
 var location = "";
@@ -31,8 +30,9 @@ const pegarUnidade = async (id, token) =>{
   });
   const jsonU = await responseU.json();
 
-  return jsonU;
+  return ({jsonU, json});
 }
+
 
 const pegaDados = async (url) => {
 
@@ -62,10 +62,9 @@ const pegaDados = async (url) => {
 
 const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
 
-  if (chefe === ""){ 
+  if (chefe === "" || chefe === undefined){ 
     chefe = false;
   }
-
   
   //////////////////////////////////////////////////////////////////////
   ////                  DESEPENHO                                 //////
@@ -80,7 +79,6 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
       }
   });
   const json = await response.json();
-  
   var tam = json.length;
 
   var respostaDesempenho;
@@ -114,33 +112,6 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
 
   }else{
 
-    //pegando se ele vez a avaliacao propria
-    var avaliouDesempenho = false;
-    //procurando no banco de avaliacoes, se ele avaliou ele mesmo
-    for(var i = 0; i < tam; i++){
-      if(idU === json[i].id_Usuario_Avaliador && idU === json[i].id_Usuario_Avaliado ){
-        avaliouDesempenho = true;
-      }
-    }
-
-    if (!avaliouDesempenho){
-      respostaDesempenho = [{
-        id: idU,
-        ano: "2018",
-        nome: nomeU,
-        tipo: "Desempenho",
-        estado: "Pendente"
-      }]
-    }else{
-      respostaDesempenho = [{
-        id: idU,
-        ano: "2018",
-        nome: nomeU,
-        tipo: "Desempenho",
-        estado: "Avaliado"
-      }]
-    }
-
     //pegar todos pertecende a sua unidade
     const responseUni = await fetch('https://hulw.herokuapp.com/localizacao/unidade/'+idU,{
       method: 'GET',
@@ -153,37 +124,54 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
     const jsonUni = await responseUni.json();
 
     var tamUsuariosNaUnidade = jsonUni.length;
-
+    
     var auxUni = [];
     var auxiliar = [];
+    var avaliouDesempenho = false;
 
+    
     for(var i =0; i < tamUsuariosNaUnidade; i++){
       avaliouDesempenho = false;
 
       for(var j = 0; j < tam; j++){
-        if(idU === json[j].id_Usuario_Avaliador && jsonUni[i].id_Usuario === json[i].id_Usuario_Avaliado ){
+        if(idU === json[j].id_Usuario_Avaliador && jsonUni[i].id_Usuario === json[j].id_Usuario_Avaliado ){
           avaliouDesempenho = true;
         }
       }
 
+      const getNomeUser = await fetch('http://hulw.herokuapp.com/usuario/'+jsonUni[i].id_Usuario,{
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "x-access-token": token
+        }
+      });
+      const nomeUserJson = await getNomeUser.json();
+
       if (!avaliouDesempenho){
-        respostaDesempenho = [{
+        auxiliar = [{
           id: jsonUni[i].id_Usuario,
           ano: "2018",
-          nome: nomeU,
+          nome: nomeUserJson.no_Pessoa,
           tipo: "Desempenho",
           estado: "Pendente"
         }]
       }else{
-        respostaDesempenho = [{
+        auxiliar = [{
           id: jsonUni[i].id_Usuario,
           ano: "2018",
-          nome: nomeU,
+          nome: nomeUserJson.no_Pessoa,
           tipo: "Desempenho",
           estado: "Avaliado"
         }]
       }
+
+      auxUni = [...auxUni, ...auxiliar]
+
+      
     }
+    respostaDesempenho = [...auxUni]
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -217,7 +205,7 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
 
     if (!avaliouDesempenho){
       respostaProbatoria = [{
-        id: idU,
+        id: idU.toString + '_1',
         ano: "2018",
         nome: nomeU,
         tipo: "Probatoria",
@@ -235,12 +223,69 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
 
   }else{
 
+    //pegar todos pertecende a sua unidade
+    const responseUni = await fetch('https://hulw.herokuapp.com/localizacao/unidade/'+idU,{
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "x-access-token": token
+      }
+    });
+    const jsonUni = await responseUni.json();
+
+    var tamUsuariosNaUnidade = jsonUni.length;
+    
+    var auxUni = [];
+    var auxiliar = [];
+    var avaliouDesempenho = false;
+
+    
+    for(var i =0; i < tamUsuariosNaUnidade; i++){
+      avaliouDesempenho = false;
+
+      for(var j = 0; j < tam; j++){
+        if(idU === jsonP[j].id_Usuario_Avaliador && jsonUni[i].id_Usuario === jsonP[j].id_Usuario_Avaliado ){
+          avaliouDesempenho = true;
+        }
+      }
+
+      const getNomeUser = await fetch('http://hulw.herokuapp.com/usuario/'+jsonUni[i].id_Usuario,{
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "x-access-token": token
+        }
+      });
+      const nomeUserJson = await getNomeUser.json();
+
+      if (!avaliouDesempenho){
+        auxiliar = [{
+          id: jsonUni[i].id_Usuario,
+          ano: "2018",
+          nome: nomeUserJson.no_Pessoa,
+          tipo: "Probatoria",
+          estado: "Pendente"
+        }]
+      }else{
+        auxiliar = [{
+          id: jsonUni[i].id_Usuario,
+          ano: "2018",
+          nome: nomeUserJson.no_Pessoa,
+          tipo: "Probatoria",
+          estado: "Avaliado"
+        }]
+      }
+
+      auxUni = [...auxUni, ...auxiliar]
+    }
+    respostaProbatoria = [...auxUni]
   }
 
   //////////////////////////////////////////////////////
 
   var result = [...respostaDesempenho, ...respostaProbatoria];
-
   return result;
 }
 
@@ -279,9 +324,10 @@ export class Userpage extends Component {
       this.setState({CHEFE: ""});
       this.setState({DADOS: []})
     }else{
-      this.setState({UNIDADE: resposta.de_UNIDADE});
-      this.setState({IDUNIDADE: resposta.id_Unidade});
-      this.setState({CHEFE: resposta.is_Chefe});
+      
+      this.setState({UNIDADE: resposta.jsonU.de_UNIDADE});
+      this.setState({IDUNIDADE: resposta.jsonU.id_Unidade});
+      this.setState({CHEFE: resposta.json[0].is_Chefe});
 
       resposta = await pegarAvaliacoes(this.state.ID, this.state.NOME, this.state.TOKEN, this.state.CHEFE, this.state.IDUNIDADE);
       this.setState({DADOS: resposta})
@@ -361,7 +407,8 @@ class Tabela extends Component {
   }
 }
 
-
+var token = "a";
+var id = "";
 
 class Linha extends Component {
 
@@ -376,33 +423,31 @@ class Linha extends Component {
     }
   }
 
-  irPaginaAvaliacao(){
-    var base64 = require('base-64')
-    var utf8 = require('utf8')
-
-    var bytes = utf8.encode(id)
-    var encoded = base64.encode(bytes)
-    window.open("/avaliacao?" + encoded,"_self");
+  irPaginaAvaliacao(idAvaliado){
+    window.open("/avaliacao?" + token + "&" + id + "&" + idAvaliado,"_self");
   }
 
   async componentWillMount () {
 
     var resposta = await pegaDados(location); //token, nome, id
-    await this.setState({TOKEN: resposta.token});
+    await this.setState({TOKIN: resposta.token});
     await this.setState({NOME: resposta.nome});
     await this.setState({ID: resposta.id});
-    
-    resposta = await pegarUnidade(this.state.ID,this.state.TOKEN);
+
+    token = this.state.TOKIN
+    id = this.state.ID;
+    resposta = await pegarUnidade(this.state.ID,this.state.TOKIN);
     if (resposta === undefined){
       console.log("nao foi definido a unidade para esse usuario");
       this.setState({UNIDADE: ""});
       this.setState({CHEFE: ""});
       this.setState({DADOS: []})
     }else{
-      this.setState({IDUNIDADE: resposta.id_Unidade});
-      this.setState({CHEFE: resposta.is_Chefe});
+      await this.setState({IDUNIDADE: resposta.jsonU.id_Unidade});
+      //var chefeUnidade = await pegaChefe(this.state.ID, this.state.TOKEN, this.state.IDUNIDADE);
+      this.setState({CHEFE: resposta.json[0].is_Chefe});
 
-      resposta = await pegarAvaliacoes(this.state.ID, this.state.NOME, this.state.TOKEN, this.state.CHEFE, this.state.IDUNIDADE);
+      resposta = await pegarAvaliacoes(this.state.ID, this.state.NOME, this.state.TOKIN, this.state.CHEFE, this.state.IDUNIDADE);
       this.setState({DADOS: resposta})
     }
   }
@@ -419,7 +464,7 @@ class Linha extends Component {
             <td>{val.tipo}</td>
             { val.estado === "Avaliado"           && <td className="btn-success">{val.estado}</td> }
             { val.estado === "Agardando Superior" && <td className="btn-warning">{val.estado}</td> }
-            { val.estado === "Pendente"           && <td className="btn-danger" onClick={this.irPaginaAvaliacao}> {val.estado}</td> }
+            { val.estado === "Pendente"           && <td className="btn-danger" onClick={() => this.irPaginaAvaliacao(val.id)}> {val.estado}</td> }
 
           </tr>
         )}
