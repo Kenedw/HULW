@@ -59,7 +59,16 @@ class avaliacao extends React.Component {
 
   pegaDados(){
 
-    console.log(this.props.location)
+    var url = (this.props.location.search).substring(1)
+
+    var tam = url.length;
+
+    var au = "a";
+    au = au + "b"
+
+    console.log(au);
+
+    for (var i = 0; i < tam; i++){}
   }
 
   componentWillMount(){

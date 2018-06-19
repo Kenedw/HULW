@@ -424,8 +424,8 @@ class Linha extends Component {
     }
   }
 
-  irPaginaAvaliacao(){
-    window.open("/avaliacao?" + token + "&" + id,"_self");
+  irPaginaAvaliacao(idAvaliado){
+    window.open("/avaliacao?" + token + "&" + id + "&" + idAvaliado,"_self");
   }
 
   async componentWillMount () {
@@ -465,7 +465,7 @@ class Linha extends Component {
             <td>{val.tipo}</td>
             { val.estado === "Avaliado"           && <td className="btn-success">{val.estado}</td> }
             { val.estado === "Agardando Superior" && <td className="btn-warning">{val.estado}</td> }
-            { val.estado === "Pendente"           && <td className="btn-danger" onClick={this.irPaginaAvaliacao}> {val.estado}</td> }
+            { val.estado === "Pendente"           && <td className="btn-danger" onClick={() => this.irPaginaAvaliacao(val.id)}> {val.estado}</td> }
 
           </tr>
         )}
