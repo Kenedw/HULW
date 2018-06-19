@@ -25,20 +25,6 @@ const liberar = async (cpfE,pass) => {
     return true;
 }
 
-const getChefe = async (token) => {
-
-    const response = await fetch('https://hulwteste.herokuapp.com/auth/me/',{
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "x-access-token": token
-        }
-    });
-    const json = await response.json();
-    return json[0].is_Adm;
-}
-
 var state = -1
 var token = "a";
 var id_Usuario = -1;
@@ -53,15 +39,11 @@ export default async function newLogin(user,pass) {
     var liberado = await liberar(cpfLimpo,pass);
     //console.log(liberado);
     if (liberado){
-        console.log(' '+ id_Usuario + ' '+ is_admin + ' ' + token);
         
         if(is_admin){
             state = 3; //ira entrar como adminstrador
         }else{
-
-            var is_chefe = await getChefe(token);
-            if(is_chefe) state = 2;
-            else state = 1;
+            state = 1; //pag user
         }
     }
     return ({state, token});
