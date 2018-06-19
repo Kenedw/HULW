@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Table} from 'reactstrap';
+import { Button, Table, Label, Input} from 'reactstrap';
 import Vinculo  from "./vincular"
 
 export default props => {
@@ -25,9 +25,14 @@ export default props => {
           <td >{todo.no_Pessoa}</td>
           <td >{todo.cd_CPF}</td>
           <td >{todo.cd_Email}</td>
+          <td>{todo.dt_Ano}</td> {/*Ano precisa ser passado*/}
           <td>
             <Button className={'btn btn-success'}>Adicionar</Button>
-        {/*Adicionar POST no localização usando id_Usuario e codUnidade*/}
+        {/*Adicionar POST no localização usando id_Usuario e codUnidade ischefe = false*/}
+          </td>
+          <td>
+            <Button className={'btn btn-warning'}>Adicionar como Chefe</Button>
+        {/*Adicionar POST no localização usando id_Usuario e codUnidade ischefe = True*/}
           </td>
       </tr>
     ))
@@ -40,7 +45,7 @@ export default props => {
           <th> Nome</th>
           <th> CPF</th>
           <th> E-Mail</th>
-          <th> Ação</th>
+          <th> Ano</th>
         </tr>
       </thead>
       <tbody>

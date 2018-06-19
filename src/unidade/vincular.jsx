@@ -25,6 +25,8 @@ class vincular extends React.Component{
           descricao: "",
           cpf: "",
           response: [],
+          isChefe: false,
+          dt_Ano: "2018",
         };
 
         this.onChange = (evento) => {
@@ -131,7 +133,7 @@ class vincular extends React.Component{
                   <Collapse isOpen={this.state.open}>
                    {clickInfo === true &&
                     <div>
-                  <Lista list={this.state.response} cpfAdmin={cpf2int(dados.usuario.CPF)} codUnidade = {this.state.unidade}/>
+                  <Lista list={this.state.response} cpfAdmin={cpf2int(dados.usuario.CPF)} codUnidade = {this.state.unidade} Ano = {this.state.dt_Ano}/>
                      </div>
                      }
                   </Collapse>
