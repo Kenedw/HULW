@@ -46,7 +46,7 @@ class avaliacao extends React.Component {
     super();
     this.state = {
       selectedValue: true
-      ,IP_USER_AVALIADO: 7,
+      ,IP_USER_AVALIADO: 80
       }
   }
   
@@ -76,278 +76,139 @@ class avaliacao extends React.Component {
     this.setState({selectedValue: value});
   }
 
+  autoAvaliacao(){
 
- 
+    var formNotes14 = <div>
+    <FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                            <Input type="radio" value='0' name="radio14" />{'0'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='1' name="radio14" />{'1'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='2' name="radio14" />{'2'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='3' name="radio14" />{'3'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='4' name="radio14" />{'4'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='5' name="radio14" />{'5'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='6' name="radio14" />{'6'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='7' name="radio14" />{'7'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='8' name="radio14" />{'8'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='9' name="radio14" />{'9'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='10' name="radio14" />{'10'}
+         </Label></FormGroup></FormGroup></div>
 
-  render(){
-    const IP_USER_AVALIADO = this.state.IP_USER_AVALIADO;
+var formNotes15 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio15" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio15" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio15"  />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio15" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio15" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio15"  />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio15" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio15"  />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio15" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio15" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio15" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
     var escreva1 = <div>    
         <p><b>4</b>. Mantém suas informações cadastrais e funcionais atualizadas perante os sistemas de informação da UFPB e Governo Federal (SIAPE, SIGRH entre outros);</p>
-       
-           
-       
-           <p><b>5</b>. Mantém atualizada, perante a UFPB, toda a documentação necessária referente ao seu afastamento (cessão, colaboração, exercício provisório entre outros).</p>
-  
-           
+            {formNotes14}
+        <p><b>5</b>. Mantém atualizada, perante a UFPB, toda a documentação necessária referente ao seu afastamento (cessão, colaboração, exercício provisório entre outros).</p>
+            {formNotes15}
+    </div>;
+      return escreva1; formNotes14; formNotes15;
+   }
+  chefe() {
 
-   </div>;
+    var formNotes14 = <div>
+    <FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                            <Input type="radio" value='0' name="radio14" />{'0'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='1' name="radio14" />{'1'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='2' name="radio14" />{'2'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='3' name="radio14" />{'3'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='4' name="radio14" />{'4'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='5' name="radio14" />{'5'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='6' name="radio14" />{'6'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='7' name="radio14" />{'7'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='8' name="radio14" />{'8'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='9' name="radio14" />{'9'}
+         </Label></FormGroup><FormGroup check inline><Label check>
+                            <Input type="radio" value='10' name="radio14" />{'10'}
+         </Label></FormGroup></FormGroup></div>
+
+var formNotes15 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio15" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio15" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio15"  />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio15" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio15" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio15"  />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio15" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio15"  />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio15" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio15" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio15" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
     var escreva2 = <div>
 
         <p><b>4</b>. Dedica atenção em aprender a utilizar os sistemas de informação da instituição e que são necessários à execução do trabalho no setor;</p>
-            
+            {formNotes14}
         <p><b>5</b>. Comunica para a chefia as dificuldades e limitações existentes no setor visando o bom andamento do trabalho.</p>
-
+            {formNotes15}
     </div>
-  
-    var formNotes1 = <div>
-    <FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                            <Input type="radio" value='0' name="radio1" />{'0'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='1' name="radio1" />{'1'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='2' name="radio1"  />{'2'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='3' name="radio1" />{'3'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='4' name="radio1" />{'4'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='5' name="radio1"  />{'5'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='6' name="radio1" />{'6'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='7' name="radio1"  />{'7'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='8' name="radio1" />{'8'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='9' name="radio1" />{'9'}
-         </Label></FormGroup><FormGroup check inline><Label check>
-                            <Input type="radio" value='10' name="radio1" />{'10'}
-         </Label></FormGroup></FormGroup></div>
+      return escreva2; formNotes14; formNotes15;
+  }
 
-var formNotes2 = <div>
-<FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                        <Input type="radio" value='0' name="radio2" />{'0'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='1' name="radio2" />{'1'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='2' name="radio2"  />{'2'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='3' name="radio" />{'3'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='4' name="radio2" />{'4'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='5' name="radio2"  />{'5'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='6' name="radio2" />{'6'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='7' name="radio2"  />{'7'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='8' name="radio2" />{'8'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='9' name="radio2" />{'9'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='10' name="radio2" />{'10'}
-     </Label></FormGroup></FormGroup></div>
+  render(){
+    const IP_USER_AVALIADO = this.state.IP_USER_AVALIADO;
+    var aux;
+   if(IP_USER_AVALIADO ===null){
+      aux = this.autoAvaliacao()
 
-var formNotes3 = <div>
-<FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                        <Input type="radio" value='0' name="radio3" />{'0'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='1' name="radio3" />{'1'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='2' name="radio3"  />{'2'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='3' name="radio3" />{'3'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='4' name="radio3" />{'4'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='5' name="radio3"  />{'5'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='6' name="radio3" />{'6'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='7' name="radio3"  />{'7'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='8' name="radio3" />{'8'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='9' name="radio3" />{'9'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='10' name="radio3" />{'10'}
-     </Label></FormGroup></FormGroup></div>
-
-var formNotes4 = <div>
-<FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                        <Input type="radio" value='0' name="radio4" />{'0'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='1' name="radio4" />{'1'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='2' name="radio4"  />{'2'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='3' name="radio4" />{'3'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='4' name="radio4" />{'4'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='5' name="radio4"  />{'5'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='6' name="radio4" />{'6'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='7' name="radio4"  />{'7'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='8' name="radio4" />{'8'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='9' name="radio4" />{'9'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='10' name="radio4" />{'10'}
-     </Label></FormGroup></FormGroup></div>
-
-var formNotes5 = <div>
-<FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                        <Input type="radio" value='0' name="radio5" />{'0'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='1' name="radio5" />{'1'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='2' name="radio5"  />{'2'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='3' name="radio5" />{'3'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='4' name="radio5" />{'4'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='5' name="radio5"  />{'5'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='6' name="radio5" />{'6'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='7' name="radio5"  />{'7'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='8' name="radio5" />{'8'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='9' name="radio5" />{'9'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='10' name="radio5" />{'10'}
-     </Label></FormGroup></FormGroup></div>
-
-var formNotes6 = <div>
-<FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                        <Input type="radio" value='0' name="radio6" />{'0'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='1' name="radio6" />{'1'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='2' name="radio6"  />{'2'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='3' name="radio6" />{'3'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='4' name="radio6" />{'4'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='5' name="radio6"  />{'5'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='6' name="radio6" />{'6'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='7' name="radio6"  />{'7'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='8' name="radio6" />{'8'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='9' name="radio6" />{'9'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='10' name="radio6" />{'10'}
-     </Label></FormGroup></FormGroup></div>
-
-var formNotes7 = <div>
-<FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                        <Input type="radio" value='0' name="radio7" />{'0'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='1' name="radio7" />{'1'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='2' name="radio7"  />{'2'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='3' name="radio7" />{'3'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='4' name="radio7" />{'4'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='5' name="radio7"  />{'5'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='6' name="radio7" />{'6'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='7' name="radio7"  />{'7'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='8' name="radio7" />{'8'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='9' name="radio7" />{'9'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='10' name="radio7" />{'10'}
-     </Label></FormGroup></FormGroup></div>
-
-var formNotes8 = <div>
-<FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                        <Input type="radio" value='0' name="radio8" />{'0'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='1' name="radio8" />{'1'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='2' name="radio8"  />{'2'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='3' name="radio8" />{'3'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='4' name="radio8" />{'4'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='5' name="radio8"  />{'5'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='6' name="radio8" />{'6'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='7' name="radio8"  />{'7'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='8' name="radio8" />{'8'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='9' name="radio8" />{'9'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='10' name="radio8" />{'10'}
-     </Label></FormGroup></FormGroup></div>
-
-var formNotes9 = <div>
-<FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                        <Input type="radio" value='0' name="radio9" />{'0'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='1' name="radio9" />{'1'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='2' name="radio9"  />{'2'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='3' name="radio9" />{'3'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='4' name="radio9" />{'4'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='5' name="radio9"  />{'5'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='6' name="radio9" />{'6'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='7' name="radio9"  />{'7'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='8' name="radio9" />{'8'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='9' name="radio9" />{'9'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='10' name="radio9" />{'10'}
-     </Label></FormGroup></FormGroup></div>
-
-var formNotes10 = <div>
-<FormGroup tag="fieldset"><FormGroup check inline><Label check>
-                        <Input type="radio" value='0' name="radio10" />{'0'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='1' name="radio10" />{'1'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='2' name="radio10"  />{'2'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='3' name="radio10" />{'3'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='4' name="radio10" />{'4'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='5' name="radio10"  />{'5'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='6' name="radio10" />{'6'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='7' name="radio10"  />{'7'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='8' name="radio10" />{'8'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='9' name="radio10" />{'9'}
-     </Label></FormGroup><FormGroup check inline><Label check>
-                        <Input type="radio" value='10' name="radio10" />{'10'}
-     </Label></FormGroup></FormGroup></div>
+      } else{
+        aux = this.chefe()
+     }    
+      
+    
 
 var formNotes11 = <div>
 <FormGroup tag="fieldset"><FormGroup check inline><Label check>
@@ -373,8 +234,8 @@ var formNotes11 = <div>
      </Label></FormGroup><FormGroup check inline><Label check>
                         <Input type="radio" value='10' name="radio11" />{'10'}
      </Label></FormGroup></FormGroup></div>
-  
-  var formNotes12 = <div>
+
+var formNotes12 = <div>
 <FormGroup tag="fieldset"><FormGroup check inline><Label check>
                         <Input type="radio" value='0' name="radio12" />{'0'}
      </Label></FormGroup><FormGroup check inline><Label check>
@@ -423,6 +284,258 @@ var formNotes13 = <div>
      </Label></FormGroup><FormGroup check inline><Label check>
                         <Input type="radio" value='10' name="radio13" />{'10'}
      </Label></FormGroup></FormGroup></div>
+
+var formNotes21 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio21" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio21" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio21"  />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio21" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio21" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio21"  />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio21" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio21"  />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio21" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio21" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio21" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
+var formNotes22 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio22" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio22" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio22"  />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio22" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio22" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio22"  />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio22" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio22"  />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio22" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio22" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio22" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
+var formNotes23 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio23" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio23" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio23"  />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio23" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio23" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio23"  />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio23" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio23"  />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio23" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio23" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio23" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
+var formNotes24 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio24" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio24" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio24"  />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio24" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio24" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio24"  />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio24" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio24"  />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio24" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio24" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio24" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
+var formNotes25 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio25" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio25" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio25"  />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio25" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio25" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio25"  />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio25" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio25"  />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio25" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio25" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio25" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
+var formNotes31 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio31" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio31" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio31"  />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio31" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio31" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio31"  />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio31" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio31"  />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio31" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio31" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio31" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+  
+  var formNotes32 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio32" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio32" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio32"  />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio32" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio32" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio32"  />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio32" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio32"  />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio32" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio32" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio32" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
+var formNotes33 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio33" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio33" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio33" />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio33" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio33" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio33" />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio33" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio33" />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio33" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio33" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radi033" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
+var formNotes34 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio34" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio34" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio34" />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio34" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio34" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio34" />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio34" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio34" />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio34" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio34" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio34" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
+var formNotes35 = <div>
+<FormGroup tag="fieldset"><FormGroup check inline><Label check>
+                        <Input type="radio" value='0' name="radio35" />{'0'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='1' name="radio35" />{'1'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='2' name="radio35" />{'2'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='3' name="radio35" />{'3'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='4' name="radio35" />{'4'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='5' name="radio35" />{'5'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='6' name="radio35" />{'6'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='7' name="radio35" />{'7'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='8' name="radio35" />{'8'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='9' name="radio35" />{'9'}
+     </Label></FormGroup><FormGroup check inline><Label check>
+                        <Input type="radio" value='10' name="radio35" />{'10'}
+     </Label></FormGroup></FormGroup></div>
+
+
     return (
       <div className="container">
         <div className="col-md-16">
@@ -436,77 +549,71 @@ var formNotes13 = <div>
 
 <p><b>1</b>. Cumpre a carga horária de trabalho (seja no regime diarista, plantonista ou de escala) definido para sua função;</p>
   
-      {formNotes1}
+      {formNotes11}
 
 <p><b>2</b>. Preserva o patrimônio público, equipamentos, materiais e documentos institucionais independentes de estar sob sua guarda, mantendo sua integridade e boa aparência;</p>
 
-      {formNotes2}
+      {formNotes12}
 
 
 <p><b>3</b>. Sabe informar a relação hierárquica existente entre o seu setor e os demais setores da Unidade, assim como a divisão de atribuições entre eles;</p>
 
-      {formNotes3}
+      {formNotes13}
 
-
-<div>
-         {IP_USER_AVALIADO=== null ? (escreva1)
-         : 
-         (escreva2)
-         }
-      </div>
+      <div>{aux}</div>
 
 <h5><b>II – Dimensão Funcional – Características que geram impacto nos processos e formas de trabalho do servidor.</b></h5>
 
 <p><b>1</b>. Atende as orientações profissionais constante nas normas vigentes;</p>
 
-         {formNotes4}
+         {formNotes21}
 
 
 <p><b>2</b>. Utiliza a comunicação de forma compreensível, por meio de linguagem oral e escrita, como facilitadora do trabalho da equipe;</p>
 
-         {formNotes5}
+         {formNotes22}
   
 
 <p><b>3</b>. Cumpre a divisão de atividades evitando sobrecarga de trabalho para os demais colegas de setor;</p>
 
-         {formNotes6}
+         {formNotes23}
 
 
 <p><b>4</b>. Auxilia os colegas quando estes apresentam dificuldades para realizar as atividades do setor;</p>
 
-         {formNotes7}
+         {formNotes24}
 
 
 <p><b>5</b>. Atende e orienta as pessoas com respeito e cordialidade no cumprimento de suas funções e nos assuntos relativos à Instituição; </p>
 
-         {formNotes8}
+         {formNotes25}
       
 
 <h5><b>III – Dimensão Individual – Características que aparecem nas atitudes, comportamentos e são um diferencial do servidor.</b></h5>
 
 <p><b>1</b>. Mantém o equilíbrio emocional diante das pressões e das situações estressantes do ambiente de trabalho;</p>
 
-         {formNotes9}
+         {formNotes31}
 
 
 <p><b>2</b>. Age de acordo com a legalidade, principalmente no que se refere à igualdade e imparcialidade no exercício de suas funções;</p>
 
-         {formNotes10}
+         {formNotes32}
 
 
 <p><b>3</b>. Apresenta suas dúvidas em relação à execução das atividades com antecedência para evitar erros ou retrabalhos.</p>
 
-         {formNotes11}
+         {formNotes33}
 
 
 <p><b>4</b>. Age em busca de negociação e acordo diante dos conflitos e dificuldades interpessoais vivenciados no trabalho.</p>
 
-         {formNotes12}
+         {formNotes34}
       
 
 <p><b>5</b>. Cumpre as orientações da chefia relativas à execução das atividades e funções do seu cargo e a gestão do setor.</p>
 
-         {formNotes13}
+         {formNotes35}
       
 
   <hr/>
