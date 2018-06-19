@@ -6,13 +6,17 @@ import axios from 'axios';
 import Decodificar from '../adminpage/decodifica';
 import Codificar from '../adminpage/codifica';
 
-const URL = 'http://hulwteste.herokuapp.com/' //'https://hulw.herokuapp.com/'
+const URL = 'http://hulw.herokuapp.com/' //'https://hulw.herokuapp.com/'
 
 var token = {
   headers:
   { 
     'cache-control': 'no-cache',
+<<<<<<< Updated upstream
     'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MzM5ODE0LCJleHAiOjE1Mjk0MjYyMTR9.7ZjQ0S0ZOAezz3PGYQo0uzPLajf3YftpviyFQplKiqk',
+=======
+    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5NDIzNDg0LCJleHAiOjE1Mjk1MDk4ODR9.23VCX1hym1boQk49Kv2RI-tpkMeMvEHQG1jT7hw1yO4',
+>>>>>>> Stashed changes
     accept: 'application/json',
     'content-type': 'application/json'
   }
@@ -34,6 +38,7 @@ class cadastrotec extends React.Component {
       id_usuario: "",
       token:"",
       cpf_Admin: "",
+      is_Adm: true
 
     };
 
@@ -68,11 +73,13 @@ class cadastrotec extends React.Component {
           cd_Senha: this.state.senha,
          // chefe: this.state.chefe,
          // unidade: this.state.unidade,
+         
          dt_Admissao: this.state.dataAdm+"T00:00:00.000Z",
+         is_Adm: this.state.is_Adm,
         };
 
         if(this.state.flagEditar === false){
-
+         
         axios.post(`${URL}usuario`,JSON.stringify(usuario), token) //JSON.stringify(usuario)
           .then(res => { 
             //console.log(res.Object.data);
@@ -86,6 +93,7 @@ class cadastrotec extends React.Component {
             alert(error.response)//.data.error.message) // alerta o erro ao submit
           });
         }else{
+          alert(JSON.stringify(usuario))
           axios.put(`${URL}usuario/`+this.state.id_usuario,JSON.stringify(usuario), token) //JSON.stringify(usuario)
           .then(res => { 
             //console.log(res.Object.data);
@@ -180,8 +188,15 @@ class cadastrotec extends React.Component {
                   <input type="password" className="form-control"  name="senha"
                     value={this.state.senha} onChange={this.onChange} minLength='4'/>
                 </div>
-{/*JSON.stringify(this.state)*/}
 
+<div>
+                <label>
+                <input name="is_Adm" type="checkbox" checked={this.state.isAdm} onChange={this.handleInputChange}
+                />
+                Adminstrador
+                </label>
+                </div>
+{JSON.stringify(this.state)}
                 <div>
 
                   <Button onSubmit={this.handleSubmit} outline type="Submit" >{this.state.flagEditar === true ? "Editar" : "Cadastrar"}</Button>
