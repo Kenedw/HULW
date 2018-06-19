@@ -52,6 +52,7 @@ class avaliacao extends React.Component {
       ,IP_USER_AVALIADO: 7,
       }
   }
+  
 
 
   pegaDados(){
@@ -439,6 +440,7 @@ var formNotes13 = <div>
           <Card  className="Card-position">
             <Info_user {...dados}/>
             <CardBody>
+              
 
 
 
@@ -528,9 +530,8 @@ var formNotes13 = <div>
   </div>
   </div>
     )}
-
 }
-
+  
 
 
 export default avaliacao;
