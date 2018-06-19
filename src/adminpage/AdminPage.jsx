@@ -17,9 +17,9 @@ const dados = {
 };
 var token = {
     headers:
-    { 
+    {
       'cache-control': 'no-cache',
-      'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MzM5ODE0LCJleHAiOjE1Mjk0MjYyMTR9.7ZjQ0S0ZOAezz3PGYQo0uzPLajf3YftpviyFQplKiqk',
+      'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI0MDU1LCJleHAiOjE1Mjk1MTA0NTV9.T0BatuKF9_th00982OFzuOqqdoMwZCVBnMPH8c1VbDM',
       'accept': 'application/json',
       'content-type': 'application/json'
     }
@@ -83,7 +83,7 @@ class admin extends Component {
     .then(res => {
       const dados = res.data;
       this.setState({ dados });
-      
+
       this.setState({nome: dados[0].no_Pessoa, cpf_admin: dados[0].cd_CPF, email: dados[0].cd_Email });
       //alert(JSON.stringify(dados))
     });/*
@@ -131,16 +131,8 @@ class admin extends Component {
                     value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
-                  <Button outline onClick={()=> {        
-                    var token = {
-                        headers:
-                        { 
-                          'cache-control': 'no-cache',
-                          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MzM5ODE0LCJleHAiOjE1Mjk0MjYyMTR9.7ZjQ0S0ZOAezz3PGYQo0uzPLajf3YftpviyFQplKiqk',
-                          'accept': 'application/json',
-                          'content-type': 'application/json'
-                        }
-                   };axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
+                  <Button outline onClick={()=> {
+                      axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });

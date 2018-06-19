@@ -5,12 +5,13 @@ import axios from 'axios';
 import PageHeader from '../pageHeader';
 
 
-
-const dados = {
-  usuario: {
-    NOME: "Zezinho Administrador da Silva",
-    CPF:  "123.456.789-00",
-    EMAIL: "zezinho.admin@boy.com",
+var token = {
+  headers:
+  {
+    'cache-control': 'no-cache',
+    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
+    accept: 'application/json',
+    'content-type': 'application/json'
   }
 };
 
@@ -27,13 +28,13 @@ class Info_user extends React.Component {
             <Row>
               <Col>
                 <CardSubtitle>Nome: </CardSubtitle>
-                <CardText>{this.props.usuario.NOME}</CardText>
+                <CardText>{this.props.nome}</CardText>
                 <CardSubtitle>Email: </CardSubtitle>
-                <CardText>{this.props.usuario.EMAIL}</CardText>
+                <CardText>{this.props.email}</CardText>
               </Col>
               <Col>
                 <CardSubtitle>CPF: </CardSubtitle>
-                <CardText>{this.props.usuario.CPF}</CardText>
+                <CardText>{this.props.cpf_admin}</CardText>
               </Col>
             </Row>
           </CardBody>
@@ -47,11 +48,15 @@ class avaliacao extends React.Component {
   constructor(){
     super();
     this.state = {
+      cpf: "",
+      cpf_admin: "",
+      email:"",
+      nome:"",
       IP_USER_AVALIADO: 7,
       unidades: [1, 2, 3, 4, 5,6,7,8,9,10],
       dt_Ano:2018,
-      // id_Usuario_Avaliador:pros.id_Usuario_Avaliador,
-      // id_Usuario_Avaliado:pros.id_Usuario_Avaliado,
+      id_Usuario_Avaliador:5,
+      id_Usuario_Avaliado:1,
       pergunta_1_1:"",
       pergunta_1_2:"",
       pergunta_1_3:"",
@@ -104,6 +109,15 @@ class avaliacao extends React.Component {
     alert("Formulario salvo!")
     window.open("/userpage?"+idM,"_self");
   }
+  componentDidMount() {
+    axios.get('https://hulw.herokuapp.com/auth/me',token )
+    .then(res => {
+      const dados = res.data;
+      this.setState({ dados });
+      this.setState({nome: dados[0].no_Pessoa, cpf_admin: dados[0].cd_CPF, email: dados[0].cd_Email });
+      console.log(res);
+    });
+  }
 
   render(){
     const IP_USER_AVALIADO = this.state.IP_USER_AVALIADO;
@@ -149,7 +163,7 @@ class avaliacao extends React.Component {
       <div className="container">
         <div className="col-md-16">
           <Card  className="Card-position">
-            <Info_user {...dados}/>
+            <Info_user {...this.state}/>
             <CardBody>
 
               <h5><b>I – Dimensão Institucional – características que agregam valor e contribuem para o desenvolvimento da instituição.</b></h5>
@@ -314,7 +328,39 @@ class avaliacao extends React.Component {
               </div>
 
               <hr/>
-              <Button color="primary" onClick={this.gravar}> Gravar</Button>{' '}
+              <Button color="primary" onClick={()=>{
+                  var jdata ={
+                    dt_Ano:2018,
+                    id_Usuario_Avaliador:this.id_Usuario_Avaliador,
+                    id_Usuario_Avaliado:this.id_Usuario_Avaliado,
+                    pergunta_1_1:this.state.pergunta_1_1,
+                    pergunta_1_2:this.state.pergunta_1_2,
+                    pergunta_1_3:this.state.pergunta_1_3,
+                    pergunta_2_1:this.state.pergunta_2_1,
+                    pergunta_2_2:this.state.pergunta_2_2,
+                    pergunta_2_3:this.state.pergunta_2_3,
+                    pergunta_3_1:this.state.pergunta_3_1,
+                    pergunta_3_2:this.state.pergunta_3_2,
+                    pergunta_3_3:this.state.pergunta_3_3,
+                    pergunta_4_1:this.state.pergunta_4_1,
+                    pergunta_4_2:this.state.pergunta_4_2,
+                    pergunta_4_3:this.state.pergunta_4_3,
+                    pergunta_5_1:this.state.pergunta_5_1,
+                    pergunta_5_2:this.state.pergunta_5_2,
+                    pergunta_5_3:this.state.pergunta_5_3,
+                  };
+                  // jdata['dt_Ano']=props.dataProb.length!==0?props.dataProb:todo.dt_Admissao.substring(0,4);
+                  jdata = JSON.stringify(jdata);
+                  axios.post('https://hulw.herokuapp.com/avaliacao/desempenho', jdata, token )
+                  .then((response) => {
+                    // console.log(response.data);
+                    this.setState({response:response.data});
+                    this.setState({open: true });
+                  }).catch((error) => {
+                    console.log(error);
+                    this.setState({open: false });
+                  });
+                }}> Gravar</Button>{' '}
                 <Button color="danger" onClick={this.voltar}>Cancelar</Button>{' '}
 
                 </CardBody>

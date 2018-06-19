@@ -60,15 +60,6 @@ class admin extends Component {
     this.pegaDados();
   }
 
-  // handleInputChange() {
-  //   if(this.state.CheckProb === false){
-  //     this.setState({CheckProb:true});
-  //   }else{
-  //     this.setState({CheckProb:false});
-  //   }
-  //
-  // }
-
   render(){
     return (
       <div className="container">
