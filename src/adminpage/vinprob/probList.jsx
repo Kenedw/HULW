@@ -23,7 +23,7 @@ export default props => {
   //captura o estado inicial do checkbox
   function init_checkbox(){
     console.log("iniciado");
-    console.log(props.list.id_Usuario);
+    // console.log(props.list.id_Usuario);
     axios.get(`${URL}estagio/probatorio/usuario/` + props.list.id_Usuario, token )
     .then((response) => {//se ela existir na tabela, ela esta em estado probatorio
       console.log(response);
@@ -33,7 +33,7 @@ export default props => {
       console.log("não esta no probatorio");
       this.CheckPro = false;
     });
-    console.log(props.list.id_Estagio_Probatorio);
+    // console.log(props.list.id_Estagio_Probatorio);
   }
   const renderRows = () =>{
     return list.map(todo =>(

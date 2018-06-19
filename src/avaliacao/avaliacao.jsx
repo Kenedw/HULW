@@ -89,7 +89,7 @@ class avaliacao extends React.Component {
     var au = "a";
     au = au + "b"
 
-    console.log(au);
+    // console.log(au);
 
     for (var i = 0; i < tam; i++){}
   }

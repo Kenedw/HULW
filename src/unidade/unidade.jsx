@@ -20,23 +20,23 @@ class cadastrarUnidade extends React.Component {
         token: "",
         cpf_Admin: "",
       };
-  
-  
+
+
       this.onChange = (evento) => {
         //this.setState({nome: evento.target.value});
         const state = Object.assign({}, this.state);
         const campo = evento.target.name;
-  
+
         state[campo] = evento.target.value;
-  
+
         this.setState(state);
         if(campo === 'unidade_pai'){ // &&  evento.target.value === ''){
           // console.log( evento.target.value.length)
           //alert(evento.target.value);
           //alert(state[campo]);
         }
-        
-  
+
+
       };
         this.handleSubmit = event => {
           event.preventDefault();
@@ -56,25 +56,25 @@ class cadastrarUnidade extends React.Component {
             cd_Unidade: this.state.unidade,
             de_UNIDADE: this.state.descricao,
             id_Unidade_Superior: this.state.unidade_pai,
-           
+
           };
-      
+
           axios.post(`${URL}unidade`,JSON.stringify(unidades), token) //JSON.stringify(usuario)
-            .then(res => { 
+            .then(res => {
               //console.log(res.Object.data);
-              console.log(res.data);
-              alert(res.data.message) // alerta sucesso ao cadastrar
+              // console.log(res.data);
+              // alert(res.data.message) // alerta sucesso ao cadastrar
               window.location.reload() // atualiza a página caso sucesso
             })
             .catch(error => {
-              console.log(error.response);//.data.error.message);
-              alert(error.response.data)//.error.message) // alerta o erro ao submit
+              // console.log(error.response);//.data.error.message);
+              // alert(error.response.data)//.error.message) // alerta o erro ao submit
             });
         };
-  
+
     }
-  
-    
+
+
     componentDidMount() {
       var token = {
         headers:
@@ -94,31 +94,31 @@ class cadastrarUnidade extends React.Component {
 
       pegaDados(){
         var dados_url = Decodificar((this.props.location.search).substring(1))
-    
+
         var cpfAdmin = (dados_url).substring(0,11);
         //alert(cpfAdmin);
         var token_url =  (dados_url).substring(11);
         this.setState({token: token_url, cpf_Admin: cpfAdmin})
 
       }
-    
+
       componentWillMount() {
-    
+
         this.pegaDados();
       }
-    
-  
-  
+
+
+
     render(){
       return (
         <div className="container">
           <div className="col-md-16">
             <Card  className="Card-position">
               <CardBody>
-  
+
                 <form onSubmit={this.handleSubmit}>
                   <h3>Cadastro de Unidades</h3>
-  
+
                   <div className="form-group">
                     <CardSubtitle>Unidade: </CardSubtitle>
                     <Input  type="text"  className="form-control"  name="unidade"
@@ -126,7 +126,7 @@ class cadastrarUnidade extends React.Component {
                   </div>
 
 
-                   
+
                     <div className="form-group">
                       <CardSubtitle>Descrição: </CardSubtitle>
                       <Input  type="text"  className="form-control"  name="descricao"
@@ -145,20 +145,20 @@ class cadastrarUnidade extends React.Component {
                 </div>
 
 
-               
+
                   <div>
                     <Button onSubmit={this.handleSubmit} outline type="Submit" >Cadastrar</Button>
                     <Button outline href={"/administrador"} className="a-fix">Voltar</Button>
                   </div>
-                  
+
                 </form>
               </CardBody>
             </Card>
           </div>
         </div>
-  
+
       )
-  
+
     }
   }
 

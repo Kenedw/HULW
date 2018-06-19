@@ -49,61 +49,61 @@ class cadastrotec extends React.Component {
 
       this.setState(state);
       //if(campo === 'unidade' &&  evento.target.value === ''){
-       // console.log( evento.target.value.length)
+      // console.log( evento.target.value.length)
       // alert("Sem comentario")
       //}
 
 
     };
     //this.onSubmit = (evento) => { // ver os dados a serem enviados no console
-      this.handleSubmit = event => {
-        event.preventDefault();
-       // var token = store.getState().session.token;
-        //let token = localStorage.getItem('x-access-token');
-        //alert(token)
-        const usuario = {
-          no_Pessoa: this.state.nome,
+    this.handleSubmit = event => {
+      event.preventDefault();
+      // var token = store.getState().session.token;
+      //let token = localStorage.getItem('x-access-token');
+      //alert(token)
+      const usuario = {
+        no_Pessoa: this.state.nome,
 
-          cd_CPF: cpf2int(this.state.cpf),
-          cd_Email: this.state.email,
-          cd_Senha: this.state.senha,
-         // chefe: this.state.chefe,
-         // unidade: this.state.unidade,
+        cd_CPF: cpf2int(this.state.cpf),
+        cd_Email: this.state.email,
+        cd_Senha: this.state.senha,
+        // chefe: this.state.chefe,
+        // unidade: this.state.unidade,
 
-         dt_Admissao: this.state.dataAdm+"T00:00:00.000Z",
-         is_Adm: this.state.is_Adm,
-        };
+        dt_Admissao: this.state.dataAdm+"T00:00:00.000Z",
+        is_Adm: this.state.is_Adm,
+      };
 
-        if(this.state.flagEditar === false){
+      if(this.state.flagEditar === false){
 
         axios.post(`${URL}usuario`,JSON.stringify(usuario), token) //JSON.stringify(usuario)
-          .then(res => {
-            //console.log(res.Object.data);
-            console.log(res.data.msg);
-            alert(res.data.msg) // alerta sucesso ao cadastrar
-            alert("Deu certo!")
-            window.location.reload() // atualiza a página caso sucesso
-          })
-          .catch(error => {
-            console.log(error)//.response)//.data.error.message);
-            alert(error.response)//.data.error.message) // alerta o erro ao submit
-          });
-        }else{
-          alert(JSON.stringify(usuario))
-          axios.put(`${URL}usuario/`+this.state.id_usuario,JSON.stringify(usuario), token) //JSON.stringify(usuario)
-          .then(res => {
-            //console.log(res.Object.data);
-            //console.log(res.data.msg);
-            //alert(res) // alerta sucesso ao cadastrar
-            alert("Deu certo!")
-            window.location.reload() // atualiza a página caso sucesso
-          })
-          .catch(error => {
-            console.log(error.response);
-            alert(error.response) // alerta o erro ao submit
-          });
-        }
-      };
+        .then(res => {
+          //console.log(res.Object.data);
+          // console.log(res.data.msg);
+          // alert(res.data.msg) // alerta sucesso ao cadastrar
+          alert("Deu certo!")
+          window.location.reload() // atualiza a página caso sucesso
+        })
+        .catch(error => {
+          console.log(error)//.response)//.data.error.message);
+          // alert(error.response)//.data.error.message) // alerta o erro ao submit
+        });
+      }else{
+        // alert(JSON.stringify(usuario))
+        axios.put(`${URL}usuario/`+this.state.id_usuario,JSON.stringify(usuario), token) //JSON.stringify(usuario)
+        .then(res => {
+          //console.log(res.Object.data);
+          //console.log(res.data.msg);
+          //alert(res) // alerta sucesso ao cadastrar
+          alert("Deu certo!")
+          window.location.reload() // atualiza a página caso sucesso
+        })
+        .catch(error => {
+          // console.log(error.response);
+          // alert(error.response) // alerta o erro ao submit
+        });
+      }
+    };
 
   }
 
@@ -185,19 +185,19 @@ class cadastrotec extends React.Component {
                     value={this.state.senha} onChange={this.onChange} minLength='4'/>
                 </div>
 
-<div>
-                <label>
-                <input name="is_Adm" type="checkbox" checked={this.state.isAdm} onChange={this.handleInputChange}
-                />
-                Adminstrador
-                </label>
+                <div>
+                  <label>
+                    <input name="is_Adm" type="checkbox" checked={this.state.isAdm} onChange={this.handleInputChange}
+                      />
+                    Adminstrador
+                  </label>
                 </div>
-{JSON.stringify(this.state)}
+                // {JSON.stringify(this.state)}
                 <div>
 
                   <Button onSubmit={this.handleSubmit} outline type="Submit" >{this.state.flagEditar === true ? "Editar" : "Cadastrar"}</Button>
                   <Button outline href={"/administrador"} className="a-fix">Voltar</Button>
-                  </div>
+                </div>
 
 
               </form>
@@ -210,35 +210,6 @@ class cadastrotec extends React.Component {
 
   }
 }
-
-
-//<CustomInput type="checkbox" id="1" label="Chefe" onChange={this.onChange} value={this.state.chefe} name="chefe"/>
-
-//           <Input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked} >One</Input>
-/*
-<div>
-                <label>
-                <input name="chefe" type="checkbox" checked={this.state.chefe} onChange={this.handleInputChange}
-                />
-                Chefe
-                </label>
-                </div>
-
-
-                <div className="form-group">
-                    <Label >Unidade</Label>
-                <Input type="select" name="unidade" id="exampleSelect"
-                    value={this.state.unidade} onChange={this.onChange}>
-                    <option></option>
-                    { this.state.unidades.map(unidade => <option>{unidade.de_UNIDADE}</option>)}
-
-                </Input>
-                </div>
-
-*/
-
-//{JSON.stringify(this.state)}
-
 
 function formatarCpf(cpf){
   cpf = cpf.replace(/\D/g,"");
