@@ -131,6 +131,7 @@ class admin extends Component {
                     value={this.state.cpf} onChange={this.onChange} minLength='14' maxLength='14' />
                 </div>
                 <div>
+<<<<<<< HEAD
                   <Button outline onClick={()=> {        
                     var token = {
                         headers:
@@ -140,7 +141,8 @@ class admin extends Component {
                           'accept': 'application/json',
                           'content-type': 'application/json'
                         }
-                   };axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
+                  <Button outline onClick={()=> {
+                    axios.get('https://hulwteste.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
                     .then((response) => {
                       this.setState({response: response.data});
                       this.setState({open: true });
