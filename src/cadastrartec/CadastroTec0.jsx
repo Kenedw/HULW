@@ -10,13 +10,9 @@ const URL = 'http://hulw.herokuapp.com/' //'https://hulw.herokuapp.com/'
 
 var token = {
   headers:
-  { 
+  {
     'cache-control': 'no-cache',
-<<<<<<< Updated upstream
-    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5MzM5ODE0LCJleHAiOjE1Mjk0MjYyMTR9.7ZjQ0S0ZOAezz3PGYQo0uzPLajf3YftpviyFQplKiqk',
-=======
     'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5NDIzNDg0LCJleHAiOjE1Mjk1MDk4ODR9.23VCX1hym1boQk49Kv2RI-tpkMeMvEHQG1jT7hw1yO4',
->>>>>>> Stashed changes
     accept: 'application/json',
     'content-type': 'application/json'
   }
@@ -73,15 +69,15 @@ class cadastrotec extends React.Component {
           cd_Senha: this.state.senha,
          // chefe: this.state.chefe,
          // unidade: this.state.unidade,
-         
+
          dt_Admissao: this.state.dataAdm+"T00:00:00.000Z",
          is_Adm: this.state.is_Adm,
         };
 
         if(this.state.flagEditar === false){
-         
+
         axios.post(`${URL}usuario`,JSON.stringify(usuario), token) //JSON.stringify(usuario)
-          .then(res => { 
+          .then(res => {
             //console.log(res.Object.data);
             console.log(res.data.msg);
             alert(res.data.msg) // alerta sucesso ao cadastrar
@@ -95,7 +91,7 @@ class cadastrotec extends React.Component {
         }else{
           alert(JSON.stringify(usuario))
           axios.put(`${URL}usuario/`+this.state.id_usuario,JSON.stringify(usuario), token) //JSON.stringify(usuario)
-          .then(res => { 
+          .then(res => {
             //console.log(res.Object.data);
             //console.log(res.data.msg);
             //alert(res) // alerta sucesso ao cadastrar
@@ -108,7 +104,7 @@ class cadastrotec extends React.Component {
           });
         }
       };
-      
+
   }
 
   handleInputChange(event) {
@@ -131,7 +127,7 @@ class cadastrotec extends React.Component {
 
     var cpfEditar = (cpfs).substring(0,11) // utf8.decode(bytes) // CPF para editar/cadastrar
 
- 
+
     if(cpfEditar !== ""){
 
       axios.get(`${URL}usuario/cpf/`+cpfEditar,token)                    //'http://localhost:3003/api/todos`)

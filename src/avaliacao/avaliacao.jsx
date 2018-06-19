@@ -52,8 +52,7 @@ class avaliacao extends React.Component {
       ,IP_USER_AVALIADO: 7,
       TOKEN: "",
       IDAVALIADOR: "",
-      IDAVALIADO: ""
-      }
+      IDAVALIADO: "",
       cpf: "",
       cpf_admin: "",
       email:"",
@@ -362,11 +361,10 @@ class avaliacao extends React.Component {
                   };
                   // jdata['dt_Ano']=props.dataProb.length!==0?props.dataProb:todo.dt_Admissao.substring(0,4);
                   jdata = JSON.stringify(jdata);
-                  axios.post('https://hulw.herokuapp.com/avaliacao/desempenho', jdata, token )
+                  axios.post('https://hulw.herokuapp.com/avaliacao/desempenho/', jdata, token )
                   .then((response) => {
                     // console.log(response.data);
                     this.setState({response:response.data});
-                    this.setState({open: true });
                   }).catch((error) => {
                     console.log(error);
                     this.setState({open: false });
