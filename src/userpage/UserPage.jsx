@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import './../App.css';
 import { Container, Row, Col, Button, Table, Card, CardText, CardBody, CardSubtitle} from 'reactstrap';
+import {Token} from '../login/Login';
 
 var finis = false;
 
 var location = "";
 
-const pegarUnidade = async (id, token) =>{
-
+const pegarUnidade = async (id) =>{
+  
   const response = await fetch('http://hulw.herokuapp.com/localizacao/usuario/'+id,{
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json",
-      "x-access-token": token
+      "x-access-token": Token()
     }
   });
   const json = await response.json();
@@ -25,7 +26,7 @@ const pegarUnidade = async (id, token) =>{
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json",
-      "x-access-token": token
+      "x-access-token": Token()
     }
   });
   const jsonU = await responseU.json();
@@ -34,16 +35,16 @@ const pegarUnidade = async (id, token) =>{
 }
 
 
-const pegaDados = async (url) => {
+const pegaDados = async () => {
 
-  var token = await (url).substring(1)
+  var token = Token();
 
-  const response = await fetch('https://hulwteste.herokuapp.com/auth/me/',{
+  const response = await fetch('https://hulw.herokuapp.com/auth/me/',{
       method: 'GET',
       headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "x-access-token": token
+          "x-access-token": Token()
       }
   });
   const json = await response.json();
@@ -75,7 +76,7 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
       headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "x-access-token": token
+          "x-access-token": Token()
       }
   });
   const json = await response.json();
@@ -118,7 +119,7 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
       headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "x-access-token": token
+          "x-access-token": Token()
       }
     });
     const jsonUni = await responseUni.json();
@@ -144,7 +145,7 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "x-access-token": token
+            "x-access-token": Token()
         }
       });
       const nomeUserJson = await getNomeUser.json();
@@ -185,7 +186,7 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
       headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "x-access-token": token
+          "x-access-token": Token()
       }
   });
   const jsonP = await responseP.json();
@@ -229,7 +230,7 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
       headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "x-access-token": token
+          "x-access-token": Token()
       }
     });
     const jsonUni = await responseUni.json();
@@ -255,7 +256,7 @@ const pegarAvaliacoes = async (idU, nomeU, token, chefe, idUnidade) => {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "x-access-token": token
+            "x-access-token": Token()
         }
       });
       const nomeUserJson = await getNomeUser.json();
@@ -310,14 +311,14 @@ export class Userpage extends Component {
 
     location = await this.props.location.search;
     
-    var resposta = await pegaDados(this.props.location.search);
+    var resposta = await pegaDados();
     this.setState({TOKEN: resposta.token});
     this.setState({NOME: resposta.nome});
     this.setState({EMAIL: resposta.email});
     this.setState({ID: resposta.id});
     this.setState({CPF: resposta.cpfPontos});
 
-    resposta = await pegarUnidade(this.state.ID,this.state.TOKEN);
+    resposta = await pegarUnidade(this.state.ID);
     if (resposta === undefined){
       console.log("nao foi definido a unidade para esse usuario");
       this.setState({UNIDADE: ""});
@@ -429,14 +430,14 @@ class Linha extends Component {
 
   async componentWillMount () {
 
-    var resposta = await pegaDados(location); //token, nome, id
+    var resposta = await pegaDados(); //token, nome, id
     await this.setState({TOKIN: resposta.token});
     await this.setState({NOME: resposta.nome});
     await this.setState({ID: resposta.id});
 
     token = this.state.TOKIN
     id = this.state.ID;
-    resposta = await pegarUnidade(this.state.ID,this.state.TOKIN);
+    resposta = await pegarUnidade(this.state.ID);
     if (resposta === undefined){
       console.log("nao foi definido a unidade para esse usuario");
       this.setState({UNIDADE: ""});

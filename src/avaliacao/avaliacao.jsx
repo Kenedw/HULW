@@ -3,13 +3,14 @@ import './../App.css';
 import { Input, Form, Label, FormGroup, FormText,Button, Card, CardBody, CardSubtitle, CardText, Row, Col,   InputGroup, InputGroupAddon,  InputGroupButtonDropdown,  InputGroupDropdown,   Dropdown,  DropdownToggle,  DropdownMenu,  DropdownItem, ButtonDropdown} from 'reactstrap';
 import axios from 'axios';
 import PageHeader from '../pageHeader';
+import {Token} from '../login/Login';
 
 
 var token = {
   headers:
   {
     'cache-control': 'no-cache',
-    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
+    'x-access-token': Token(),
     accept: 'application/json',
     'content-type': 'application/json'
   }

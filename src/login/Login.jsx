@@ -2,6 +2,7 @@ import React from 'react'
 import './Login.css'
 import newLogin from './actions/validation'
 
+
 class Login extends React.Component{
 
   constructor(props){
@@ -37,10 +38,13 @@ class Login extends React.Component{
     else{
 
       var resultado = await newLogin(this.state.user,this.state.pass);
+     
+      localStorage.setItem("token1", resultado.token);
+     
       if(resultado.state === 1){
         window.open("/userpage?"+resultado.token,"_self");
       }else if(resultado.state === 2){
-        window.open("/userpage?"+resultado.token,"_self");
+        window.open("/userpage?1","_self");
       }else if(resultado.state === 3){
         window.open("/administrador","_self");
       }else{
@@ -84,4 +88,10 @@ function formatarCpf(cpf){
   cpf = cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
   return cpf;
 }
+
+export const Token=()=>{ 
+  return  localStorage.getItem("token1") 
+}
+
+
 export default Login

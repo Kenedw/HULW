@@ -5,18 +5,19 @@ import { Input, Button, Card, CardBody, CardSubtitle, Label,FormGroup} from 'rea
 import axios from 'axios';
 import Decodificar from '../adminpage/decodifica';
 import Codificar from '../adminpage/codifica';
+import {Token} from '../login/Login';
 
-const URL = 'http://hulw.herokuapp.com/' //'https://hulw.herokuapp.com/'
 
 var token = {
   headers:
   {
     'cache-control': 'no-cache',
-    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImNwZiI6IjEwNDEwNDEwNDEwIiwiaWF0IjoxNTI5NDIzNDg0LCJleHAiOjE1Mjk1MDk4ODR9.23VCX1hym1boQk49Kv2RI-tpkMeMvEHQG1jT7hw1yO4',
+    'x-access-token': Token(),
     accept: 'application/json',
     'content-type': 'application/json'
   }
 };
+const URL = 'http://hulw.herokuapp.com/' //'https://hulw.herokuapp.com/'
 
 class cadastrotec extends React.Component {
   constructor(){
@@ -34,7 +35,7 @@ class cadastrotec extends React.Component {
       id_usuario: "",
       token:"",
       cpf_Admin: "",
-      is_Adm: true
+      is_adm: false
 
     };
 
@@ -71,7 +72,7 @@ class cadastrotec extends React.Component {
         // unidade: this.state.unidade,
 
         dt_Admissao: this.state.dataAdm+"T00:00:00.000Z",
-        is_Adm: this.state.is_Adm,
+        is_Adm: this.state.is_adm,
       };
 
       if(this.state.flagEditar === false){
@@ -93,7 +94,7 @@ class cadastrotec extends React.Component {
         axios.put(`${URL}usuario/`+this.state.id_usuario,JSON.stringify(usuario), token) //JSON.stringify(usuario)
         .then(res => {
           //console.log(res.Object.data);
-          //console.log(res.data.msg);
+          console.log(JSON.stringify(usuario)); // COMENTAR AQUI
           //alert(res) // alerta sucesso ao cadastrar
           alert("Deu certo!")
           window.location.reload() // atualiza a página caso sucesso
@@ -126,15 +127,15 @@ class cadastrotec extends React.Component {
 
 
     var cpfEditar = (cpfs).substring(0,11) // utf8.decode(bytes) // CPF para editar/cadastrar
-
-
+    var tok = Token
+    console.log(Token())
     if(cpfEditar !== ""){
 
       axios.get(`${URL}usuario/cpf/`+cpfEditar,token)                    //'http://localhost:3003/api/todos`)
       .then(res => {
         const usuarios = res.data;
         this.setState({ usuarios });
-        this.setState({id_usuario: usuarios.id_Usuario, flagEditar: true, cpf: usuarios.cd_CPF,nome: usuarios.no_Pessoa, email: usuarios.cd_Email,dataAdm: (usuarios.dt_Admissao).substring(0,10)})
+        this.setState({is_adm: usuarios.is_Adm, id_usuario: usuarios.id_Usuario, flagEditar: true, cpf: usuarios.cd_CPF,nome: usuarios.no_Pessoa, email: usuarios.cd_Email,dataAdm: (usuarios.dt_Admissao).substring(0,10)})
       })
     }
   }
@@ -187,14 +188,14 @@ class cadastrotec extends React.Component {
 
                 <div>
                   <label>
-                    <input name="is_Adm" type="checkbox" checked={this.state.isAdm} onChange={this.handleInputChange}
+                    <input name="is_adm" type="checkbox" checked={this.state.is_adm} onChange={this.handleInputChange}
                       />
                     Adminstrador
                   </label>
                 </div>
-                // {JSON.stringify(this.state)}
+                 {JSON.stringify(this.state)}
+                 {/*tokenFunc*/}
                 <div>
-
                   <Button onSubmit={this.handleSubmit} outline type="Submit" >{this.state.flagEditar === true ? "Editar" : "Cadastrar"}</Button>
                   <Button outline href={"/administrador"} className="a-fix">Voltar</Button>
                 </div>

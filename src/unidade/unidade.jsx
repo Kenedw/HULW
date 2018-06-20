@@ -5,9 +5,19 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import axios from 'axios'
 import Decodificar from '../adminpage/decodifica'
 import Codificar from '../adminpage/codifica'
+import {Token} from '../login/Login';
 
 const URL = 'https://hulwteste.herokuapp.com/'
 
+var token = {
+  headers:
+  { 'postman-token': '9e60e149-eae0-183f-7716-ded2c58b4471',
+    'cache-control': 'no-cache',
+    'x-access-token': Token(),
+    'accept': 'application/json',
+    'content-type': 'application/json'
+  }
+};
 
 class cadastrarUnidade extends React.Component {
     constructor(){
@@ -43,15 +53,7 @@ class cadastrarUnidade extends React.Component {
           var config = {
             headers: {'content-type': 'application/json'}
           };
-          var token = {
-            headers:
-            { 'postman-token': '9e60e149-eae0-183f-7716-ded2c58b4471',
-              'cache-control': 'no-cache',
-              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
-              'accept': 'application/json',
-              'content-type': 'application/json'
-            }
-          };
+
           const unidades = {
             cd_Unidade: this.state.unidade,
             de_UNIDADE: this.state.descricao,
@@ -76,15 +78,7 @@ class cadastrarUnidade extends React.Component {
 
 
     componentDidMount() {
-      var token = {
-        headers:
-        { 'postman-token': '9e60e149-eae0-183f-7716-ded2c58b4471',
-          'cache-control': 'no-cache',
-          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
-          'accept': 'application/json',
-          'content-type': 'application/json'
-        }
-      };
+
       axios.get(`${URL}unidade`,token)                    //'http://localhost:3003/api/todos`)
         .then(res => {
           const unidades = res.data;

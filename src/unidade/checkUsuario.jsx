@@ -2,19 +2,21 @@ import React from 'react'
 import { Button, Table, Label, Input} from 'reactstrap';
 import Vinculo  from "./vincular"
 import axios from 'axios';
+import {Token} from '../login/Login';
 
-
-const URL = 'http://hulw.herokuapp.com/'
 
 var token = {
   headers:
   {
     'cache-control': 'no-cache',
-    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
+    'x-access-token': Token(),
     accept: 'application/json',
     'content-type': 'application/json'
   }
 };
+
+const URL = 'http://hulw.herokuapp.com/'
+
 
 export default props => {
 

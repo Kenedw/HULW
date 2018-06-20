@@ -5,7 +5,7 @@ import axios from 'axios';
 import Lista from './todoList.jsx';
 import Pesquisa from '../unidade/pesqUnidade';
 import Decodificar from './decodifica';
-
+import {Token} from '../login/Login';
 
 const dados = {
   usuario: {
@@ -19,7 +19,7 @@ var token = {
   headers:
   {
     'cache-control': 'no-cache',
-    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzcsImNwZiI6IjE0NzI1ODM2OTE0IiwiaWF0IjoxNTI5NDIxNTg1LCJleHAiOjE1Mjk1MDc5ODV9.YcRhJCR82SRnWNPags5VRVYxF7_6O1ESgaN_fT4tBK0',
+    'x-access-token': Token(),
     accept: 'application/json',
     'content-type': 'application/json'
   }
@@ -156,6 +156,5 @@ function formatarCpf(cpf){
   cpf = cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
   return cpf;
 }
-
 
 export default admin;

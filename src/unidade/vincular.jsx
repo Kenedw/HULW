@@ -4,6 +4,7 @@ import { Input, Button, Card, CardBody, CardSubtitle, Label,FormGroup, Collapse}
 //import { DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios'
 import Lista from './checkUsuario';
+import {Token} from '../login/Login';
 
 const dados = {
   usuario: {
@@ -13,6 +14,15 @@ const dados = {
   }
 };
 
+var token = {
+  headers:
+  {
+    'cache-control': 'no-cache',
+    'x-access-token': Token(),
+    accept: 'application/json',
+    'content-type': 'application/json'
+  }
+};
 
 const URL = 'https://hulw.herokuapp.com/'
 var clickInfo = false;
@@ -53,7 +63,7 @@ class vincular extends React.Component{
         headers:
         { 
           'cache-control': 'no-cache',
-          'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
+          'x-access-token': Token(),
           accept: 'application/json',
           'content-type': 'application/json'
         }
@@ -106,15 +116,7 @@ class vincular extends React.Component{
                       </div>
                           <div>
                       <Button outline onClick={()=> {        
-                        var token = {
-                            headers:
-                            { 
-                              'cache-control': 'no-cache',
-                              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImNwZiI6IjExMTExMTExMTExIiwiaWF0IjoxNTI5NDI3MTEwLCJleHAiOjE1Mjk1MTM1MTB9.K-KPQAyJJpn7ld57hxMGlOtiFMQC4x7bdQMxRWheerE',
-                              'accept': 'application/json',
-                              'content-type': 'application/json'
-                            }
-                      };axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
+                        axios.get('https://hulw.herokuapp.com/usuario/cpf/' + cpf2int(this.state.cpf),token )
                         .then((response) => {
                           this.setState({response: response.data});
                           this.setState({open: true });
